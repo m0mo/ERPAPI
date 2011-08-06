@@ -5,7 +5,7 @@
  * ERP API 
  * -----------------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner@gmail.com> 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Node.php
  * @version     0.1.0 (Aug 5, 2011)
@@ -28,6 +28,12 @@ abstract class Node {
         return "Instance of " . get_class($this) . "; Properties: " . $vars;
     }
 
+    /**
+     * Checks if two Nodes are the same
+     *
+     * @param Node $that
+     * @return true if equal, else false 
+     */
     public function equals($that) {
 
         if ($this == $that) {
@@ -35,10 +41,6 @@ abstract class Node {
         }
         if (($that == NULL) or !(is_a($that, get_class($this)))) {
             return false;
-        }
-
-        if ($this->getURI() == $that->getURI()) {
-            return true;
         }
 
         return false;

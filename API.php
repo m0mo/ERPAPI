@@ -5,7 +5,7 @@
  * ERP API 
  * -----------------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner@gmail.com> 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        API.php
  * @version     Aug 5, 2011

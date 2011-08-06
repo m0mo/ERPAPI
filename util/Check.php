@@ -5,10 +5,10 @@
  * ERP API 
  * -----------------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner@gmail.com> 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        InstanceCheck.php
- * @version     Aug 5, 2011
+ * @version     0.1.5 (Aug 6, 2011)
  * @package     util
  * @access      public
  * 
@@ -45,11 +45,10 @@ class Check {
         if ($predicate instanceof Resource && !($predicate instanceof BlankNode)) {
 
             $array = $predicate->getProperties();
-            
+
             if (empty($array)) {
                 return true;
             }
-           
         }
         return false;
     }
@@ -63,6 +62,14 @@ class Check {
     public static function isObject($object) {
 
         if ($object instanceof Resource || $object instanceof LiteralNode)
+            return true;
+
+        return false;
+    }
+
+    public static function isStatement($statement) {
+
+        if ($statement instanceof Statement)
             return true;
 
         return false;

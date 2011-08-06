@@ -3,6 +3,22 @@
 require_once 'PHPUnit/Autoload.php';
 require_once "../API.php";
 
+/**
+ * -----------------------------------------------------------------------------
+ * ERP API Test
+ * -----------------------------------------------------------------------------
+ *
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * 
+ * @name        StatementTest.php
+ * @version     0.1.5 (Aug 6, 2011)
+ * @package     tests
+ * @access      public
+ * 
+ * Description  here
+ * 
+ * -----------------------------------------------------------------------------
+ */
 class StatementTest extends PHPUnit_Framework_TestCase {
 
     private $statement;
@@ -29,8 +45,6 @@ class StatementTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testGetterMethods() {
-
-        print_r($this->statement->getSubject());
 
         $this->assertTrue($this->statement->getSubject()->equals($this->subj));
         $this->assertTrue($this->statement->getObject()->equals($this->obj));

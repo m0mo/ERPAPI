@@ -8,7 +8,7 @@ require_once "../API.php";
  * ERP API Test
  * -----------------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner@gmail.com> 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        CheckTest.php
  * @version     0.1.5 (Aug 6, 2011)
@@ -61,8 +61,7 @@ class CheckTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse(Check::isSubject(new LiteralNode("subject can't be a literal")));
 
         // adding a full ressource with properties
-        $res = new Resource("test");
-        $statement = $res->addProperty(new Resource("pred"), new LiteralNode("Test"));
+        $statement = new Statement(new Resource("test"), new Resource("pred"), new LiteralNode("Test"));
 
         $this->assertFalse(Check::isSubject($statement));
     }

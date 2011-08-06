@@ -5,7 +5,7 @@
  * ERP API 
  * -----------------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner@gmail.com> 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Resource.php
  * @version     0.1.5 (Aug 6, 2011)
@@ -51,10 +51,16 @@ class Resource extends Node {
         
         $this->properties[$predicate->getUri()] = array("predicate" => $predicate, "object" => $object);
         
-        return new Statement($this, $predicate, $object);
+        return $this;
         
     }
     
+    /**
+     * Check if the resource has a specific property, independend of the content
+     *
+     * @param Resource $predicate
+     * @return true if resource has property, otherwise false 
+     */
     public function hasProperty($predicate) {
         
         if (!Check::isPredicate($predicate)) {
@@ -114,6 +120,25 @@ class Resource extends Node {
     public function getProperties() {
         return $this->properties;
     }
+    
+    /**
+     * Checks if two Resources are the same
+     *
+     * @param Node $that
+     * @return true if equal, else false 
+     */
+    public function equals($that) {
+        
+        if(parent::equals($that))
+            return true;
+        
+        if (is_a($that, Resource) && $this->getURI() == $that->getURI()) {
+            return true;
+        }
+        
+        return false;       
+    }
+
 
 }
 

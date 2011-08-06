@@ -5,7 +5,7 @@
  * ERP API 
  * -----------------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner@gmail.com> 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Statement.php
  * @version     0.2.0 (Aug 6, 2011)
@@ -92,6 +92,9 @@ class Statement {
      * @return true or false
      */
     public function equals($that) {
+        
+        if(!is_a($that, Statement))
+                return false;
 
         return $this->getSubject()->equals($that->getSubject()) && 
                $this->getPredicate()->equals($that->getPredicate()) && 

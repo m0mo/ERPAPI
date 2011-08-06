@@ -8,7 +8,7 @@ require_once "../API.php";
  * ERP API Test
  * -----------------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner@gmail.com> 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        ResourceTest.php
  * @version     0.1.5 (Aug 6, 2011)
@@ -44,9 +44,9 @@ class ResourceTest extends PHPUnit_Framework_TestCase {
         $object = new LiteralNode("test", BOOL);
         $statement1 = new Statement($this->resource, $predicate, $object);
         
-        $statement2 = $this->resource->addProperty($predicate, $object);
+        $this->resource->addProperty($predicate, $object);
         
-        $this->assertTrue($statement1->equals($statement2));
+        $this->assertTrue($statement1->getSubject()->equals($this->resource));
         $this->assertTrue($this->resource->getProperty($predicate) != null);
         
     }
