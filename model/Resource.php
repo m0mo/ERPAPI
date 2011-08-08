@@ -22,11 +22,16 @@ class Resource extends Node {
     protected $properties;
     
     /**
-     * Creates a new Resource from an URI
+     * Creates a new Resource from an URI. The Uri can be a short version
+     * (prefix) in form of ns:name or the full link.
      *
      * @param String $uri 
      */
     function __construct($uri) {
+        
+        if(!Check::isValidURI($uri))
+            throw new APIException(API_ERROR_URI);
+            
         $this->uri = $uri;
     }
 
@@ -41,13 +46,12 @@ class Resource extends Node {
      */
     public function addProperty($predicate, $object) {
         
-        if (!Check::isPredicate($predicate)) {
+        if (!Check::isPredicate($predicate)) 
             throw new APIException(ERP_ERROR_PREDICATE);
-        }
-        
-        if (!Check::isObject($object)) {
+                
+        if (!Check::isObject($object)) 
             throw new APIException(ERP_ERROR_OBJECT);
-        }
+        
         
         $this->properties[$predicate->getUri()] = array("predicate" => $predicate, "object" => $object);
         
@@ -63,10 +67,9 @@ class Resource extends Node {
      */
     public function hasProperty($predicate) {
         
-        if (!Check::isPredicate($predicate)) {
+        if (!Check::isPredicate($predicate))
             throw new APIException(ERP_ERROR_PREDICATE);
-        }
-        
+               
         return isset($this->properties[$predicate->getURI()]);
     }
     
@@ -78,10 +81,9 @@ class Resource extends Node {
      */
     public function getProperty($predicate) {
         
-        if (!Check::isPredicate($predicate)) {
+        if (!Check::isPredicate($predicate)) 
             throw new APIException(ERP_ERROR_PREDICATE);
-        }
-        
+                
         return $this->properties[$predicate->getURI()]["object"];
     }
     
@@ -93,10 +95,9 @@ class Resource extends Node {
      */
     public function removeProperty($predicate) {
         
-        if (!Check::isPredicate($predicate)) {
+        if (!Check::isPredicate($predicate))
             throw new APIException(ERP_ERROR_PREDICATE);
-        }
-        
+                
         unset ($this->properties[$predicate->getURI()]);
         
         return !isset($this->properties[$predicate->getURI()]);

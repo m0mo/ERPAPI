@@ -67,12 +67,50 @@ class Check {
         return false;
     }
 
+    /**
+     * Checks if $statement is a valid Statement.
+     *
+     * @param Statement $statement
+     * @return true if valid, otherwise false 
+     */
     public static function isStatement($statement) {
 
         if ($statement instanceof Statement)
             return true;
 
         return false;
+    }
+
+    /**
+     * Checks if the URI is valid.
+     *
+     * @param String $uri 
+     * @return true if valid, otherwise false
+     */
+    public function isValidURI($uri) {
+        
+        if(!is_string($uri))
+            return false;
+        
+        // TODO: implement
+
+        return true;
+    }
+
+    /**
+     * Checks if the prefix is valid.
+     *
+     * @param String $prefix 
+     * @return true if valid, otherwise false
+     */
+    public function isValidPrefix($prefix) {
+        
+        if(!is_string($prefix))
+            return false;
+        
+        // TODO: implement
+
+        return true;
     }
 
 }
