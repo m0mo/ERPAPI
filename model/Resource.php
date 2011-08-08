@@ -67,7 +67,7 @@ class Resource extends Node {
             throw new APIException(ERP_ERROR_PREDICATE);
         }
         
-        return !isset($this->properties[$predicate->getURI()]);
+        return isset($this->properties[$predicate->getURI()]);
     }
     
     /**

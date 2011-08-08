@@ -21,6 +21,7 @@ class Model {
 
     private $statements;
     private $namespaces;
+    private $foundResources;
 
     /**
      * Create a new model
@@ -36,9 +37,9 @@ class Model {
      * @param String $uri 
      */
     public function addNamespace($prefix, $uri) {
-        
+
         // TODO: Check input
-        
+
         $this->namespaces[$prefix] = $uri;
     }
 
@@ -49,12 +50,12 @@ class Model {
      * @return String $uri 
      */
     public function getNamespace($prefix) {
-        
+
         // TODO: Check input
-        
+
         return $this->namespaces[$prefix];
     }
-    
+
     /**
      * Get a list of namespaces inform of namespaces[$prefix] = $uri
      *
@@ -62,9 +63,9 @@ class Model {
      * @return String $uri 
      */
     public function getNamespaces() {
-        
+
         // TODO: Check input
-        
+
         return $this->namespaces;
     }
 
@@ -75,11 +76,11 @@ class Model {
      * @return true if removed 
      */
     public function removeNamespace($prefix) {
-        
+
         // TODO: Check input
 
         unset($this->namespaces[$prefix]);
-        return !$this->hasNamespace($prefix);
+        return!$this->hasNamespace($prefix);
     }
 
     /**
@@ -89,9 +90,9 @@ class Model {
      * @return true if yes, otherwise false 
      */
     public function hasNamespace($prefix) {
-        
+
         // TODO: Check input
-        
+
         return isset($this->namespaces[$prefix]);
     }
 
@@ -160,9 +161,9 @@ class Model {
             $object = $prop["object"];
 
             $this->addStatement(new Statement($resource, $predicate, $object));
-            
-            if(Check::isSubject($object))
-                $this->addResource ($object);
+
+            if (Check::isSubject($object))
+                $this->addResource($object);
         }
     }
 
@@ -192,7 +193,7 @@ class Model {
      * @return Statement Array 
      */
     public function search($subject = null, $predicate = null, $object = null) {
-        
+
         if (!Check::isSubject($subject) && !empty($subject)) {
             throw new APIException(ERP_ERROR_SUBJECT);
         }
@@ -209,7 +210,7 @@ class Model {
             return null;
 
         foreach ($this->statements as $statement) {
-            
+
             $subFound = false;
             $preFound = false;
             $objFound = false;
@@ -244,6 +245,51 @@ class Model {
     }
 
     /**
+     *
+     * @param Resource $resource
+     * @return Resource
+     */
+    public function searchResource($resource) {
+
+        echo $resource->getUri();
+
+        if (!Check::isSubject($resource)) {
+            throw new APIException(ERP_ERROR_SUBJECT);
+        }
+
+        // prevent dead lock
+        if (isset($this->foundResource[$resource->getUri()])) {
+
+            //return the element of the array rather than creating 
+            //a new one
+
+            return $this->foundResource[$resource->getUri()];
+        }
+
+        $statements = $this->search($resource);
+
+        if (!empty($statements)) {
+
+            foreach ($statements as $statement) {
+
+                $this->foundResource[$resource->getUri()] = $resource;
+
+                $object = $statement->getObject();
+
+                if (Check::isSubject($object)) {
+                    $object = $this->searchResource($object);
+                }
+
+                $resource->addProperty($statement->getPredicate(), $object);
+            }
+        }
+        
+        unset ($this->foundResource[$resource->getUri()]);
+        
+        return $resource;
+    }
+
+    /**
      * Returns a list of all statements in the model using following format:
      * subjectURI, predicateURI, objectUri or Literal
      *
@@ -261,19 +307,18 @@ class Model {
      * @return String
      */
     public function statementListToString($statements) {
-        
+
         $returnString = "";
-        
+
         foreach ($statements as $statement) {
-            
-            $returnString.= $statement->getSubject()->getUri(). " ";
-            $returnString.= $statement->getPredicate()->getUri(). " ";
+
+            $returnString.= $statement->getSubject()->getUri() . " ";
+            $returnString.= $statement->getPredicate()->getUri() . " ";
             $returnString.= (is_a($statement->getObject(), LiteralNode)) ? $statement->getObject()->getLiteral() : $statement->getObject()->getUri();
             $returnString.= " \n";
         }
-        
+
         return $returnString;
-        
     }
 
     public function modelToHTMLTable() {
@@ -294,7 +339,7 @@ class Model {
     public function newResource($uri = null) {
         if (!empty($uri))
             return new Resource($uri);
-       
+
         return $this->newBlankNode();
     }
 

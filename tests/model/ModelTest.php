@@ -93,11 +93,81 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($this->model->search(new Resource("ns:test2"), $pred, $obj) == null);
     }
 
-    public function testSearchSuccess() {
+    public function testSearchSuccess1() {
         $statement = new Statement(new Resource("ns:test"), new Resource("ns:pred"), new LiteralNode("literal"));
         $this->model->add($statement);
 
         $this->assertTrue($this->model->contains($statement));
+    }
+    
+    public function testSearchSuccess2() {
+        $statement1 = new Statement(new Resource("ns:test1"), new Resource("ns:pred"), new LiteralNode("literal1"));
+               
+        $this->model->add($statement1);
+
+        $this->assertTrue($this->model->contains($statement1));
+        $this->assertTrue($this->model->search(new Resource("ns:test1")) != null);
+        
+        $resource = $this->model->searchResource(new Resource("ns:test1"));
+                
+        $this->assertTrue($resource instanceof Resource);
+        $this->assertTrue($resource->equals(new Resource("ns:test1")));
+        $this->assertTrue($resource->hasProperty(new Resource("ns:pred")));
+        
+    }
+    
+    public function testSearchSuccess3() {
+        
+        //simple resource tree
+        
+        $statement1 = new Statement(new Resource("ns:test1"), new Resource("ns:pred"), new Resource("ns:test2"));
+        $statement2 = new Statement(new Resource("ns:test2"), new Resource("ns:pred"), new LiteralNode("literal2"));
+        
+        $this->model->add($statement1);
+        $this->model->add($statement2);
+
+        $this->assertTrue($this->model->contains($statement1));
+        $this->assertTrue($this->model->contains($statement2));
+        $this->assertTrue($this->model->search(new Resource("ns:test1")) != null);
+        $this->assertTrue($this->model->search(new Resource("ns:test2")) != null);
+        
+        $resource = $this->model->searchResource(new Resource("ns:test1"));
+        
+        $this->assertTrue($resource instanceof Resource);
+        $this->assertTrue($resource->equals(new Resource("ns:test1")));
+        $this->assertTrue($resource->hasProperty(new Resource("ns:pred")));
+        
+        $this->assertTrue($resource->getProperty(new Resource("ns:pred"))->equals(new Resource("ns:test2")));
+        $this->assertTrue($resource->getProperty(new Resource("ns:pred"))->hasProperty(new Resource("ns:pred")));
+        $this->assertTrue($resource->getProperty(new Resource("ns:pred"))->getProperty(new Resource("ns:pred"))->equals(new LiteralNode("literal2")));
+
+    }
+        
+    public function testSearchSuccess4() {
+        
+        // recursion
+        
+        $statement1 = new Statement(new Resource("ns:test1"), new Resource("ns:pred"), new Resource("ns:test2"));
+        $statement2 = new Statement(new Resource("ns:test2"), new Resource("ns:pred"), new Resource("ns:test1"));
+        
+        $this->model->add($statement1);
+        $this->model->add($statement2);
+
+        $this->assertTrue($this->model->contains($statement1));
+        $this->assertTrue($this->model->contains($statement2));
+        $this->assertTrue($this->model->search(new Resource("ns:test1")) != null);
+        $this->assertTrue($this->model->search(new Resource("ns:test2")) != null);
+        
+        $resource = $this->model->searchResource(new Resource("ns:test1"));
+        
+        $this->assertTrue($resource instanceof Resource);
+        $this->assertTrue($resource->equals(new Resource("ns:test1")));
+        $this->assertTrue($resource->hasProperty(new Resource("ns:pred")));
+        
+        $this->assertTrue($resource->getProperty(new Resource("ns:pred"))->equals(new Resource("ns:test2")));
+        $this->assertTrue($resource->getProperty(new Resource("ns:pred"))->hasProperty(new Resource("ns:pred")));
+        $this->assertTrue($resource->getProperty(new Resource("ns:pred"))->getProperty(new Resource("ns:pred"))->equals($resource));
+
     }
 
     public function testContainsSuccess() {
@@ -184,8 +254,6 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($this->model->search($res2, $pred, $obj) != null);
         $this->assertTrue($this->model->search($res2, new Resource("ns:pred4"), $obj) != null);
         $this->assertTrue($this->model->search($res, new Resource("ns:pred4"), $res2) != null);
-
-        echo $this->model->modelToString();
     }
 
     public function testInstanceCreation() {
