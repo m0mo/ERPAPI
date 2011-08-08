@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        InstanceCheck.php
- * @version     0.1.5 (Aug 6, 2011)
+ * @version     0.1.6 (Aug 6, 2011)
  * @package     util
  * @access      public
  * 

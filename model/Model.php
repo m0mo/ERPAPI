@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Model.php
- * @version     0.2.0 (Aug 6, 2011)
+ * @version     0.2.5 (Aug 8, 2011)
  * @package     model
  * @access      public
  * 

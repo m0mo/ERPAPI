@@ -34,18 +34,15 @@ class Statement {
      */
     public function __construct($subject, $predicate, $object) {
 
-        if (!Check::isSubject($subject)) {
+        if (!Check::isSubject($subject))
             throw new APIException(ERP_ERROR_SUBJECT);
-        }
-
-        if (!Check::isPredicate($predicate)) {
+        
+        if (!Check::isPredicate($predicate))
             throw new APIException(ERP_ERROR_PREDICATE);
-        }
-
-        if (!Check::isObject($object)) {
+        
+        if (!Check::isObject($object))
             throw new APIException(ERP_ERROR_OBJECT);
-        }
-
+        
         // Save the predicate and object to represent the statement
         $this->subject = $subject;
         $this->predicate = $predicate;
