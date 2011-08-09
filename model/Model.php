@@ -470,6 +470,15 @@ class Model {
             }
         }
     }
+    
+    /**
+     * Generates a unique ID for a BlankNode
+     *
+     * @return string ID
+     */
+    public function generateUniqueId() {
+        return "bNode".$this->bnodeCount++;
+    }
 
     // ------------------------------------------------------------------------
     // Generators for convenience
@@ -521,7 +530,7 @@ class Model {
         if (!Check::isValidNamespace($this->baseNamespace))
             throw new APIException(API_ERROR_BASENS);
 
-        return new BlankNode($this->baseNamespace, "bNode" . ++$this->cnt);
+        return new BlankNode($this->baseNamespace, $this->generateUniqueId());
     }
 
     /**
@@ -544,9 +553,9 @@ class Model {
      * Returns a list of all statements in the model using following format:
      * subjectURI, predicateURI, objectUri or Literal
      *
-     * @return String
+     * @return string
      */
-    public function modelToString() {
+    public function toString() {
         return $this->statementListToString($this->statements);
     }
 
@@ -558,7 +567,7 @@ class Model {
      * @return string
      * @throws APIException
      */
-    public function statementListToString($statements) {
+    public function statemensToString($statements) {
 
         if (!is_array($statements))
             throw new APIException(API_ERROR . "Array of statements expected and not given!");
@@ -582,11 +591,11 @@ class Model {
         return $returnString;
     }
 
-    public function modelToHTMLTable() {
+    public function toHTML() {
         return $this->statementListToHTMLTable($this->statements);
     }
 
-    public function statementListToHTMLTable($statements) {
+    public function statementsToHTML($statements) {
         //TODO: Implement statementListToHTMLTable
     }
 

@@ -15,7 +15,7 @@ require_once "../API.php";
  * @package     tests
  * @access      public
  * 
- * Description  Testing the class model/Model.php
+ * Description  Testing the class Model
  * 
  * -----------------------------------------------------------------------------
  */
@@ -283,6 +283,8 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(is_a($this->model->newLiteralNode("literal"), LiteralNode));
         $this->assertTrue(is_a($this->model->newLiteralNode("literal", STRING), LiteralNode));
         $this->assertTrue(is_a($this->model->newStatement(new BlankNode("http://example.org/", "bnode1"), new Resource("ns:pred"), new BlankNode("http://example.org/", "bnode2")), Statement));
+        
+        $this->assertTrue($this->model->newBlankNode()->getId() == "bNode3");
     }
 
     public function testSize() {

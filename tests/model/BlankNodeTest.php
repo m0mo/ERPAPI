@@ -15,7 +15,7 @@ require_once "../API.php";
  * @package     tests
  * @access      public
  * 
- * Description  here
+ * Description  Testing the class BlankNode
  * 
  * -----------------------------------------------------------------------------
  */
@@ -31,7 +31,7 @@ class BlankNodeTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($blank->getId() == "bnode1");
         $this->assertTrue($blank->getName() == "bnode1");
         $this->assertTrue($blank->getUri() == "http://example.org/bnode1");
-        
+                
     }
 
     // Add your tests here

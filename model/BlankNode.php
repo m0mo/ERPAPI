@@ -12,7 +12,7 @@
  * @package     model
  * @access      public
  * 
- * Description  here
+ * Description  This class represents a RDF Blank Node
  * 
  * -----------------------------------------------------------------------------
  */
@@ -38,12 +38,15 @@ class BlankNode extends Resource {
     function __construct($namespace_or_uri, $id = "") {
         
         parent::__construct($namespace_or_uri, $id);
-        $this->id = $id;
-        
-        // extract id from uri
+        $this->id = $this->name;
         
     }
     
+    /**
+     * Returns the ID of the BlankNode
+     *
+     * @return string 
+     */
     public function getId() {
         return $this->id;
     }
