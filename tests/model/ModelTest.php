@@ -11,7 +11,7 @@ require_once "../API.php";
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        ModelTest.php
- * @version     2011-08-08
+ * @version     2011-08-09
  * @package     tests
  * @access      public
  * 

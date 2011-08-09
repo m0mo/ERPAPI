@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        BlankNode.php
- * @version     2011-08-05
+ * @version     2011-08-09
  * @package     model
  * @access      public
  * 

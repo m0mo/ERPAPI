@@ -11,7 +11,7 @@ require_once "../API.php";
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        BlankNodeTest.php
- * @version     2011-08-06
+ * @version     2011-08-09
  * @package     tests
  * @access      public
  * 
