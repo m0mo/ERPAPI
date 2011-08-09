@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Statement.php
- * @version     0.2.0 (Aug 6, 2011)
+ * @version     2011-08-07
  * @package     model
  * @access      public
  * 

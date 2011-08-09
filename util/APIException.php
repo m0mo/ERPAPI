@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        APIException.php
- * @version     0.1.5 (Aug 6, 2011)
+ * @version     2011-08-06
  * @package     utils
  * @access      public
  * 

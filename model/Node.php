@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Node.php
- * @version     0.1.0 (Aug 5, 2011)
+ * @version     2011-08-05
  * @package     model
  * @access      public
  * 

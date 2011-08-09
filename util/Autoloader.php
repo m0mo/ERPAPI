@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Autoloader.php
- * @version     0.1.6 (Aug 8, 2011)
+ * @version     2011-08-08
  * @package     util
  * @access      public
  * 
