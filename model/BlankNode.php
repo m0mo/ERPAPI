@@ -18,9 +18,36 @@
  */
 class BlankNode extends Resource {
     
-    function __construct($uri = null) {
-        $this->uri = $uri;
+    /**
+     * The id of the node
+     *
+     * @var string 
+     */
+    private $id;
+
+
+    /**
+     * 
+     * The resource represented by a blank node is also called an anonymous 
+     * resource. By RDF standard a blank node can only be used as subject or 
+     * object in an RDF triple
+     *
+     * @param string $uri
+     * @param string $id
+     */
+    function __construct($namespace_or_uri, $id = "") {
+        
+        parent::__construct($namespace_or_uri, $id);
+        $this->id = $id;
+        
+        // extract id from uri
+        
     }
+    
+    public function getId() {
+        return $this->id;
+    }
+    
 
     
 }

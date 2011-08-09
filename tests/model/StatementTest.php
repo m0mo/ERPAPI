@@ -11,7 +11,7 @@ require_once "../API.php";
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        StatementTest.php
- * @version     2011-08-06
+ * @version     2011-08-09
  * @package     tests
  * @access      public
  * 
@@ -88,7 +88,7 @@ class StatementTest extends PHPUnit_Framework_TestCase {
      */
     public function testErrorPredicate3() {
 
-        $statement = new Statement($this->subj, new BlankNode(), $this->obj);
+        $statement = new Statement($this->subj, new BlankNode("http://example.org/", "bnode1"), $this->obj);
     }
 
     /**
@@ -115,7 +115,7 @@ class StatementTest extends PHPUnit_Framework_TestCase {
 
     public function testAcceptedSubject2() {
 
-        $statement = new Statement(new BlankNode(), $this->pred, $this->obj);
+        $statement = new Statement(new BlankNode("http://example.org/", "bnode1"), $this->pred, $this->obj);
         $this->assertTrue(is_a($statement, Statement));
     }
 

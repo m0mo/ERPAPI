@@ -11,7 +11,7 @@ require_once "../API.php";
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        ResourceTest.php
- * @version     2011-08-06
+ * @version     2011-08-09
  * @package     tests
  * @access      public
  * 
@@ -25,7 +25,7 @@ class ResourceTest extends PHPUnit_Framework_TestCase {
     private $ns = "http://thisIsMyUri/test/";
     
     protected function setUp() {
-        $this->resource = new Resource($this->ns."R1");
+        $this->resource = new Resource($this->ns, "R1");
     }
 
     function testGenerateResource() {
@@ -35,6 +35,9 @@ class ResourceTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testGetUri() {
+        
+        echo $this->resource->getUri();
+        
         $this->assertTrue($this->resource->getUri() == $this->ns."R1");
     }
     

@@ -28,7 +28,7 @@ class CheckTest extends PHPUnit_Framework_TestCase {
     public function testAcceptSubject() {
 
         $this->assertTrue(Check::isSubject(new Resource("test")));
-        $this->assertTrue(Check::isSubject(new BlankNode()));
+        $this->assertTrue(Check::isSubject(new BlankNode("http://example.org/", "bnode1")));
 
         // adding a full ressource with properties
         $res = new Resource("test");
@@ -46,7 +46,7 @@ class CheckTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue(Check::isObject(new Resource("test")));
         $this->assertTrue(Check::isObject(new LiteralNode("literal")));
-        $this->assertTrue(Check::isObject(new BlankNode()));
+        $this->assertTrue(Check::isObject(new BlankNode("http://example.org/", "bnode1")));
 
         // adding a full ressource with properties
         $res = new Resource("test");
@@ -70,7 +70,7 @@ class CheckTest extends PHPUnit_Framework_TestCase {
 
         $this->assertFalse(Check::isPredicate("this is a string"));
         $this->assertFalse(Check::isPredicate(new LiteralNode("predicate can't be a literal")));
-        $this->assertFalse(Check::isPredicate(new BlankNode()));
+        $this->assertFalse(Check::isPredicate(new BlankNode("http://example.org/", "bnode1")));
 
         $res = new Resource("test");
         $statement = $res->addProperty(new Resource("pred"), new LiteralNode("Test"));

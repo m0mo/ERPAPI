@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        InstanceCheck.php
- * @version     2011-08-06
+ * @version     2011-08-09
  * @package     util
  * @access      public
  * 
@@ -82,14 +82,14 @@ class Check {
     }
 
     /**
-     * Checks if the URI is valid.
+     * Checks if the namespace is valid.
      *
-     * @param String $uri 
-     * @return true if valid, otherwise false
+     * @param string $namespace 
+     * @return bool true if valid, otherwise false
      */
-    public function isValidURI($uri) {
+    public function isValidNamespace($namespace) {
         
-        if(!is_string($uri))
+        if(!is_string($namespace))
             return false;
         
         // TODO: implement

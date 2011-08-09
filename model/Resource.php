@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Resource.php
- * @version     2011-08-07
+ * @version     2011-08-09
  * @package     model
  * @access      public
  * 
@@ -18,21 +18,43 @@
  */
 class Resource extends Node {
 
+    /**
+     * The uri of the resource
+     *
+     * @var string 
+     */
     protected $uri;
+    
+    /**
+     * The name of the resource
+     *
+     * @var string 
+     */
+    protected $name;
+
+    /**
+     * An array of properties of the resource
+     *
+     * @var array containing array("predicate" => $predicate, "object" => $object); 
+     */
     protected $properties;
     
     /**
-     * Creates a new Resource from an URI. The Uri can be a short version
-     * (prefix) in form of ns:name or the full link.
+     * Creates a new Resource from an URI and a name.
      *
-     * @param String $uri 
+     * @param string $uri
+     * @param string $name 
+     * @throws APIException
      */
-    function __construct($uri) {
+    function __construct($namespace_or_uri, $name = null) {
         
-        if(!Check::isValidURI($uri))
+        if(!Check::isValidNamespace($namespace_or_uri))
             throw new APIException(API_ERROR_URI);
             
-        $this->uri = $uri;
+        $this->uri = ($name != null) ? $namespace_or_uri.$name: $namespace_or_uri;
+        $this->name = $name;
+        
+        // TODO: extract name from uri
     }
 
     /**
@@ -43,6 +65,7 @@ class Resource extends Node {
      * @param Resource $predicate
      * @param Node $object 
      * @return Statement of the added property
+     * @throws APIException
      */
     public function addProperty($predicate, $object) {
         
@@ -63,7 +86,8 @@ class Resource extends Node {
      * Check if the resource has a specific property, independend of the content
      *
      * @param Resource $predicate
-     * @return true if resource has property, otherwise false 
+     * @return bool true if resource has property, otherwise false 
+     * @throws APIException
      */
     public function hasProperty($predicate) {
         
@@ -76,8 +100,9 @@ class Resource extends Node {
     /**
      * Returns the object of the property
      *
-     * @param Predicate $predicate
-     * @return Node 
+     * @param Resource $predicate
+     * @return Node Resource or LiteralNode
+     * @throws APIException
      */
     public function getProperty($predicate) {
         
@@ -91,7 +116,8 @@ class Resource extends Node {
      * Removes the predicate and its object as a property
      *
      * @param Resource $predicate
-     * @return true if success else false 
+     * @return bool true if success else false 
+     * @throws APIException
      */
     public function removeProperty($predicate) {
         
@@ -106,16 +132,23 @@ class Resource extends Node {
     /**
      * Returns the URI of the resource
      *
-     * @return String
+     * @return string
      */
     public function getUri() {
         return $this->uri;
     }
     
     /**
+     * Returns the name of the Resource
+     */
+    public function getName() {
+        return $this->name;    
+    }
+    
+    /**
      * Returns an array of the resources properties
      *
-     * @return $properties[$predicate->getUri()] => array("predicate" => 
+     * @return array $properties[$predicate->getUri()] => array("predicate" => 
      *                          $predicate, "object" => $object);
      */
     public function getProperties() {
@@ -126,7 +159,7 @@ class Resource extends Node {
      * Checks if two Resources are the same
      *
      * @param Node $that
-     * @return true if equal, else false 
+     * @return bool true if equal, else false 
      */
     public function equals($that) {
         

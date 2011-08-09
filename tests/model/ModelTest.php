@@ -15,7 +15,7 @@ require_once "../API.php";
  * @package     tests
  * @access      public
  * 
- * Description  here
+ * Description  Testing the class model/Model.php
  * 
  * -----------------------------------------------------------------------------
  */
@@ -25,6 +25,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
 
     protected function setUp() {
         $this->model = new Model();
+        $this->model->addBaseNamespace("unit", "http://www.example.org/");
     }
 
     public function testAddNamespace() {
@@ -32,8 +33,10 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($this->model->getNamespace("ns"), "http://test/");
     }
 
-    public function testDeleteNamespace() {
+    public function testRemoveNamespace() {
 
+        $this->assertFalse($this->model->hasNamespace("ns"));
+        
         $this->model->addNamespace("ns", "1234");
         $this->assertTrue($this->model->hasNamespace("ns"));
         $this->assertTrue($this->model->removeNamespace("ns"));
@@ -69,7 +72,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
      * @expectedException APIException
      */
     public function testAddError3() {
-        $this->model->add(new BlankNode());
+        $this->model->add($this->model->newBlankNode());
     }
 
     /**
@@ -273,13 +276,13 @@ class ModelTest extends PHPUnit_Framework_TestCase {
 
     public function testInstanceCreation() {
 
-        $this->assertTrue(is_a($this->model->newResource("ns:test"), Resource));
+        $this->assertTrue(is_a($this->model->newResource("test"), Resource));
         $this->assertTrue(is_a($this->model->newResource(), Resource));
         $this->assertTrue(is_a($this->model->newResource(), BlankNode));
         $this->assertTrue(is_a($this->model->newBlankNode(), BlankNode));
         $this->assertTrue(is_a($this->model->newLiteralNode("literal"), LiteralNode));
         $this->assertTrue(is_a($this->model->newLiteralNode("literal", STRING), LiteralNode));
-        $this->assertTrue(is_a($this->model->newStatement(new BlankNode(), new Resource("ns:pred"), new BlankNode), Statement));
+        $this->assertTrue(is_a($this->model->newStatement(new BlankNode("http://example.org/", "bnode1"), new Resource("ns:pred"), new BlankNode("http://example.org/", "bnode2")), Statement));
     }
 
     public function testSize() {

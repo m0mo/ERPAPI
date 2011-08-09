@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Model.php
- * @version     2011-08-08
+ * @version     2011-08-09
  * @package     model
  * @access      public
  * 
@@ -19,64 +19,104 @@
  */
 class Model {
 
+    /**
+     * List of Statements
+     *
+     * @var array Array of statements
+     */
     private $statements;
+
+    /**
+     * A list of URIs
+     *
+     * @var array Array of URIs
+     */
     private $namespaces;
+
+    /**
+     * A list of resources used by the serach method to prevent dead lock
+     *
+     * @var array Array of resources
+     */
     private $foundResources;
-    
-    private $baseUri;
+
+    /**
+     * A uri used for creating nodes with the model
+     *
+     * @var string 
+     */
+    private $baseNamespace;
+
+    /**
+     * A prefix used for creating nodes with the model
+     *
+     * @var string 
+     */
     private $basePrefix;
 
     /**
-     * Create a new model
+     * A counter for created BlankNodes so that it can be used for creating IDs
+     * 
+     * @var integer
+     */
+    private $bnodeCount = 0;
+
+    /**
+     * Constructor
      */
     function __construct() {
         
     }
-    
+
     /**
+     * Adds a base URI
+     * 
      * Adds a standart namespace to the model, which is used for node creation
      * by the model. So that nodes, that don't have a prefix or full Uri are
      * automatically added to the base namespace.
      *
-     * @param type $prefix
-     * @param type $uri 
+     * @param string $prefix
+     * @param string $uri 
+     * @throws APIException
      */
-    public function addBaseNamespace($prefix, $uri) {
-        
+    public function addBaseNamespace($prefix, $namespace) {
+
         if (!Check::isValidPrefix($prefix))
             throw new APIException(API_ERROR_URI);
 
-        if (!Check::isValidURI($uri))
+        if (!Check::isValidNamespace($namespace))
             throw new APIException(API_ERROR_URI);
-        
-        $this->baseUri = $uri;
+
+        $this->baseNamespace = $namespace;
         $this->basePrefix = $prefix;
-        
-        $this->addNamespace($prefix, $uri);
+
+        $this->addNamespace($prefix, $namespace);
     }
 
     /**
      * Add a namespace to the model
      * 
-     * @param String $prefix
-     * @param String $uri 
+     * @param string $prefix
+     * @param string $uri 
+     * @throws APIException
      */
-    public function addNamespace($prefix, $uri) {
+    public function addNamespace($prefix, $namespace) {
 
         if (!Check::isValidPrefix($prefix))
             throw new APIException(API_ERROR_URI);
 
-        if (!Check::isValidURI($uri))
+        if (!Check::isValidNamespace($namespace))
             throw new APIException(API_ERROR_URI);
 
-        $this->namespaces[$prefix] = $uri;
+        $this->namespaces[$prefix] = $namespace;
     }
 
     /**
      * Get the URI of the namespace
      *
-     * @param String $prefix
-     * @return String $uri 
+     * @param string $prefix
+     * @return string $uri
+     * @throws APIException 
      */
     public function getNamespace($prefix) {
 
@@ -87,12 +127,12 @@ class Model {
     }
 
     /**
-     * Get a list of namespaces inform of namespaces[$prefix] = $uri
+     * Get a list of namespaces inform of namespaces[$prefix] = $uri. May return null
      *
-     * @param String $prefix
-     * @return String $uri 
+     * @param string $prefix
+     * @return string the uri fitting to the $prefix 
      */
-    public function getNamespaces() {
+    public function getAllNamespaces() {
 
         return $this->namespaces;
     }
@@ -100,8 +140,9 @@ class Model {
     /**
      * Remove a namespace from the model
      *
-     * @param String $prefix
-     * @return true if removed 
+     * @param string $prefix
+     * @return bool true = removed, false = not removed
+     * @throws APIException
      */
     public function removeNamespace($prefix) {
 
@@ -115,8 +156,9 @@ class Model {
     /**
      * Checks if the model contains a specific namespace
      *
-     * @param String $prefix
-     * @return true if yes, otherwise false 
+     * @param string $prefix
+     * @return bool true if yes, otherwise false 
+     * @throws APIException
      */
     public function hasNamespace($prefix) {
 
@@ -132,11 +174,12 @@ class Model {
      * already part of the model and a copy will be saved. If $double is false
      * double entries are forbidden.
      *
-     * @param Statement or Resource $statement_or_resource
+     * @param mixed $statement_or_resource can be Statement or Resource
      * @param bool $double
-     * @return true if added, false if not
+     * @return bool true if added, false if not
+     * @throws APIException
      */
-    public function add($statement_or_resource, $double=true) {
+    public function add($statement_or_resource, $double = ALLOW_DUPLICATES) {
 
         if (empty($statement_or_resource))
             throw new APIException(API_ERROR . "Parameter is null");
@@ -157,9 +200,10 @@ class Model {
      * Add a statement to the list of statements if it does not exist already
      *
      * @param Statement $statement 
-     * @return true if successfull,otherwise false
+     * @return bool true if successfull,otherwise false
+     * @throws APIException
      */
-    private function addStatement($statement, $double) {
+    private function addStatement($statement, $double = ALLOW_DUPLICATES) {
 
         if (!Check::isStatement($statement))
             throw new APIException(API_ERROR_STATEMENT);
@@ -182,10 +226,11 @@ class Model {
      * and adds them to the list if they don't exist already.
      *
      * @param Resource $resource 
-     * @return true if successfull,otherwise false
+     * @return bool true if successfull,otherwise false
+     * @throws APIException
      */
-    private function addResource($resource, $double) {
-        
+    private function addResource($resource, $double = ALLOW_DUPLICATES) {
+
         if (!Check::isSubject($resource))
             throw new APIException(ERP_ERROR_SUBJECT);
 
@@ -213,7 +258,9 @@ class Model {
     /**
      * Removes a statement or resource (and its properties) of the model
      *
-     * @param Statement or Resource $statement_or_resource 
+     * @param mixed $statement_or_resource can be Statement or Resource
+     * @return bool true = removed, false = not removed
+     * @throws APIException
      */
     public function remove($statement_or_resource) {
 
@@ -236,6 +283,8 @@ class Model {
      * Removes a statement to the list of statements
      *
      * @param Statement $statement
+     * @return bool true = removed, false = not removed  
+     * @throws APIException
      */
     private function removeStatement($statement) {
 
@@ -257,6 +306,8 @@ class Model {
      * This function removes a resource (with its properties) from the model
      *
      * @param Resource $resource 
+     * @return bool true = removed, false = not removed
+     * @throws APIException
      */
     private function removeResource($resource) {
 
@@ -284,10 +335,11 @@ class Model {
     /**
      * Returns a list of statements which fit to the input
      *
-     * @param Node $subject
-     * @param Node $predicate
-     * @param Node $object
-     * @return Statement Array 
+     * @param Resource $subject
+     * @param Resource $predicate
+     * @param Node $object can be Resource or literal
+     * @return array Array of Statements
+     * @throws APIException
      */
     public function search($subject = null, $predicate = null, $object = null) {
 
@@ -342,6 +394,7 @@ class Model {
      *
      * @param Resource $resource
      * @return Resource
+     * @throws APIException
      */
     public function searchResource($resource) {
 
@@ -381,15 +434,16 @@ class Model {
     /**
      * Returns the number of statements stored in the model
      *
-     * @return Integer 
+     * @return integer 
      */
     public function size() {
         return count($this->statements);
     }
 
     /**
+     * Checks if the model is empty
      *
-     * @return true if no statements are in the model, otherwise false 
+     * @return bool true if no statements are in the model, otherwise false 
      */
     public function isEmpty() {
         return empty($this->statements);
@@ -399,7 +453,8 @@ class Model {
      * Checks if the statement is already present in the model
      *
      * @param Statement $statement 
-     * @return true if model contains the statement, otherwise false
+     * @return bool true if model contains the statement, otherwise false
+     * @throws APIException
      */
     public function contains($statement) {
 
@@ -424,26 +479,34 @@ class Model {
      * Returns a new object of type Resource if $uri is set, otherwise it will 
      * return a BlankNode
      *
-     * @param String $uri
-     * @return Resource 
+     * @param string $uri
+     * @return Resource
+     * @throws APIException
      */
-    public function newResource($name_or_uri = null) {
-        if (!empty($name_or_uri))
-            return new Resource($name_or_uri);
-        
-        // TODO: check URI and include base namespace;
+    public function newResource($name = null) {
 
-        return $this->newBlankNode();
+        if (!Check::isValidNamespace($this->baseNamespace))
+            throw new APIException(API_ERROR_BASENS);
+
+        if (empty($name))
+            return $this->newBlankNode();
+
+        return new Resource($this->baseNamespace, $name);
     }
 
     /**
      * Returns a new object of type LiteralNode
      *
-     * @param type $literal
-     * @param type $datatype
-     * @return Literal 
+     * @param string $literal
+     * @param string $datatype
+     * @return LiteralNode
+     * @throws APIException
      */
     public function newLiteralNode($literal, $datatype = STRING) {
+
+        if (!Check::isValidNamespace($this->baseNamespace))
+            throw new APIException(API_ERROR_BASENS);
+
         return new LiteralNode($literal, $datatype);
     }
 
@@ -451,17 +514,22 @@ class Model {
      * Returns a new object of type BlankNode
      *
      * @return BlankNode 
+     * @throws APIException
      */
     public function newBlankNode() {
-        return new BlankNode();
+
+        if (!Check::isValidNamespace($this->baseNamespace))
+            throw new APIException(API_ERROR_BASENS);
+
+        return new BlankNode($this->baseNamespace, "bNode" . ++$this->cnt);
     }
 
     /**
      * Returns a new object of type Statement
      *
-     * @param Node $subject
-     * @param Node $predicate
-     * @param Node $object
+     * @param Resource $subject
+     * @param Resource $predicate
+     * @param Node $object Can be Resource or LiteralNode
      * @return Statement 
      */
     public function newStatement($subject, $predicate, $object) {
@@ -486,8 +554,9 @@ class Model {
      * Returns a list of provided statements using following format:
      * subjectURI, predicateURI, objectUri or Literal
      *
-     * @param Statement Array $statements
-     * @return String
+     * @param array $statements Array of Statements
+     * @return string
+     * @throws APIException
      */
     public function statementListToString($statements) {
 
