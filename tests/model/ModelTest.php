@@ -282,9 +282,9 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(is_a($this->model->newBlankNode(), BlankNode));
         $this->assertTrue(is_a($this->model->newLiteralNode("literal"), LiteralNode));
         $this->assertTrue(is_a($this->model->newLiteralNode("literal", STRING), LiteralNode));
-        $this->assertTrue(is_a($this->model->newStatement(new BlankNode("http://example.org/", "bnode1"), new Resource(NS."pred"), new BlankNode("http://example.org/", "bnode2")), Statement));
+        $this->assertTrue(is_a($this->model->newStatement(new BlankNode(), new Resource(NS."pred"), new BlankNode()), Statement));
         
-        $this->assertTrue($this->model->newBlankNode()->getId() == "bNode3");
+        $this->assertEquals($this->model->newBlankNode()->getId() , BNODE."4");
     }
 
     public function testSize() {

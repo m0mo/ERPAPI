@@ -21,17 +21,29 @@ require_once "settings.php";
 class BlankNodeTest extends PHPUnit_Framework_TestCase {
 
     public function testGenerateBlankNode() {
-        $blank = new BlankNode(NS, "bnode1");
+        $blank = new BlankNode("bnode1");
         $this->assertTrue(is_a($blank, BlankNode));
-        $this->assertTrue($blank->getId() == "bnode1");
-        $this->assertTrue($blank->getName() == "bnode1");
-        $this->assertTrue($blank->getUri() == NS . "bnode1");
+        $this->assertEquals($blank->getId(), "bnode1");
+        $this->assertEquals($blank->getName(), "bnode1");
+        $this->assertEquals($blank->getUri(), "bnode1");
     }
 
     public function testToString() {
-        $blank = new BlankNode(NS, "bnode1");
+        $blank = new BlankNode("bnode1");
         $this->assertTrue(Check::isString($blank->toString()));
     }
+    
+    public function testEquals() {
+        $m = new Model();
+        
+        $blank1 = new BlankNode(BNODE."1");
+        $blank2 = $m->newBlankNode();
+        
+        $this->assertEquals($blank1->getId(), $blank2->getId());
+        $this->assertTrue($blank1->equals($blank2));
+        
+    }
+    
 
 }
 

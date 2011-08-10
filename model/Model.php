@@ -483,7 +483,7 @@ class Model {
      * @return string ID
      */
     public function generateUniqueId() {
-        return "bNode" . $this->bnodeCount++;
+        return BNODE . ++$this->bnodeCount;
     }
 
     // ------------------------------------------------------------------------
@@ -529,14 +529,10 @@ class Model {
      * Returns a new object of type BlankNode
      *
      * @return BlankNode
-     * @throws APIException
      */
     public function newBlankNode() {
 
-        if (!Check::isNamespace($this->baseNamespace))
-            throw new APIException(API_ERROR_BASENS);
-
-        return new BlankNode($this->baseNamespace, $this->generateUniqueId());
+        return new BlankNode($this->generateUniqueId());
     }
 
     /**
