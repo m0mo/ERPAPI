@@ -109,6 +109,15 @@ class Statement {
                $this->getPredicate()->equals($that->getPredicate()) && 
                $this->getObject()->equals($that->getObject());
     }
+    
+    public function toString() {
+        $string = "\n";
+        $string.= "Subject: ".$this->getSubject()->toString(). "\n";
+        $string.= "Predicate: ".$this->getPredicate()->toString(). "\n";
+        $string.= "Object: ".$this->getObject()->toString(). "\n";
+        
+        return $string;
+    }
 
 }
 

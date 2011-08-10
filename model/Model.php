@@ -2,19 +2,19 @@
 
 /**
  * -----------------------------------------------------------------------------
- * ERP API 
+ * ERP API
  * -----------------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
- * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com>
+ *
  * @name        Model.php
  * @version     2011-08-10
  * @package     model
  * @access      public
- * 
- * Description  This class represents the whole RDF model in form of a list 
+ *
+ * Description  This class represents the whole RDF model in form of a list
  *              of statements.
- * 
+ *
  * -----------------------------------------------------------------------------
  */
 class Model {
@@ -43,20 +43,20 @@ class Model {
     /**
      * A uri used for creating nodes with the model
      *
-     * @var string 
+     * @var string
      */
     private $baseNamespace;
 
     /**
      * A prefix used for creating nodes with the model
      *
-     * @var string 
+     * @var string
      */
     private $basePrefix;
 
     /**
      * A counter for created BlankNodes so that it can be used for creating IDs
-     * 
+     *
      * @var integer
      */
     private $bnodeCount = 0;
@@ -70,13 +70,13 @@ class Model {
 
     /**
      * Adds a base URI
-     * 
+     *
      * Adds a standart namespace to the model, which is used for node creation
      * by the model. So that nodes, that don't have a prefix or full Uri are
      * automatically added to the base namespace.
      *
      * @param string $prefix
-     * @param string $uri 
+     * @param string $uri
      * @throws APIException
      */
     public function addBaseNamespace($prefix, $namespace) {
@@ -95,9 +95,9 @@ class Model {
 
     /**
      * Add a namespace to the model
-     * 
+     *
      * @param string $prefix
-     * @param string $uri 
+     * @param string $uri
      * @throws APIException
      */
     public function addNamespace($prefix, $namespace) {
@@ -116,7 +116,7 @@ class Model {
      *
      * @param string $prefix
      * @return string $uri
-     * @throws APIException 
+     * @throws APIException
      */
     public function getNamespace($prefix) {
 
@@ -130,7 +130,7 @@ class Model {
      * Get a list of namespaces inform of namespaces[$prefix] = $uri. May return null
      *
      * @param string $prefix
-     * @return string the uri fitting to the $prefix 
+     * @return string the uri fitting to the $prefix
      */
     public function getAllNamespaces() {
 
@@ -157,7 +157,7 @@ class Model {
      * Checks if the model contains a specific namespace
      *
      * @param string $prefix
-     * @return bool true if yes, otherwise false 
+     * @return bool true if yes, otherwise false
      * @throws APIException
      */
     public function hasNamespace($prefix) {
@@ -170,7 +170,7 @@ class Model {
 
     /**
      * Adds a statement or a resource (with properties) to the model. If $double
-     * is true (standart) there will be no check performed if the statement is 
+     * is true (standart) there will be no check performed if the statement is
      * already part of the model and a copy will be saved. If $double is false
      * double entries are forbidden.
      *
@@ -199,7 +199,7 @@ class Model {
     /**
      * Add a statement to the list of statements if it does not exist already
      *
-     * @param Statement $statement 
+     * @param Statement $statement
      * @return bool true if successfull,otherwise false
      * @throws APIException
      */
@@ -225,7 +225,7 @@ class Model {
      * This function transforms a resource and its properties to a list of statements
      * and adds them to the list if they don't exist already.
      *
-     * @param Resource $resource 
+     * @param Resource $resource
      * @return bool true if successfull,otherwise false
      * @throws APIException
      */
@@ -269,7 +269,7 @@ class Model {
 
         if (Check::isStatement($statement_or_resource)) {
             return $this->removeStatement($statement_or_resource);
-        } else if (Check::isSubject($statement_or_resource)) {
+        } else if (Check::isResource($statement_or_resource)) {
             return $this->removeResource($statement_or_resource);
         } else {
             // if nothing above fits, throw new exception
@@ -283,7 +283,7 @@ class Model {
      * Removes a statement to the list of statements
      *
      * @param Statement $statement
-     * @return bool true = removed, false = not removed  
+     * @return bool true = removed, false = not removed
      * @throws APIException
      */
     private function removeStatement($statement) {
@@ -291,34 +291,37 @@ class Model {
         if (!Check::isStatement($statement))
             throw new APIException(API_ERROR_STATEMENT);
 
+        $bool = false;
+
         foreach ($this->statements as $key => $value) {
 
             if ($statement->equals($value)) {
                 unset($this->statements[$key]);
-                return true;
+                $bool = true;
             }
         }
 
-        return false;
+        return $bool;
     }
 
     /**
      * This function removes a resource (with its properties) from the model
      *
-     * @param Resource $resource 
+     * @param Resource $resource
      * @return bool true = removed, false = not removed
      * @throws APIException
      */
     private function removeResource($resource) {
 
-        if (!Check::isSubject($resource))
+        if (!Check::isResource($resource))
             throw new APIException(ERP_ERROR_SUBJECT);
 
+        $bool = false;
         $properties = $resource->getProperties();
 
         // if there are no properties we can't remove any statements
         if (empty($properties)) {
-            throw new APIException(API_ERROR . "A resource needs to contain at least one property to be removed from the model.");
+            return false;
         }
 
         foreach ($properties as $prop) {
@@ -326,10 +329,13 @@ class Model {
             $predicate = $prop["predicate"];
             $object = $prop["object"];
 
-            return $this->removeStatement(new Statement($resource, $predicate, $object));
+            $bool = $this->removeStatement(new Statement($resource, $predicate, $object)) || $bool;
+
+            if (Check::isResource($object))
+                $bool = $bool || $this->removeResource($object);
         }
 
-        return false;
+        return $bool;
     }
 
     /**
@@ -388,9 +394,9 @@ class Model {
     }
 
     /**
-     * Searchs for a resource and adds all found properties (recursive) to it. 
+     * Searchs for a resource and adds all found properties (recursive) to it.
      * The resource that is returned will contain all properties and their
-     * properties creating a tree of related nodes. 
+     * properties creating a tree of related nodes.
      *
      * @param Resource $resource
      * @return Resource
@@ -404,7 +410,7 @@ class Model {
         // prevent dead lock
         if (isset($this->foundResources[$resource->getUri()])) {
 
-            //return the element of the array rather than creating 
+            //return the element of the array rather than creating
             //a new one
 
             return $this->foundResources[$resource->getUri()];
@@ -434,7 +440,7 @@ class Model {
     /**
      * Returns the number of statements stored in the model
      *
-     * @return integer 
+     * @return integer
      */
     public function size() {
         return count($this->statements);
@@ -443,7 +449,7 @@ class Model {
     /**
      * Checks if the model is empty
      *
-     * @return bool true if no statements are in the model, otherwise false 
+     * @return bool true if no statements are in the model, otherwise false
      */
     public function isEmpty() {
         return empty($this->statements);
@@ -452,7 +458,7 @@ class Model {
     /**
      * Checks if the statement is already present in the model
      *
-     * @param Statement $statement 
+     * @param Statement $statement
      * @return bool true if model contains the statement, otherwise false
      * @throws APIException
      */
@@ -485,7 +491,7 @@ class Model {
     // ------------------------------------------------------------------------
 
     /**
-     * Returns a new object of type Resource if $uri is set, otherwise it will 
+     * Returns a new object of type Resource if $uri is set, otherwise it will
      * return a BlankNode
      *
      * @param string $uri
@@ -522,7 +528,7 @@ class Model {
     /**
      * Returns a new object of type BlankNode
      *
-     * @return BlankNode 
+     * @return BlankNode
      * @throws APIException
      */
     public function newBlankNode() {
@@ -539,7 +545,7 @@ class Model {
      * @param Resource $subject
      * @param Resource $predicate
      * @param Node $object Can be Resource or LiteralNode
-     * @return Statement 
+     * @return Statement
      */
     public function newStatement($subject, $predicate, $object) {
         return new Statement($subject, $predicate, $object);
@@ -556,7 +562,7 @@ class Model {
      * @return string
      */
     public function toString() {
-        return $this->statementListToString($this->statements);
+        return $this->statemensToString($this->statements);
     }
 
     /**
@@ -591,12 +597,31 @@ class Model {
         return $returnString;
     }
 
+    /**
+     * Returns a HTML table of the model's statements
+     *
+     * @return type
+     */
     public function toHTML() {
-        return $this->statementListToHTMLTable($this->statements);
+        return $this->statementsToHTML($this->statements);
     }
 
+    /**
+     * Returns a HTML table of the statement array
+     *
+     * @param type $statements
+     * @return type
+     */
     public function statementsToHTML($statements) {
+
+        if (!is_array($statements))
+            throw new APIException(API_ERROR . "Array of statements expected and not given!");
+
+        if (empty($statements))
+            return "no statements in model";
+
         //TODO: Implement statementListToHTMLTable
+        return "";
     }
 
 }

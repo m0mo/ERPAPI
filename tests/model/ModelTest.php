@@ -30,6 +30,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     public function testAddNamespace() {
         $this->model->addNamespace("ns", NS);
         $this->assertEquals($this->model->getNamespace("ns"), NS);
+        $this->assertTrue(count($this->model->getAllNamespaces()) == 2);
     }
 
     public function testRemoveNamespace() {
@@ -314,12 +315,10 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->model->remove(null);
     }
 
-    /**
-     * @expectedException APIException
-     */
+    
     public function testRemoveError2() {
 
-        $this->model->remove(new Resource(NS."test"));
+        $this->assertFalse($this->model->remove(new Resource(NS."test")));
     }
 
     /**
@@ -328,6 +327,15 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     public function testRemoveError3() {
 
         $this->model->remove(new LiteralNode("test"));
+    }
+    
+    public function testRemoveError4() {
+        
+        $res = $this->model->newResource("test")->addProperty(new Resource(NS."pred"), new LiteralNode("literal"));
+        $this->model->add($res);
+        
+        $res1 = $this->model->newResource("test2")->addProperty(new Resource(NS."pred"), new LiteralNode("literal"));
+        $this->assertFalse($this->model->remove($res1));
     }
 
     public function testRemoveSuccess1() {
@@ -363,6 +371,34 @@ class ModelTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($this->model->size() == 0);
         $this->assertTrue($this->model->search($res) == null);
+    }
+    
+     public function testRemoveSuccess3() {
+
+        $res = $this->model->newResource("test")
+                                ->addProperty($this->model->newResource("pred"), new LiteralNode("literal"))
+                                ->addProperty($this->model->newResource("pred2"), new LiteralNode("literal1"))
+                                ->addProperty($this->model->newResource("pred3"), new LiteralNode("literal2"));
+        
+        $this->model->add($res);
+        $this->assertEquals($this->model->size(), 3);
+        $this->assertTrue($this->model->search($res) != null);
+
+        $this->model->remove($res);
+
+        $this->assertEquals($this->model->size(), 0);
+        $this->assertTrue($this->model->search($res) == null);
+    }
+    
+    public function testToString() {
+        
+        $res = $this->model->newResource("test")->addProperty(new Resource(NS."pred"), new LiteralNode("literal"));
+        
+        $this->model->add($res);
+        
+        $this->assertTrue(Check::isString($this->model->toString()));
+        $this->assertTrue(Check::isString($this->model->toHTML()));
+        
     }
 
     protected function tearDown() {

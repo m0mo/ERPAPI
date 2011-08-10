@@ -135,6 +135,11 @@ class StatementTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(is_a($statement, Statement));
     }
 
+    public function testToString() {
+        $statement = new Statement($this->subj, $this->pred, $this->obj);
+        $this->assertTrue(Check::isString($statement->toString()));
+    }
+
     protected function tearDown() {
         
     }

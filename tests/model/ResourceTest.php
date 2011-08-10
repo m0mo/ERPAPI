@@ -71,6 +71,12 @@ class ResourceTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($this->resource->removeProperty($predicate));
         $this->assertFalse($this->resource->getProperty($predicate) == $object);
     }
+    
+    public function testGetNamespace() {
+        
+        $this->assertTrue($this->resource->getNamespace() == NS);
+        
+    }
 
     protected function tearDown() {
         

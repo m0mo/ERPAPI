@@ -84,7 +84,7 @@ class LiteralNode extends Node {
      * @return type 
      */
     public function getLanguage() {
-    return $this->lang;
+    return $this->language;
   }
 
     /**
@@ -102,11 +102,8 @@ class LiteralNode extends Node {
             return false;
         }
 
-        if ($this->getLiteral() == $that->getLiteral() && $this->getDatatype() == $that->getDatatype()) {
-            return true;
-        }
-
-        return false;
+        return ($this->getLiteral() == $that->getLiteral() && $this->getDatatype() == $that->getDatatype() && $this->getLanguage() == $that->getLanguage());
+        
     }
 
 }

@@ -20,23 +20,17 @@ require_once "settings.php";
  */
 class BlankNodeTest extends PHPUnit_Framework_TestCase {
 
-    protected function setUp() {
-        
-    }
-    
     public function testGenerateBlankNode() {
         $blank = new BlankNode(NS, "bnode1");
         $this->assertTrue(is_a($blank, BlankNode));
         $this->assertTrue($blank->getId() == "bnode1");
         $this->assertTrue($blank->getName() == "bnode1");
-        $this->assertTrue($blank->getUri() == NS."bnode1");
-                
+        $this->assertTrue($blank->getUri() == NS . "bnode1");
     }
 
-    // Add your tests here
-
-    protected function tearDown() {
-        
+    public function testToString() {
+        $blank = new BlankNode(NS, "bnode1");
+        $this->assertTrue(Check::isString($blank->toString()));
     }
 
 }

@@ -37,7 +37,30 @@ class LiteralNodeTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($l->getLiteral(), "Test");
         $this->assertEquals($l->getDatatype(), "string");
         
+        $l = new LiteralNode("Test", DATE);
+        $this->assertEquals($l->getLiteral(), "Test");
+        $this->assertEquals($l->getDatatype(), "date");
+        
     }
+    
+    public function testGetLanguage() {
+        
+        $l = new LiteralNode("Test", STRING, "de");
+        $this->assertEquals($l->getLanguage(), "de");
+        
+    }
+    
+    public function testEquals() {
+        
+        $l = new LiteralNode("Test", STRING, "de");
+        
+        $this->assertTrue($l->equals($l));
+        $this->assertFalse($l->equals(new LiteralNode("Test", STRING, "en")));
+        
+        $this->assertTrue($l->equals(new LiteralNode("Test", STRING, "de")));
+        
+    }
+    
 
     protected function tearDown() {
         
