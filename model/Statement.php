@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Statement.php
- * @version     2011-08-07
+ * @version     2011-08-10
  * @package     model
  * @access      public
  * 
@@ -19,8 +19,25 @@
  */
 class Statement {
 
+    /**
+     * The subject of the statement
+     *
+     * @var Resource 
+     */
     private $subject;
+    
+    /**
+     * The predicate of the statement
+     *
+     * @var Resource
+     */
     private $predicate;
+    
+    /**
+     * The object of the statement
+     *
+     * @var Node Can be Resource or LiteralNode
+     */
     private $object;
 
     /**
@@ -47,18 +64,13 @@ class Statement {
         $this->subject = $subject;
         $this->predicate = $predicate;
         $this->object = $object;
-
-//        $prop = $this->subject->getProperty($predicate);
-//        
-//        if(!empty($prop))
-//            $this->subject->addProperty($predicate, $object);
         
     }
 
     /**
      * Returns the subject of the statement triple
      *
-     * @return Resource or BlankNode 
+     * @return Resource
      */
     public function getSubject() {
         return $this->subject;
@@ -76,7 +88,7 @@ class Statement {
     /**
      * Returns the object of the statement triple
      *
-     * @return Resource, BlankNode or Literal 
+     * @return mixed Resource, BlankNode or Literal 
      */
     public function getObject() {
         return $this->object;
@@ -86,7 +98,7 @@ class Statement {
      * Checks if two statements are equal
      * 
      * @param Statement $that
-     * @return true or false
+     * @return bool true or false
      */
     public function equals($that) {
         

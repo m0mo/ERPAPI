@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Model.php
- * @version     2011-08-09
+ * @version     2011-08-10
  * @package     model
  * @access      public
  * 
@@ -81,11 +81,11 @@ class Model {
      */
     public function addBaseNamespace($prefix, $namespace) {
 
-        if (!Check::isValidPrefix($prefix))
-            throw new APIException(API_ERROR_URI);
+        if (!Check::isPrefix($prefix))
+            throw new APIException(API_ERROR_PREFIX);
 
-        if (!Check::isValidNamespace($namespace))
-            throw new APIException(API_ERROR_URI);
+        if (!Check::isNamespace($namespace))
+            throw new APIException(API_ERROR_NS);
 
         $this->baseNamespace = $namespace;
         $this->basePrefix = $prefix;
@@ -102,11 +102,11 @@ class Model {
      */
     public function addNamespace($prefix, $namespace) {
 
-        if (!Check::isValidPrefix($prefix))
-            throw new APIException(API_ERROR_URI);
+        if (!Check::isPrefix($prefix))
+            throw new APIException(API_ERROR_PREFIX);
 
-        if (!Check::isValidNamespace($namespace))
-            throw new APIException(API_ERROR_URI);
+        if (!Check::isNamespace($namespace))
+            throw new APIException(API_ERROR_NS);
 
         $this->namespaces[$prefix] = $namespace;
     }
@@ -120,8 +120,8 @@ class Model {
      */
     public function getNamespace($prefix) {
 
-        if (!Check::isValidPrefix($prefix))
-            throw new APIException(API_ERROR_URI);
+        if (!Check::isPrefix($prefix))
+            throw new APIException(API_ERROR_PREFIX);
 
         return $this->namespaces[$prefix];
     }
@@ -146,8 +146,8 @@ class Model {
      */
     public function removeNamespace($prefix) {
 
-        if (!Check::isValidPrefix($prefix))
-            throw new APIException(API_ERROR_URI);
+        if (!Check::isPrefix($prefix))
+            throw new APIException(API_ERROR_PREFIX);
 
         unset($this->namespaces[$prefix]);
         return!$this->hasNamespace($prefix);
@@ -162,8 +162,8 @@ class Model {
      */
     public function hasNamespace($prefix) {
 
-        if (!Check::isValidPrefix($prefix))
-            throw new APIException(API_ERROR_URI);
+        if (!Check::isPrefix($prefix))
+            throw new APIException(API_ERROR_PREFIX);
 
         return isset($this->namespaces[$prefix]);
     }
@@ -494,7 +494,7 @@ class Model {
      */
     public function newResource($name = null) {
 
-        if (!Check::isValidNamespace($this->baseNamespace))
+        if (!Check::isNamespace($this->baseNamespace))
             throw new APIException(API_ERROR_BASENS);
 
         if (empty($name))
@@ -513,7 +513,7 @@ class Model {
      */
     public function newLiteralNode($literal, $datatype = STRING) {
 
-        if (!Check::isValidNamespace($this->baseNamespace))
+        if (!Check::isNamespace($this->baseNamespace))
             throw new APIException(API_ERROR_BASENS);
 
         return new LiteralNode($literal, $datatype);
@@ -527,7 +527,7 @@ class Model {
      */
     public function newBlankNode() {
 
-        if (!Check::isValidNamespace($this->baseNamespace))
+        if (!Check::isNamespace($this->baseNamespace))
             throw new APIException(API_ERROR_BASENS);
 
         return new BlankNode($this->baseNamespace, $this->generateUniqueId());

@@ -1,7 +1,6 @@
 <?php
 
-require_once 'PHPUnit/Autoload.php';
-require_once "../API.php";
+require_once "settings.php";
 
 /**
  * -----------------------------------------------------------------------------
@@ -22,15 +21,14 @@ require_once "../API.php";
 class StatementTest extends PHPUnit_Framework_TestCase {
 
     private $statement;
-    private $ns = "http://thisIsMyUri/test/";
     private $subj;
     private $pred;
     private $obj;
 
     protected function setUp() {
 
-        $this->subj = new Resource($this->ns . "Subj");
-        $this->pred = new Resource($this->ns . "Pred");
+        $this->subj = new Resource(NS . "Subj");
+        $this->pred = new Resource(NS . "Pred");
         $this->obj = new LiteralNode("Literal");
 
         $this->statement = new Statement($this->subj, $this->pred, $this->obj);
@@ -38,7 +36,7 @@ class StatementTest extends PHPUnit_Framework_TestCase {
 
     public function testGenerateStatement() {
         $statement1 = new Statement($this->subj, $this->pred, $this->obj);
-        $statement2 = new Statement($this->subj, $this->pred, new Resource($this->ns . "Res1"));
+        $statement2 = new Statement($this->subj, $this->pred, new Resource(NS . "Res1"));
 
         $this->assertTrue(is_a($statement1, Statement));
         $this->assertTrue(is_a($statement2, Statement));
@@ -88,7 +86,7 @@ class StatementTest extends PHPUnit_Framework_TestCase {
      */
     public function testErrorPredicate3() {
 
-        $statement = new Statement($this->subj, new BlankNode("http://example.org/", "bnode1"), $this->obj);
+        $statement = new Statement($this->subj, new BlankNode(NS, "bnode1"), $this->obj);
     }
 
     /**
@@ -104,24 +102,24 @@ class StatementTest extends PHPUnit_Framework_TestCase {
      */
     public function testErrorObject2() {
 
-        $statement = new Statement(new Resource($this->ns . "Res3"), $this->pred, $this->statement);
+        $statement = new Statement(new Resource(NS . "Res3"), $this->pred, $this->statement);
     }
 
     public function testAcceptedSubject1() {
 
-        $statement = new Statement(new Resource($this->ns . "Res2"), $this->pred, $this->obj);
+        $statement = new Statement(new Resource(NS . "Res2"), $this->pred, $this->obj);
         $this->assertTrue(is_a($statement, Statement));
     }
 
     public function testAcceptedSubject2() {
 
-        $statement = new Statement(new BlankNode("http://example.org/", "bnode1"), $this->pred, $this->obj);
+        $statement = new Statement(new BlankNode(NS, "bnode1"), $this->pred, $this->obj);
         $this->assertTrue(is_a($statement, Statement));
     }
 
     public function testAcceptedPredicate() {
 
-        $statement = new Statement($this->subj, new Resource($this->ns . "Pred2"), $this->obj);
+        $statement = new Statement($this->subj, new Resource(NS . "Pred2"), $this->obj);
         $this->assertTrue(is_a($statement, Statement));
     }
 

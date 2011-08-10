@@ -1,7 +1,6 @@
 <?php
 
-require_once 'PHPUnit/Autoload.php';
-require_once "../API.php";
+require_once "settings.php";
 
 /**
  * -----------------------------------------------------------------------------
@@ -11,7 +10,7 @@ require_once "../API.php";
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        ResourceTest.php
- * @version     2011-08-09
+ * @version     2011-08-10
  * @package     tests
  * @access      public
  * 
@@ -22,15 +21,14 @@ require_once "../API.php";
 class ResourceTest extends PHPUnit_Framework_TestCase {
 
     private $resource;
-    private $ns = "http://thisIsMyUri/test/";
 
     protected function setUp() {
-        $this->resource = new Resource($this->ns, "R1");
+        $this->resource = new Resource(NS, "R1");
     }
 
     function testGenerateResource() {
 
-        $res = new Resource($this->ns . "R2");
+        $res = new Resource(NS . "R2");
         $this->assertTrue(is_a($res, Resource));
     }
 
@@ -38,12 +36,12 @@ class ResourceTest extends PHPUnit_Framework_TestCase {
 
         echo $this->resource->getUri();
 
-        $this->assertTrue($this->resource->getUri() == $this->ns . "R1");
+        $this->assertTrue($this->resource->getUri() == NS . "R1");
     }
 
     public function testAddProperty() {
 
-        $predicate = new Resource($this->ns . "arc");
+        $predicate = new Resource(NS . "arc");
         $object = new LiteralNode("test", BOOL);
         $statement1 = new Statement($this->resource, $predicate, $object);
 
@@ -55,7 +53,7 @@ class ResourceTest extends PHPUnit_Framework_TestCase {
 
     public function testGetProperty() {
 
-        $predicate = new Resource($this->ns . "arc");
+        $predicate = new Resource(NS . "arc");
         $object = new LiteralNode("test");
 
         $this->resource->addProperty($predicate, $object);
@@ -65,7 +63,7 @@ class ResourceTest extends PHPUnit_Framework_TestCase {
 
     public function testRemoveProperty() {
 
-        $predicate = new Resource($this->ns . "arc");
+        $predicate = new Resource(NS . "arc");
         $object = new LiteralNode("test");
 
         $this->resource->addProperty($predicate, $object);

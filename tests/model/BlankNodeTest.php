@@ -1,7 +1,6 @@
 <?php
 
-require_once 'PHPUnit/Autoload.php';
-require_once "../API.php";
+require_once "settings.php";
 
 /**
  * -----------------------------------------------------------------------------
@@ -26,11 +25,11 @@ class BlankNodeTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testGenerateBlankNode() {
-        $blank = new BlankNode("http://example.org/", "bnode1");
+        $blank = new BlankNode(NS, "bnode1");
         $this->assertTrue(is_a($blank, BlankNode));
         $this->assertTrue($blank->getId() == "bnode1");
         $this->assertTrue($blank->getName() == "bnode1");
-        $this->assertTrue($blank->getUri() == "http://example.org/bnode1");
+        $this->assertTrue($blank->getUri() == NS."bnode1");
                 
     }
 

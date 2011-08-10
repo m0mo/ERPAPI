@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Node.php
- * @version     2011-08-05
+ * @version     2011-08-10
  * @package     model
  * @access      public
  * 
@@ -18,6 +18,11 @@
  */
 abstract class Node {
 
+    /**
+     * prints the propertis of the node
+     *
+     * @return string 
+     */
     public function toString() {
 
         $variables = get_object_vars($this);
@@ -32,7 +37,7 @@ abstract class Node {
      * Checks if two Nodes are the same
      *
      * @param Node $that
-     * @return true if equal, else false 
+     * @return bool true if equal, else false 
      */
     public function equals($that) {
 

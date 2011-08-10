@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        constants.php
- * @version     2011-08-09
+ * @version     2011-08-10
  * @package     util
  * @access      public
  * 
@@ -18,27 +18,36 @@
  */
 
 // -----------------------------------------------------------------------------
+// Settings
+// -----------------------------------------------------------------------------
+
+
+define('ALLOW_DUPLICATES', false);
+define("INCLUDE_DIR", "../");
+
+// -----------------------------------------------------------------------------
 // Errors
 // -----------------------------------------------------------------------------
 
 define("API_ERROR", "ERP Error: ");
-define(ERP_ERROR_SUBJECT, API_ERROR . "Subject has to be a resource!");
-define(ERP_ERROR_PREDICATE, API_ERROR . "Predicate has to be a resource and can't be a blank node!");
-define(ERP_ERROR_OBJECT, API_ERROR . "Object has to be a resource or a literal!");
+define(ERP_ERROR_SUBJECT, API_ERROR . "Parameter is not a subject (has to be a resource)");
+define(ERP_ERROR_PREDICATE, API_ERROR . "Parameter is not a predicate (has to be a resource and can't be a blank node)");
+define(ERP_ERROR_OBJECT, API_ERROR . "Parameter is not an object (has to be a resource or a literal node)");
 define(API_ERROR_STATEMENT, API_ERROR . "Parameter is not a statement");
 define(API_ERROR_URI, API_ERROR . "Parameter is not a valid URI");
-
+define(API_ERROR_NS, API_ERROR . "Parameter is not a valid namespace");
+define(API_ERROR_PREFIX, API_ERROR . "Parameter is not a valid namespace");
 define(API_ERROR_BASENS, API_ERROR . "Please provide a base namespace");
+define(API_ERROR_STRING, API_ERROR . "Parameter is not a string");
 
 
-// datatypes for literl nodes
+// -----------------------------------------------------------------------------
+// Types
+// -----------------------------------------------------------------------------
 define("STRING", "string");
 define("BOOL", "boolean");
 define("INTEGER", "integer");
-
-define('ALLOW_DUPLICATES', false);
-
-define("INCLUDE_DIR", "../");
+define("DATE", "date");
 
 // -----------------------------------------------------------------------------
 // RDF

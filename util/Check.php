@@ -12,38 +12,67 @@
  * @package     util
  * @access      public
  * 
- * Description  here
+ * Description  This class provides static functions for performing various 
+ *              checks
  * 
  * -----------------------------------------------------------------------------
  */
 class Check {
 
     /**
-     * Checks if a node can be used as a subject
+     * Checks if the parameter is a resource
      *
-     * @param Node $node
-     * @return true if node can fit a subject, otherwise false 
+     * @param Node $resource
+     * @return bool 
      */
-    public static function isSubject($subject) {
+    public static function isResource($resource) {
 
-        if ($subject instanceof Resource)
-            return true;
-
-        return false;
+        return ($resource instanceof Resource);
     }
 
     /**
-     * Checks if a node can be used as a predicate
+     * Checks if parameter is a blank node
+     *
+     * @param Node $blankNode
+     * @return bool 
+     */
+    public static function isBlankNode($blankNode) {
+
+        return ($blankNode instanceof BlankNode);
+    }
+
+    /**
+     * Checks if the parameter is a literal node
+     *
+     * @param LiteralNode $literalNode
+     * @return bool 
+     */
+    public static function isLiteralNode($literalNode) {
+        return ($literalNode instanceof LiteralNode);
+    }
+
+    /**
+     * Checks if the parameter is a valid subject
      *
      * @param Node $node
-     * @return true if node can fit a predicate, otherwise false 
+     * @return bool
+     */
+    public static function isSubject($subject) {
+
+        return self::isResource($subject);
+    }
+
+    /**
+     * Checks if the parameter is a valid predicate
+     * 
+     * @param Node $node
+     * @return bool
      */
     public static function isPredicate($predicate) {
 
-        //TODO: check if is correcht Ressource (no properties)
+        if (self::isResource($predicate) && !self::isBlankNode($predicate)) {
 
-        if ($predicate instanceof Resource && !($predicate instanceof BlankNode)) {
-
+            // predicate schould not have properties
             $array = $predicate->getProperties();
 
             if (empty($array)) {
@@ -54,44 +83,50 @@ class Check {
     }
 
     /**
-     * Checks if a node can be used as a object
+     * Checks if the parameter is a valid object
      *
      * @param Node $node
-     * @return true if node can fit an object, otherwise false 
+     * @return bool
      */
     public static function isObject($object) {
 
-        if ($object instanceof Resource || $object instanceof LiteralNode)
-            return true;
-
-        return false;
+        return (self::isResource($object) || self::isLiteralNode($object));
     }
 
     /**
      * Checks if $statement is a valid Statement.
      *
      * @param Statement $statement
-     * @return true if valid, otherwise false 
+     * @return bool
      */
     public static function isStatement($statement) {
 
-        if ($statement instanceof Statement)
-            return true;
-
-        return false;
+        return ($statement instanceof Statement);
+    }
+    
+    /**
+     * Checks if the parameter is a String
+     *
+     * @param String $string
+     * @return bool 
+     */
+    public static function isString($string) {
+        
+        return is_string($string);
+        
     }
 
     /**
      * Checks if the namespace is valid.
      *
      * @param string $namespace 
-     * @return bool true if valid, otherwise false
+     * @return bool
      */
-    public function isValidNamespace($namespace) {
-        
-        if(!is_string($namespace))
+    public static function isNamespace($namespace) {
+
+        if (!self::isString($namespace))
             return false;
-        
+
         // TODO: implement
 
         return true;
@@ -103,11 +138,21 @@ class Check {
      * @param String $prefix 
      * @return true if valid, otherwise false
      */
-    public function isValidPrefix($prefix) {
-        
-        if(!is_string($prefix))
+    public static function isPrefix($prefix) {
+
+        if (!self::isString($prefix))
             return false;
+
+        // TODO: implement
+
+        return true;
+    }
+    
+    public static function isUri($uri) {
         
+        if (!self::isString($uri))
+            return false;
+
         // TODO: implement
 
         return true;

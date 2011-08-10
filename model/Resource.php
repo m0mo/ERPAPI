@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Resource.php
- * @version     2011-08-09
+ * @version     2011-08-10
  * @package     model
  * @access      public
  * 
@@ -24,7 +24,7 @@ class Resource extends Node {
      * @var string 
      */
     protected $uri;
-    
+
     /**
      * The name of the resource
      *
@@ -38,7 +38,7 @@ class Resource extends Node {
      * @var array containing array("predicate" => $predicate, "object" => $object); 
      */
     protected $properties;
-    
+
     /**
      * Creates a new Resource from an URI and a name.
      *
@@ -47,14 +47,17 @@ class Resource extends Node {
      * @throws APIException
      */
     function __construct($namespace_or_uri, $name = null) {
-        
-        if(!Check::isValidNamespace($namespace_or_uri))
+
+        // if $name is not a string $namespace_or_uri has to be an uri
+        if (!Check::isString($name) && !Check::isUri($namespace_or_uri))
             throw new APIException(API_ERROR_URI);
-            
-        $this->uri = ($name != null) ? $namespace_or_uri.$name: $namespace_or_uri;
-        $this->name = $name;
-        
-        // TODO: extract name from uri
+
+        // if $name is a string $namespace_or_uri has to be an namespace
+        if (Check::isString($name) && !Check::isNamespace($namespace_or_uri))
+            throw new APIException(API_ERROR_NS);
+
+        $this->uri = (Check::isString($name)) ? $namespace_or_uri . $name : $namespace_or_uri;
+        $this->name = (Check::isString($name)) ? $name : Utils::getName($namespace_or_uri);
     }
 
     /**
@@ -68,20 +71,18 @@ class Resource extends Node {
      * @throws APIException
      */
     public function addProperty($predicate, $object) {
-        
-        if (!Check::isPredicate($predicate)) 
+
+        if (!Check::isPredicate($predicate))
             throw new APIException(ERP_ERROR_PREDICATE);
-                
-        if (!Check::isObject($object)) 
+
+        if (!Check::isObject($object))
             throw new APIException(ERP_ERROR_OBJECT);
-        
-        
+
         $this->properties[$predicate->getUri()] = array("predicate" => $predicate, "object" => $object);
-        
+
         return $this;
-        
     }
-    
+
     /**
      * Check if the resource has a specific property, independend of the content
      *
@@ -90,13 +91,13 @@ class Resource extends Node {
      * @throws APIException
      */
     public function hasProperty($predicate) {
-        
+
         if (!Check::isPredicate($predicate))
             throw new APIException(ERP_ERROR_PREDICATE);
-               
+
         return isset($this->properties[$predicate->getURI()]);
     }
-    
+
     /**
      * Returns the object of the property
      *
@@ -105,13 +106,13 @@ class Resource extends Node {
      * @throws APIException
      */
     public function getProperty($predicate) {
-        
-        if (!Check::isPredicate($predicate)) 
+
+        if (!Check::isPredicate($predicate))
             throw new APIException(ERP_ERROR_PREDICATE);
-                
+
         return $this->properties[$predicate->getURI()]["object"];
     }
-    
+
     /**
      * Removes the predicate and its object as a property
      *
@@ -120,15 +121,15 @@ class Resource extends Node {
      * @throws APIException
      */
     public function removeProperty($predicate) {
-        
+
         if (!Check::isPredicate($predicate))
             throw new APIException(ERP_ERROR_PREDICATE);
-                
-        unset ($this->properties[$predicate->getURI()]);
-        
-        return !isset($this->properties[$predicate->getURI()]);
+
+        unset($this->properties[$predicate->getURI()]);
+
+        return!isset($this->properties[$predicate->getURI()]);
     }
-    
+
     /**
      * Returns the URI of the resource
      *
@@ -137,14 +138,18 @@ class Resource extends Node {
     public function getUri() {
         return $this->uri;
     }
-    
+
+    public function getNamespace() {
+        return Utils::getNamespace($this->uri);
+    }
+
     /**
      * Returns the name of the Resource
      */
     public function getName() {
-        return $this->name;    
+        return $this->name;
     }
-    
+
     /**
      * Returns an array of the resources properties
      *
@@ -154,7 +159,7 @@ class Resource extends Node {
     public function getProperties() {
         return $this->properties;
     }
-    
+
     /**
      * Checks if two Resources are the same
      *
@@ -162,17 +167,16 @@ class Resource extends Node {
      * @return bool true if equal, else false 
      */
     public function equals($that) {
-        
-        if(parent::equals($that))
+
+        if (parent::equals($that))
             return true;
-        
-        if (is_a($that, Resource) && $this->getURI() == $that->getURI()) {
+
+        if (Check::isResource($that) && $this->getURI() == $that->getURI()) {
             return true;
         }
-        
-        return false;       
-    }
 
+        return false;
+    }
 
 }
 
