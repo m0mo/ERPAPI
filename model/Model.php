@@ -470,14 +470,14 @@ class Model {
             }
         }
     }
-    
+
     /**
      * Generates a unique ID for a BlankNode
      *
      * @return string ID
      */
     public function generateUniqueId() {
-        return "bNode".$this->bnodeCount++;
+        return "bNode" . $this->bnodeCount++;
     }
 
     // ------------------------------------------------------------------------

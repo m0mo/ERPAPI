@@ -21,7 +21,7 @@
 require_once 'PHPUnit/Autoload.php';
 require_once "../API.php";
 
-define(NS, "http://example.org");
+define(NS, "http://example.org/");
 define(PREFIX, "ex");
 
 

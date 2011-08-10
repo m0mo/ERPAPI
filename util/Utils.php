@@ -31,6 +31,7 @@ class Utils {
             throw new APIException(API_ERROR_URI);
         
         $l = self::getNamespaceEnd($uri);
+                
         return ($l > 1) ? substr($uri, 0, $l) : "";
     }
 

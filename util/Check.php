@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        InstanceCheck.php
- * @version     2011-08-09
+ * @version     2011-08-10
  * @package     util
  * @access      public
  * 
@@ -117,7 +117,7 @@ class Check {
     }
 
     /**
-     * Checks if the namespace is valid.
+     * Checks if the parameter is a namespace.
      *
      * @param string $namespace 
      * @return bool
@@ -133,7 +133,7 @@ class Check {
     }
 
     /**
-     * Checks if the prefix is valid.
+     * Checks if the parameter is a prefix.
      *
      * @param String $prefix 
      * @return true if valid, otherwise false
@@ -148,6 +148,12 @@ class Check {
         return true;
     }
     
+    /**
+     * Checks if the parameter is an uri
+     *
+     * @param type $uri
+     * @return type 
+     */
     public static function isUri($uri) {
         
         if (!self::isString($uri))
