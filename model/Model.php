@@ -305,7 +305,7 @@ class Model {
     }
 
     /**
-     * This function removes a resource (with its properties) from the model
+     * This function removes a resource (with all properties recursively) from the model
      *
      * @param Resource $resource
      * @return bool true = removed, false = not removed
@@ -332,7 +332,7 @@ class Model {
             $bool = $this->removeStatement(new Statement($resource, $predicate, $object)) || $bool;
 
             if (Check::isResource($object))
-                $bool = $bool || $this->removeResource($object);
+                $bool = $this->removeResource($object) || $bool;
         }
 
         return $bool;

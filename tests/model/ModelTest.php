@@ -376,12 +376,16 @@ class ModelTest extends PHPUnit_Framework_TestCase {
      public function testRemoveSuccess3() {
 
         $res = $this->model->newResource("test")
-                                ->addProperty($this->model->newResource("pred"), new LiteralNode("literal"))
-                                ->addProperty($this->model->newResource("pred2"), new LiteralNode("literal1"))
-                                ->addProperty($this->model->newResource("pred3"), new LiteralNode("literal2"));
+                                ->addProperty($this->model->newResource("pred1"), new LiteralNode("literal1"))
+                                ->addProperty($this->model->newResource("pred2"), new LiteralNode("literal2"))
+                                ->addProperty($this->model->newResource("pred3"), $this->model->newResource("test2")
+                                                    ->addProperty($this->model->newResource("pred"), new LiteralNode("litera3"))
+                                                    ->addProperty($this->model->newResource("pred2"), new LiteralNode("litera4"))
+                                            );
         
         $this->model->add($res);
-        $this->assertEquals($this->model->size(), 3);
+        
+        $this->assertEquals($this->model->size(), 5);
         $this->assertTrue($this->model->search($res) != null);
 
         $this->model->remove($res);
