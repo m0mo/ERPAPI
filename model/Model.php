@@ -496,6 +496,13 @@ class Model {
         return BNODE . ++$this->bnodeCount;
     }
 
+    /**
+     * Saves the model to a file
+     *
+     * @param string $filename
+     * @param string $type
+     * @return bool 
+     */
     public function save($filename, $type ='rdf') {
 
 
@@ -509,6 +516,37 @@ class Model {
         };
 
         return $ser->serialize($filename, $this);
+    }
+    
+    /**
+     * Loads a model from a file and returns it. Does not automatically 
+     * override the current model. Base Prefix and Namespace stay the same.
+     *
+     * @param string $filename
+     * @param string $type
+     * @param bool $overwrite [Optional] If true overwrites namespaces and statements
+     * @return Model 
+     */
+    public function load($filename, $type ='rdf', $overwrite = false) {
+        
+        // get suffix and create a corresponding serializer
+        if ($type == 'rdf') {
+            
+            include_once(INCLUDE_DIR."parsers/RDFXMLParser.php");
+            $ser = new RDFXMLParser();
+        } else {
+            throw new APIException(API_ERROR_FILETYPE);
+        };
+        
+        $model = $ser->parse($filename);
+        
+        if($overwrite) {
+            $this->namespaces = $model->getNamespaces();
+            $this->statements = $model->getStatements();
+        }
+            
+        return $ser->parse($filename);
+        
     }
 
     // ------------------------------------------------------------------------

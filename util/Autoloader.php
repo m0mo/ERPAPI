@@ -26,6 +26,8 @@ include_once "Check.php";
 include_once 'Utils.php';
 
 // Parsers
+include_once INCLUDE_DIR."parsers/IParser.php";
+include_once INCLUDE_DIR."parsers/RDFXMLParser.php";
 
 // Serializers
 include_once INCLUDE_DIR."serializers/ISerializer.php";

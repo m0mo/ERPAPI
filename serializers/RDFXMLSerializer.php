@@ -129,7 +129,7 @@ class RDFXMLSerializer implements ISerializer {
     private function initXPath() {
         $xpath = new DOMXpath($this->dom);
 
-        $xpath->registerNamespace("ns", RDF_NS);
+        $xpath->registerNamespace(RDF_PREFIX, RDF_NS);
 
         foreach ($this->model->getNamespaces() as $key => $ns) {
             $xpath->registerNamespace($key, $ns);
