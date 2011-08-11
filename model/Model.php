@@ -136,7 +136,7 @@ class Model {
 
         return $this->namespaces;
     }
-    
+
     /**
      * Returns an array of all stored statements
      *
@@ -297,7 +297,7 @@ class Model {
      * @throws APIException
      */
     private function removeStatement($statement) {
-       
+
         if (!Check::isStatement($statement))
             throw new APIException(API_ERROR_STATEMENT);
 
@@ -494,6 +494,21 @@ class Model {
      */
     public function generateUniqueId() {
         return BNODE . ++$this->bnodeCount;
+    }
+
+    public function save($filename, $type ='rdf') {
+
+
+        // get suffix and create a corresponding serializer
+        if ($type == 'rdf') {
+            
+            include_once(INCLUDE_DIR."serializers/RDFXMLSerializer.php");
+            $ser = new RDFXMLSerializer();
+        } else {
+            throw new APIException(API_ERROR_FILETYPE);
+        };
+
+        return $ser->serialize($filename, $this);
     }
 
     // ------------------------------------------------------------------------

@@ -61,21 +61,23 @@ class RDFXMLSerializer implements ISerializer {
      */
     public function serializeToString($model) {
 
-        return $this->getDom($model)->saveXML();
+        return $this->transform($model)->saveXML();
     }
 
     /**
      * Serializes the model to a RDF/XML file
      *
-     * @param String $file
+     * @param string $file
      * @param Model $model 
+     * @return bool
      */
     public function serialize($file, $model) {
 
         if (!Check::isString($file))
             throw new APIException(API_ERROR_STRING);
 
-        $this->getDom($model)->save($file);
+        $this->transform($model)->save($file);
+        return true;
     }
 
     /**
@@ -84,7 +86,7 @@ class RDFXMLSerializer implements ISerializer {
      * @param Model $model
      * @return DOMDocument 
      */
-    private function getDom($model) {
+    private function transform($model) {
 
         if (!Check::isModel($model))
             throw new APIException(API_ERROR_MODEL);

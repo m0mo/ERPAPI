@@ -47,7 +47,7 @@ class RDFXMLSerializerTest extends PHPUnit_Framework_TestCase {
         $this->model = $model;
     }
 
-    public function testSerializeSuccess() {
+    public function testSerializeSuccess1() {
 
         $this->assertFalse(file_exists($this->filename));
 
@@ -57,6 +57,15 @@ class RDFXMLSerializerTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(file_exists($this->filename));
     }
 
+     public function testSerializeSuccess2() {
+
+        $this->assertFalse(file_exists($this->filename));
+
+        $this->assertTrue($this->model->save($this->filename));
+
+        $this->assertTrue(file_exists($this->filename));
+    }
+    
     /**
      * @expectedException APIException
      */
@@ -82,12 +91,20 @@ class RDFXMLSerializerTest extends PHPUnit_Framework_TestCase {
     /**
      * @expectedException APIException
      */
-    public function testSerializeError() {
+    public function testSerializeError3() {
 
         $this->assertFalse(file_exists($this->filename));
 
         $ser = new RDFXMLSerializer();
         $ser->serialize($this->filename, new Model());
+    }
+    
+    /**
+     * @expectedException APIException
+     */
+    public function testSerializeError4() {
+
+        $this->model->save($this->filename, "xml");
     }
 
     public function testSerializeToStringSuccess() {
