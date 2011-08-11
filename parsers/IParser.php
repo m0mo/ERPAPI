@@ -18,7 +18,7 @@
  */
 interface IParser {
     
-    public function parse($file);
+    public function parse($file, &$model);
     
 }
 

@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Autoloader.php
- * @version     2011-08-08
+ * @version     2011-08-11
  * @package     util
  * @access      public
  * 
@@ -32,6 +32,8 @@ include_once INCLUDE_DIR."parsers/RDFXMLParser.php";
 // Serializers
 include_once INCLUDE_DIR."serializers/ISerializer.php";
 include_once INCLUDE_DIR."serializers/RDFXMLSerializer.php";
+include_once INCLUDE_DIR."serializers/NTripleSerializer.php";
+include_once INCLUDE_DIR."serializers/TurtleSerializer.php";
 
 // Model
 include_once INCLUDE_DIR."model/Model.php";

@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        RDFXMLSerializer.php
- * @version     0.1.5 (Aug 6, 2011)
+ * @version     2011-08-11
  * @package     serializers
  * @access      public
  * 
@@ -57,11 +57,19 @@ class RDFXMLSerializer implements ISerializer {
      * Returns the RDF/XML as a string
      *
      * @param Model $model
-     * @return string 
+     * @return string
+     * @throws APIException
      */
     public function serializeToString($model) {
 
-        return $this->transform($model)->saveXML();
+        $cont = $this->transform($model)->saveXML();
+        
+        $this->dom = null;
+        $this->rdf = null;
+        $this->xpath = null;
+        $this->model = null;
+        
+        return $cont;
     }
 
     /**
@@ -70,6 +78,7 @@ class RDFXMLSerializer implements ISerializer {
      * @param string $file
      * @param Model $model 
      * @return bool
+     * @throws APIException
      */
     public function serialize($file, $model) {
 
@@ -77,6 +86,12 @@ class RDFXMLSerializer implements ISerializer {
             throw new APIException(API_ERROR_STRING);
 
         $this->transform($model)->save($file);
+        
+        $this->dom = null;
+        $this->rdf = null;
+        $this->xpath = null;
+        $this->model = null;
+        
         return true;
     }
 
@@ -85,6 +100,7 @@ class RDFXMLSerializer implements ISerializer {
      *
      * @param Model $model
      * @return DOMDocument 
+     * @throws APIException
      */
     private function transform($model) {
 

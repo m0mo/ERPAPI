@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Literal.php
- * @version     2011-08-10
+ * @version     2011-08-11
  * @package     model
  * @access      public
  * 
@@ -31,7 +31,7 @@ class LiteralNode extends Node {
      * @var string 
      */
     private $literal;
-    
+
     /**
      * The language of the literal node
      *
@@ -77,15 +77,33 @@ class LiteralNode extends Node {
     public function getLiteral() {
         return $this->literal;
     }
-    
+
     /**
      * Returns the language of the literal node. May return null
      *
-     * @return type 
+     * @return string 
      */
     public function getLanguage() {
-    return $this->language;
-  }
+        return $this->language;
+    }
+    
+    /**
+     * Checks if the Literal has set a datatype
+     *
+     * @return bool 
+     */
+    public function hasDatatype() { 
+        return !empty($this->datatype);
+    }
+    
+    /**
+     * checks if the Literal has set a language
+     *
+     * @return bool 
+     */
+    public function hasLanguage() { 
+        return !empty($this->language);
+    }
 
     /**
      * Checks if two literal nodes are equal
@@ -103,7 +121,6 @@ class LiteralNode extends Node {
         }
 
         return ($this->getLiteral() == $that->getLiteral() && $this->getDatatype() == $that->getDatatype() && $this->getLanguage() == $that->getLanguage());
-        
     }
 
 }

@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
  *
  * @name        Model.php
- * @version     2011-08-10
+ * @version     2011-08-11
  * @package     model
  * @access      public
  *
@@ -511,7 +511,18 @@ class Model {
             
             include_once(INCLUDE_DIR."serializers/RDFXMLSerializer.php");
             $ser = new RDFXMLSerializer();
-        } else {
+            
+        } else if ($type == 'nt' || $type == "ntriple") {
+            
+            include_once(INCLUDE_DIR."serializers/NTripleSerializer.php");
+            $ser = new NTripleSerializer();
+            
+        } else if ($type == 'turtle' || $type == "ntriple") {
+            
+            include_once(INCLUDE_DIR."serializers/TurtleSerializer.php");
+            $ser = new TurtleSerializer();
+            
+        }else {
             throw new APIException(API_ERROR_FILETYPE);
         };
 
@@ -519,15 +530,16 @@ class Model {
     }
     
     /**
-     * Loads a model from a file and returns it. Does not automatically 
-     * override the current model. Base Prefix and Namespace stay the same.
+     * Loads a model from a file and returns it. Default it will load the model 
+     * into the this object. By using the optional parameter it will return a 
+     * new model.
      *
      * @param string $filename
      * @param string $type
-     * @param bool $overwrite [Optional] If true overwrites namespaces and statements
+     * @param bool $overwrite If false returns a new model, default true
      * @return Model 
      */
-    public function load($filename, $type ='rdf', $overwrite = false) {
+    public function load($filename, $type ='rdf', $overwrite = true) {
         
         // get suffix and create a corresponding serializer
         if ($type == 'rdf') {
@@ -538,14 +550,10 @@ class Model {
             throw new APIException(API_ERROR_FILETYPE);
         };
         
-        $model = $ser->parse($filename);
-        
-        if($overwrite) {
-            $this->namespaces = $model->getNamespaces();
-            $this->statements = $model->getStatements();
-        }
-            
-        return $ser->parse($filename);
+        if($overwrite)
+            return $ser->parse($filename, $this);
+        else 
+            return $ser->parse($filename);
         
     }
 

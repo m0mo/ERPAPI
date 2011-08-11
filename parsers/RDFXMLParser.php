@@ -8,11 +8,11 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        RdfXmlParser.php
- * @version     2011-08-10
+ * @version     2011-08-11
  * @package     parsers
  * @access      public
  * 
- * Description  parser for RDF/XML
+ * Description  Parser for RDF/XML
  * 
  * -----------------------------------------------------------------------------
  */
@@ -52,7 +52,7 @@ class RDFXMLParser implements IParser {
      * @param string $file 
      * @return Model
      */
-    public function parse($file) {
+    public function parse($file, &$model = null) {
         
         if(!Check::isString($file))
             throw new APIException(API_ERROR."The filename need to be a string!");
@@ -60,7 +60,7 @@ class RDFXMLParser implements IParser {
         if (!file_exists($file))
                 throw new APIException (API_ERROR."The file to parse does not exist!");
         
-        return $this->transform($file);
+        return $this->transform($file, $model);
     }
 
     /**
@@ -68,9 +68,10 @@ class RDFXMLParser implements IParser {
      *
      * @return Model 
      */
-    private function transform($file) {
+    private function transform($file, &$model) {
         
         $this->file = $file;
+        $this->model = $model;
         
         // load the xml file
         $this->initDom();
@@ -127,7 +128,7 @@ class RDFXMLParser implements IParser {
      * Creates a new model
      */
     private function initModel() {
-        $this->model = new Model();
+        if($this->model == null) $this->model = new Model();
     }
 
     /**
