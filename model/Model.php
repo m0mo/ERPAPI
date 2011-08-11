@@ -132,9 +132,18 @@ class Model {
      * @param string $prefix
      * @return string the uri fitting to the $prefix
      */
-    public function getAllNamespaces() {
+    public function getNamespaces() {
 
         return $this->namespaces;
+    }
+    
+    /**
+     * Returns an array of all stored statements
+     *
+     * @return array 
+     */
+    public function getStatements() {
+        return $this->statements;
     }
 
     /**
@@ -235,10 +244,11 @@ class Model {
             throw new APIException(ERP_ERROR_SUBJECT);
 
         $properties = $resource->getProperties();
+        $bool = false;
 
         // if there are no properties we can't add any statements
         if (empty($properties)) {
-            throw new APIException(API_ERROR . "A resource needs to contain at least one property to be added to the model.");
+            return $bool;
         }
 
         foreach ($properties as $prop) {
@@ -246,13 +256,13 @@ class Model {
             $predicate = $prop["predicate"];
             $object = $prop["object"];
 
-            $this->addStatement(new Statement($resource, $predicate, $object), $double);
+            $bool = $this->addStatement(new Statement($resource, $predicate, $object), $double) || $bool;
 
             if (Check::isSubject($object))
-                $this->addResource($object, $double);
+                $bool = $this->addResource($object, $double) || $bool;
         }
 
-        return true;
+        return $bool;
     }
 
     /**
@@ -287,7 +297,7 @@ class Model {
      * @throws APIException
      */
     private function removeStatement($statement) {
-
+       
         if (!Check::isStatement($statement))
             throw new APIException(API_ERROR_STATEMENT);
 
@@ -480,7 +490,7 @@ class Model {
     /**
      * Generates a unique ID for a BlankNode
      *
-     * @return string ID
+     * @return string unique ID
      */
     public function generateUniqueId() {
         return BNODE . ++$this->bnodeCount;

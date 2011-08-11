@@ -86,7 +86,7 @@ class StatementTest extends PHPUnit_Framework_TestCase {
      */
     public function testErrorPredicate3() {
 
-        $statement = new Statement($this->subj, new BlankNode(), $this->obj);
+        $statement = new Statement($this->subj, new BlankNode("id"), $this->obj);
     }
 
     /**
@@ -113,7 +113,7 @@ class StatementTest extends PHPUnit_Framework_TestCase {
 
     public function testAcceptedSubject2() {
 
-        $statement = new Statement(new BlankNode(), $this->pred, $this->obj);
+        $statement = new Statement(new BlankNode("id"), $this->pred, $this->obj);
         $this->assertTrue(is_a($statement, Statement));
     }
 

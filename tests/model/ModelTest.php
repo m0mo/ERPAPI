@@ -30,7 +30,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     public function testAddNamespace() {
         $this->model->addNamespace("ns", NS);
         $this->assertEquals($this->model->getNamespace("ns"), NS);
-        $this->assertTrue(count($this->model->getAllNamespaces()) == 2);
+        $this->assertTrue(count($this->model->getNamespaces()) == 2);
     }
 
     public function testRemoveNamespace() {
@@ -61,18 +61,12 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->model->add("bla");
     }
 
-    /**
-     * @expectedException APIException
-     */
     public function testAddError2() {
-        $this->model->add(new Resource(NS."test"));
+        $this->assertFalse($this->model->add(new Resource(NS."test")));
     }
 
-    /**
-     * @expectedException APIException
-     */
     public function testAddError3() {
-        $this->model->add($this->model->newBlankNode());
+        $this->assertFalse($this->model->add($this->model->newBlankNode()));
     }
 
     /**
@@ -282,7 +276,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(is_a($this->model->newBlankNode(), BlankNode));
         $this->assertTrue(is_a($this->model->newLiteralNode("literal"), LiteralNode));
         $this->assertTrue(is_a($this->model->newLiteralNode("literal", STRING), LiteralNode));
-        $this->assertTrue(is_a($this->model->newStatement(new BlankNode(), new Resource(NS."pred"), new BlankNode()), Statement));
+        $this->assertTrue(is_a($this->model->newStatement(new BlankNode("id"), new Resource(NS."pred"), new BlankNode("id")), Statement));
         
         $this->assertEquals($this->model->newBlankNode()->getId() , BNODE."4");
     }

@@ -28,6 +28,8 @@ include_once 'Utils.php';
 // Parsers
 
 // Serializers
+include_once INCLUDE_DIR."serializers/ISerializer.php";
+include_once INCLUDE_DIR."serializers/RDFXMLSerializer.php";
 
 // Model
 include_once INCLUDE_DIR."model/Model.php";

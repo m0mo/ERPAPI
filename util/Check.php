@@ -163,6 +163,16 @@ class Check {
 
         return true;
     }
+    
+    /**
+     * Checks if the parameter is a Model
+     *
+     * @param Model $model 
+     */
+    public static function isModel($model) {
+        return ($model instanceof Model);
+    }
+
 
 }
 

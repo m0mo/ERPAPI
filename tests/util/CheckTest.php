@@ -27,7 +27,7 @@ class CheckTest extends PHPUnit_Framework_TestCase {
     public function testResourceSuccess() {
        
         $this->assertTrue(Check::isResource(new Resource(NS . "test")));
-        $this->assertTrue(Check::isResource(new BlankNode()));
+        $this->assertTrue(Check::isResource(new BlankNode("id")));
     }
 
     public function testResourceError() {
@@ -39,7 +39,7 @@ class CheckTest extends PHPUnit_Framework_TestCase {
 
     public function testBlankNodeSuccess() {
         
-        $this->assertTrue(Check::isBlankNode(new BlankNode()));
+        $this->assertTrue(Check::isBlankNode(new BlankNode("id")));
     }
 
     public function testBlankNodeError() {
@@ -60,7 +60,7 @@ class CheckTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse(Check::isLiteralNode(null));
         $this->assertFalse(Check::isLiteralNode("string"));
         $this->assertFalse(Check::isLiteralNode(new Resource(NS . "test")));
-        $this->assertFalse(Check::isLiteralNode(new BlankNode()));
+        $this->assertFalse(Check::isLiteralNode(new BlankNode("id")));
     }
     
     public function testIsStringSucess() {
@@ -70,14 +70,14 @@ class CheckTest extends PHPUnit_Framework_TestCase {
     public function testIsStringError() {
         $this->assertFalse(Check::isString(null));
         $this->assertFalse(Check::isString(new Resource(NS . "test")));
-        $this->assertFalse(Check::isString(new BlankNode()));
+        $this->assertFalse(Check::isString(new BlankNode("id")));
         $this->assertFalse(Check::isString(new LiteralNode("test")));
     }
 
     public function testSubjectSuccess() {
 
         $this->assertTrue(Check::isSubject(new Resource(NS . "test")));
-        $this->assertTrue(Check::isSubject(new BlankNode()));
+        $this->assertTrue(Check::isSubject(new BlankNode("id")));
 
         // adding a full ressource with properties
         $res = new Resource(NS . "test");
@@ -95,7 +95,7 @@ class CheckTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue(Check::isObject(new Resource(NS . "test")));
         $this->assertTrue(Check::isObject(new LiteralNode("literal")));
-        $this->assertTrue(Check::isObject(new BlankNode()));
+        $this->assertTrue(Check::isObject(new BlankNode("id")));
 
         // adding a full ressource with properties
         $res = new Resource(NS . "test");
@@ -119,7 +119,7 @@ class CheckTest extends PHPUnit_Framework_TestCase {
 
         $this->assertFalse(Check::isPredicate("this is a string"));
         $this->assertFalse(Check::isPredicate(new LiteralNode("predicate can't be a literal")));
-        $this->assertFalse(Check::isPredicate(new BlankNode()));
+        $this->assertFalse(Check::isPredicate(new BlankNode("id")));
 
         $res = new Resource("test");
         $statement = $res->addProperty(new Resource(NS . "pred"), new LiteralNode("Test"));

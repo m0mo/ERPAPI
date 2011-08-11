@@ -27,7 +27,7 @@ class BlankNode extends Resource {
      * @param string $uri
      * @param string $notused is currently not used
      */
-    function __construct($id = "", $notused = null) {
+    function __construct($id, $notused = null) {
         
         // if $name is not a string $namespace_or_uri has to be an uri
         if (!Check::isString($id));

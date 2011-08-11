@@ -7,22 +7,19 @@
  *
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
- * @name        settings.php
+ * @name        IParser.php
  * @version     2011-08-10
- * @package     tests
+ * @package     parsers
  * @access      public
  * 
- * Description  Settings for tests
+ * Description  Interface for parsers
  * 
  * -----------------------------------------------------------------------------
  */
-
-
-require_once 'PHPUnit/Autoload.php';
-require_once '../API.php';
-
-define("NS", "http://example.org/");
-define("PREFIX", "ex");
-
+interface IParser {
+    
+    public function parse($file, $model);
+    
+}
 
 ?>
