@@ -43,7 +43,7 @@ define("API_ERROR_PREFIX", API_ERROR . "Parameter is not a valid namespace");
 define("API_ERROR_BASENS", API_ERROR . "Please provide a base namespace");
 define("API_ERROR_STRING", API_ERROR . "Parameter is not a string");
 
-define("API_ERROR_FILETYPE", API_ERROR . "This type is not supportet, please choose 'rdf' or 'nt'!");
+define("API_ERROR_FILETYPE", API_ERROR . "This type is not supportet, please choose 'rdf', 'nt' or 'turtle'!");
 
 
 // -----------------------------------------------------------------------------
