@@ -530,30 +530,29 @@ class Model {
     }
     
     /**
-     * Loads a model from a file and returns it. Default it will load the model 
-     * into the this object. By using the optional parameter it will return a 
-     * new model.
+     * Loads a model from a file and returns it.
      *
      * @param string $filename
      * @param string $type
-     * @param bool $overwrite If false returns a new model, default true
-     * @return Model 
+     * @return bool 
      */
-    public function load($filename, $type ='rdf', $overwrite = true) {
+    public function load($filename, $type ='rdf') {
         
         // get suffix and create a corresponding serializer
         if ($type == 'rdf') {
-            
             include_once(INCLUDE_DIR."parsers/RDFXMLParser.php");
             $ser = new RDFXMLParser();
+        } else if ($type == 'nt') {         
+            include_once(INCLUDE_DIR."parsers/NTripleParser.php");
+            $ser = new NTripleParser();
+        } else if ($type == 'turtle') {            
+            include_once(INCLUDE_DIR."parsers/TurtleParser.php");
+            $ser = new TurtleParser();
         } else {
             throw new APIException(API_ERROR_FILETYPE);
         };
         
-        if($overwrite)
-            return $ser->parse($filename, $this);
-        else 
-            return $ser->parse($filename);
+        return $ser->parse($filename, $this);
         
     }
 
@@ -628,8 +627,31 @@ class Model {
      *
      * @return string
      */
-    public function toString() {
-        return $this->statemensToString($this->statements);
+    public function toString($type = null) {
+        
+        // get suffix and create a corresponding serializer
+        if ($type == 'rdf') {
+            
+            include_once(INCLUDE_DIR."serializers/RDFXMLSerializer.php");
+            $ser = new RDFXMLSerializer();
+            
+        } else if ($type == 'nt' || $type == "ntriple") {
+            
+            include_once(INCLUDE_DIR."serializers/NTripleSerializer.php");
+            $ser = new NTripleSerializer();
+            
+        } else if ($type == 'turtle' || $type == "ntriple") {
+            
+            include_once(INCLUDE_DIR."serializers/TurtleSerializer.php");
+            $ser = new TurtleSerializer();
+            
+        }else {
+            return $this->statemensToString($this->statements);
+        };
+
+        return $ser->serializeToString($this);
+        
+        
     }
 
     /**

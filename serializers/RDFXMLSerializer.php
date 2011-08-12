@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        RDFXMLSerializer.php
- * @version     2011-08-11
+ * @version     2011-08-12
  * @package     serializers
  * @access      public
  * 

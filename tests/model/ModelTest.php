@@ -395,6 +395,9 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->model->add($res);
         
         $this->assertTrue(Check::isString($this->model->toString()));
+         $this->assertTrue(Check::isString($this->model->toString("rdf")));
+          $this->assertTrue(Check::isString($this->model->toString("nt")));
+           $this->assertTrue(Check::isString($this->model->toString("turtle")));
         $this->assertTrue(Check::isString($this->model->toHTML()));
         
     }

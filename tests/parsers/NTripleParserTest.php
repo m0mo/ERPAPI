@@ -10,17 +10,17 @@ require_once 'settings.php';
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        RDFXMLParserTest.php
- * @version     2011-08-11  
+ * @version     2011-08-12  
  * @package     tests
  * @access      public
  * 
- * Description  Tests the RDF/XML parser
+ * Description  Tests the N-Triple parser
  * 
  * -----------------------------------------------------------------------------
  */
-class RDFXMLParserTest extends PHPUnit_Framework_TestCase {
+class NTripleParserTest extends PHPUnit_Framework_TestCase {
 
-    private $filename = "test2.rdf";
+    private $filename = "test.nt";
 
     protected function setUp() {
 
@@ -37,86 +37,83 @@ class RDFXMLParserTest extends PHPUnit_Framework_TestCase {
                 )
         );
         $model->add($res);
-        $model->save($this->filename);
+        $model->save($this->filename, "nt");
 
         $model = null;
     }
 
-    public function testRDFXMLParserSuccess1() {
+    public function testNTParserSuccess1() {
 
         $this->assertTrue(file_exists($this->filename));
-        $parser = new RDFXMLParser();
+        
         $model = new Model();
         
-        $this->assertTrue($parser->parse($this->filename,$model));
+        $parser = new NTripleParser();
+        $parser->parse($this->filename, $model);
+
         $this->assertFalse($model->isEmpty());
-        $this->assertTrue($model->hasNamespace(PREFIX));
+        $this->assertEquals($model->size(), "7");
+    }
+    
+        public function testNTParserSuccess2() {
+
+        $this->assertTrue(file_exists($this->filename));
+        
+        $model = new Model();
+        
+        $model->load($this->filename, "nt");
+
+        $this->assertFalse($model->isEmpty());
         $this->assertEquals($model->size(), "7");
     }
 
-    public function testRDFXMLParserSuccess2() {
-
-        $this->assertTrue(file_exists($this->filename));
-        $parser = new RDFXMLParser();
-        $model = new Model();
-        
-        $this->assertTrue($model->load($this->filename, "rdf"));
-        $this->assertFalse($model->isEmpty());
-        $this->assertTrue($model->hasNamespace(PREFIX));
-        $this->assertEquals($model->size(), "7");
-    }
-
+    
     /**
      * @expectedException APIException
      */
-    public function testRDFXMLParserError1() {
+    public function testNTParserError1() {
 
         $this->assertFalse(file_exists($this->filename . "2"));
-        $parser = new RDFXMLParser();
-        $parser->parse($this->filename . "2", new Model());
+        $parser = new NTripleParser();
+        $model = $parser->parse($this->filename . "2", new Model());
     }
 
     /**
      * @expectedException APIException
      */
-    public function testRDFXMLParserError2() {
-        $parser = new RDFXMLParser();
+    public function testNTParserError2() {
+        $parser = new NTripleParser();
         $model = $parser->parse(null, new Model());
     }
 
     /**
      * @expectedException APIException
      */
-    public function testRDFXMLParserError4() {
+    public function testNTParserError3() {
 
         $ourFileHandle = fopen($this->filename, 'w');
         fclose($ourFileHandle);
 
-        $parser = new RDFXMLParser();
+        $parser = new NTripleParser();
         $model = $parser->parse($this->filename, new Model());
     }
 
+    
     /**
      * @expectedException APIException
      */
-    public function testRDFXMLParserError5() {
+    public function testRDFXMLParserError4() {
 
-        $content = "<?xml version='1.0'?><rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:ex='http://example.org/'></rdf:RDF>";
+        $content = "<http://example.org/test> <http://example.org/pred> \"deutsch\"@de^^<string> .\n";
+        $content.= "<http://example.org/test> <http://example.org/pred2> \"englisch\"@en^^<string> .\n";
+        $content.= "<http://example.org/test> <http://example.org/pred3> \n";
 
         $ourFileHandle = fopen($this->filename, 'w');
         fwrite($ourFileHandle, $content);
         fclose($ourFileHandle);
 
-        $parser = new RDFXMLParser();
-        $parser->parse($this->filename, new Model());
-    }
-
-    /**
-     * @expectedException APIException
-     */
-    public function testRDFXMLParserError6() {
-        $model = new Model();
-        $model = $model->load($this->filename, "unknownFiletype");
+        $parser = new NTripleParser();
+        $model = $parser->parse($this->filename, new Model());
     }
 
     protected function tearDown() {
@@ -127,6 +124,8 @@ class RDFXMLParserTest extends PHPUnit_Framework_TestCase {
         }
         
     }
+    
+
 
 }
 

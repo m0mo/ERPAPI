@@ -28,6 +28,8 @@ include_once 'Utils.php';
 // Parsers
 include_once INCLUDE_DIR."parsers/IParser.php";
 include_once INCLUDE_DIR."parsers/RDFXMLParser.php";
+include_once INCLUDE_DIR."parsers/NTripleParser.php";
+include_once INCLUDE_DIR."parsers/TurtleParser.php";
 
 // Serializers
 include_once INCLUDE_DIR."serializers/ISerializer.php";

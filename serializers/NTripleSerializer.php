@@ -12,7 +12,8 @@
  * @package     serializers
  * @access      public
  * 
- * Description  Serializer for RDF/XML
+ * Description  Serializer for N-Triple. Not whole gramma of N-Triple notation
+ *              is possible. For a description visit http://www.w3.org/2001/sw/RDFCore/ntriples/
  * 
  * -----------------------------------------------------------------------------
  */
@@ -53,7 +54,6 @@ class NTripleSerializer implements ISerializer {
         fclose($handle);
 
         $this->content = null;
-        $this->model = null;
         
         return true;
     }
@@ -69,7 +69,6 @@ class NTripleSerializer implements ISerializer {
         
         $cont = $this->transform($model);
         $this->content = null;
-        $this->model = null;
         
         return $cont;
     }

@@ -8,11 +8,12 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        TurtleSerializer.php
- * @version     2011-08-11
+ * @version     2011-08-12
  * @package     serializers
  * @access      public
  * 
- * Description  Serializer for Turtle
+ * Description  Serializer for Turtle. Not all grammar of Turtle is possible. 
+ *              For more info see http://www.w3.org/TeamSubmission/turtle/
  * 
  * -----------------------------------------------------------------------------
  */

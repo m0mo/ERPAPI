@@ -14,7 +14,7 @@ require_once 'settings.php';
  * @package     tests
  * @access      public
  * 
- * Description  here
+ * Description  Testing the RDF/XML serializer
  * 
  * -----------------------------------------------------------------------------
  */

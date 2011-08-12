@@ -50,9 +50,10 @@ class RDFXMLParser implements IParser {
      * Loads an RDFXML-file into the a model an returns it;
      *
      * @param string $file 
-     * @return Model
+     * @param Model $model
+     * @return bool
      */
-    public function parse($file, &$model = null) {
+    public function parse($file, &$model) {
         
         if(!Check::isString($file))
             throw new APIException(API_ERROR."The filename need to be a string!");
@@ -60,7 +61,9 @@ class RDFXMLParser implements IParser {
         if (!file_exists($file))
                 throw new APIException (API_ERROR."The file to parse does not exist!");
         
-        return $this->transform($file, $model);
+        $model = $this->transform($file, $model);
+        
+        return true;
     }
 
     /**
@@ -78,9 +81,6 @@ class RDFXMLParser implements IParser {
         
         // instantiate the xpath
         $this->initXPath();
-        
-        // create a new model
-        $this->initModel();
         
         // add namespaces to the model
         $this->addNamespaces();
@@ -125,13 +125,6 @@ class RDFXMLParser implements IParser {
     }
 
     /**
-     * Creates a new model
-     */
-    private function initModel() {
-        if($this->model == null) $this->model = new Model();
-    }
-
-    /**
      * Adds namespaces of the docment to the model.
      */
     private function addNamespaces() {
@@ -141,9 +134,6 @@ class RDFXMLParser implements IParser {
             if ($node->prefix != RDF_PREFIX) {
                 $this->model->addNamespace($node->prefix, $node->nodeValue);
             }
-
-//            echo $node->nodeValue, "\n";
-//            echo $node->prefix, "\n";
         }
     }
 
