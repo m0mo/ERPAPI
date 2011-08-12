@@ -7,15 +7,15 @@ require_once "settings.php";
  * ERP API Test
  * -----------------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
- * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com>
+ *
  * @name        ModelTest.php
  * @version     2011-08-10
  * @package     tests
  * @access      public
- * 
+ *
  * Description  Testing the class Model
- * 
+ *
  * -----------------------------------------------------------------------------
  */
 class ModelTest extends PHPUnit_Framework_TestCase {
@@ -36,7 +36,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     public function testRemoveNamespace() {
 
         $this->assertFalse($this->model->hasNamespace("ns"));
-        
+
         $this->model->addNamespace("ns", NS);
         $this->assertTrue($this->model->hasNamespace("ns"));
         $this->assertTrue($this->model->removeNamespace("ns"));
@@ -62,7 +62,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testAddError2() {
-        $this->assertFalse($this->model->add(new Resource(NS."test")));
+        $this->assertFalse($this->model->add(new Resource(NS . "test")));
     }
 
     public function testAddError3() {
@@ -77,7 +77,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testAddDoubleError() {
-        $statement = new Statement(new Resource(NS."test"), new Resource(NS."pred"), new LiteralNode("literal"));
+        $statement = new Statement(new Resource(NS . "test"), new Resource(NS . "pred"), new LiteralNode("literal"));
         $this->model->add($statement);
 
         $this->assertTrue($this->model->contains($statement));
@@ -86,7 +86,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testAddDoubleSuccess() {
-        $statement = new Statement(new Resource(NS."test"), new Resource(NS."pred"), new LiteralNode("literal"));
+        $statement = new Statement(new Resource(NS . "test"), new Resource(NS . "pred"), new LiteralNode("literal"));
         $this->model->add($statement);
 
         $this->assertTrue($this->model->contains($statement));
@@ -97,106 +97,106 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     public function testSearchError() {
         $this->assertTrue($this->model->search(null, null, null) == null);
 
-        $res = new Resource(NS."test");
-        $pred = new Resource(NS."pred");
+        $res = new Resource(NS . "test");
+        $pred = new Resource(NS . "pred");
         $obj = new LiteralNode("literal");
 
         $statement = new Statement($res, $pred, $obj);
 
         $this->model->add($statement);
         $this->assertTrue($this->model->search($res, $pred, $obj) != null);
-        $this->assertTrue($this->model->search(new Resource(NS."test2"), $pred, $obj) == null);
+        $this->assertTrue($this->model->search(new Resource(NS . "test2"), $pred, $obj) == null);
     }
 
     public function testSearchSuccess1() {
-        $statement = new Statement(new Resource(NS."test"), new Resource(NS."pred"), new LiteralNode("literal"));
+        $statement = new Statement(new Resource(NS . "test"), new Resource(NS . "pred"), new LiteralNode("literal"));
         $this->model->add($statement);
 
         $this->assertTrue($this->model->contains($statement));
     }
 
     public function testSearchSuccess2() {
-        $statement1 = new Statement(new Resource(NS."test1"), new Resource(NS."pred"), new LiteralNode("literal1"));
+        $statement1 = new Statement(new Resource(NS . "test1"), new Resource(NS . "pred"), new LiteralNode("literal1"));
 
         $this->model->add($statement1);
 
         $this->assertTrue($this->model->contains($statement1));
-        $this->assertTrue($this->model->search(new Resource(NS."test1")) != null);
+        $this->assertTrue($this->model->search(new Resource(NS . "test1")) != null);
 
-        $resource = $this->model->searchResource(new Resource(NS."test1"));
+        $resource = $this->model->searchResource(new Resource(NS . "test1"));
 
         $this->assertTrue($resource instanceof Resource);
-        $this->assertTrue($resource->equals(new Resource(NS."test1")));
-        $this->assertTrue($resource->hasProperty(new Resource(NS."pred")));
+        $this->assertTrue($resource->equals(new Resource(NS . "test1")));
+        $this->assertTrue($resource->hasProperty(new Resource(NS . "pred")));
     }
 
     public function testSearchSuccess3() {
 
         //simple resource tree
 
-        $statement1 = new Statement(new Resource(NS."test1"), new Resource(NS."pred"), new Resource(NS."test2"));
-        $statement2 = new Statement(new Resource(NS."test2"), new Resource(NS."pred"), new LiteralNode("literal2"));
+        $statement1 = new Statement(new Resource(NS . "test1"), new Resource(NS . "pred"), new Resource(NS . "test2"));
+        $statement2 = new Statement(new Resource(NS . "test2"), new Resource(NS . "pred"), new LiteralNode("literal2"));
 
         $this->model->add($statement1);
         $this->model->add($statement2);
 
         $this->assertTrue($this->model->contains($statement1));
         $this->assertTrue($this->model->contains($statement2));
-        $this->assertTrue($this->model->search(new Resource(NS."test1")) != null);
-        $this->assertTrue($this->model->search(new Resource(NS."test2")) != null);
+        $this->assertTrue($this->model->search(new Resource(NS . "test1")) != null);
+        $this->assertTrue($this->model->search(new Resource(NS . "test2")) != null);
 
-        $resource = $this->model->searchResource(new Resource(NS."test1"));
+        $resource = $this->model->searchResource(new Resource(NS . "test1"));
 
         $this->assertTrue($resource instanceof Resource);
-        $this->assertTrue($resource->equals(new Resource(NS."test1")));
-        $this->assertTrue($resource->hasProperty(new Resource(NS."pred")));
+        $this->assertTrue($resource->equals(new Resource(NS . "test1")));
+        $this->assertTrue($resource->hasProperty(new Resource(NS . "pred")));
 
-        $this->assertTrue($resource->getProperty(new Resource(NS."pred"))->equals(new Resource(NS."test2")));
-        $this->assertTrue($resource->getProperty(new Resource(NS."pred"))->hasProperty(new Resource(NS."pred")));
-        $this->assertTrue($resource->getProperty(new Resource(NS."pred"))->getProperty(new Resource(NS."pred"))->equals(new LiteralNode("literal2")));
+        $this->assertTrue($resource->getProperty(new Resource(NS . "pred"))->equals(new Resource(NS . "test2")));
+        $this->assertTrue($resource->getProperty(new Resource(NS . "pred"))->hasProperty(new Resource(NS . "pred")));
+        $this->assertTrue($resource->getProperty(new Resource(NS . "pred"))->getProperty(new Resource(NS . "pred"))->equals(new LiteralNode("literal2")));
     }
 
     public function testSearchSuccess4() {
 
         // recursion
 
-        $statement1 = new Statement(new Resource(NS."test1"), new Resource(NS."pred"), new Resource(NS."test2"));
-        $statement2 = new Statement(new Resource(NS."test2"), new Resource(NS."pred"), new Resource(NS."test1"));
+        $statement1 = new Statement(new Resource(NS . "test1"), new Resource(NS . "pred"), new Resource(NS . "test2"));
+        $statement2 = new Statement(new Resource(NS . "test2"), new Resource(NS . "pred"), new Resource(NS . "test1"));
 
         $this->model->add($statement1);
         $this->model->add($statement2);
 
         $this->assertTrue($this->model->contains($statement1));
         $this->assertTrue($this->model->contains($statement2));
-        $this->assertTrue($this->model->search(new Resource(NS."test1")) != null);
-        $this->assertTrue($this->model->search(new Resource(NS."test2")) != null);
+        $this->assertTrue($this->model->search(new Resource(NS . "test1")) != null);
+        $this->assertTrue($this->model->search(new Resource(NS . "test2")) != null);
 
-        $resource = $this->model->searchResource(new Resource(NS."test1"));
+        $resource = $this->model->searchResource(new Resource(NS . "test1"));
 
         $this->assertTrue($resource instanceof Resource);
-        $this->assertTrue($resource->equals(new Resource(NS."test1")));
-        $this->assertTrue($resource->hasProperty(new Resource(NS."pred")));
+        $this->assertTrue($resource->equals(new Resource(NS . "test1")));
+        $this->assertTrue($resource->hasProperty(new Resource(NS . "pred")));
 
-        $this->assertTrue($resource->getProperty(new Resource(NS."pred"))->equals(new Resource(NS."test2")));
-        $this->assertTrue($resource->getProperty(new Resource(NS."pred"))->hasProperty(new Resource(NS."pred")));
-        $this->assertTrue($resource->getProperty(new Resource(NS."pred"))->getProperty(new Resource(NS."pred"))->equals($resource));
+        $this->assertTrue($resource->getProperty(new Resource(NS . "pred"))->equals(new Resource(NS . "test2")));
+        $this->assertTrue($resource->getProperty(new Resource(NS . "pred"))->hasProperty(new Resource(NS . "pred")));
+        $this->assertTrue($resource->getProperty(new Resource(NS . "pred"))->getProperty(new Resource(NS . "pred"))->equals($resource));
     }
 
     public function testContainsSuccess() {
-        $statement = new Statement(new Resource(NS."test"), new Resource(NS."pred"), new LiteralNode("literal"));
+        $statement = new Statement(new Resource(NS . "test"), new Resource(NS . "pred"), new LiteralNode("literal"));
         $this->model->add($statement);
 
         $this->assertTrue($this->model->contains($statement));
     }
 
     public function testContainsError() {
-        $statement = new Statement(new Resource(NS."test"), new Resource(NS."pred"), new LiteralNode("literal"));
+        $statement = new Statement(new Resource(NS . "test"), new Resource(NS . "pred"), new LiteralNode("literal"));
         $this->assertFalse($this->model->contains($statement));
     }
 
     public function testAddSuccess1() {
-        $res = new Resource(NS."test");
-        $pred = new Resource(NS."pred");
+        $res = new Resource(NS . "test");
+        $pred = new Resource(NS . "pred");
         $obj = new LiteralNode("literal");
 
         $statement = new Statement($res, $pred, $obj);
@@ -218,8 +218,8 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testAddSuccess2() {
-        $res = new Resource(NS."test");
-        $pred = new Resource(NS."pred");
+        $res = new Resource(NS . "test");
+        $pred = new Resource(NS . "pred");
         $obj = new LiteralNode("literal");
 
         $res->addProperty($pred, $obj);
@@ -241,21 +241,21 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testAddSuccess3() {
-        $res = new Resource(NS."test");
-        $pred1 = new Resource(NS."pred");
-        $pred2 = new Resource(NS."pred2");
+        $res = new Resource(NS . "test");
+        $pred1 = new Resource(NS . "pred");
+        $pred2 = new Resource(NS . "pred2");
         $obj = new LiteralNode("literal");
 
-        $res2 = new Resource(NS."test2");
-        $pred3 = new Resource(NS."pred3");
+        $res2 = new Resource(NS . "test2");
+        $pred3 = new Resource(NS . "pred3");
         $obj2 = new LiteralNode("literal2");
 
         $res->addProperty($pred1, $obj)->addProperty($pred2, $res2->addProperty($pred3, $obj2));
         $res->addProperty($pred3, $obj2);
-        $res->addProperty(new Resource(NS."pred4"), $res2);
+        $res->addProperty(new Resource(NS . "pred4"), $res2);
 
         $res2->addProperty($pred1, $obj);
-        $res2->addProperty(new Resource(NS."pred4"), $obj);
+        $res2->addProperty(new Resource(NS . "pred4"), $obj);
 
         $this->model->add($res);
 
@@ -264,8 +264,8 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($this->model->search($res, $pred2, $res2) != null);
         $this->assertTrue($this->model->search($res2, $pred3, $obj2) != null);
         $this->assertTrue($this->model->search($res2, $pred, $obj) != null);
-        $this->assertTrue($this->model->search($res2, new Resource(NS."pred4"), $obj) != null);
-        $this->assertTrue($this->model->search($res, new Resource(NS."pred4"), $res2) != null);
+        $this->assertTrue($this->model->search($res2, new Resource(NS . "pred4"), $obj) != null);
+        $this->assertTrue($this->model->search($res, new Resource(NS . "pred4"), $res2) != null);
     }
 
     public function testInstanceCreation() {
@@ -276,16 +276,16 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(is_a($this->model->newBlankNode(), BlankNode));
         $this->assertTrue(is_a($this->model->newLiteralNode("literal"), LiteralNode));
         $this->assertTrue(is_a($this->model->newLiteralNode("literal", STRING), LiteralNode));
-        $this->assertTrue(is_a($this->model->newStatement(new BlankNode("id"), new Resource(NS."pred"), new BlankNode("id")), Statement));
-        
-        $this->assertEquals($this->model->newBlankNode()->getId() , BNODE."4");
+        $this->assertTrue(is_a($this->model->newStatement(new BlankNode("id"), new Resource(NS . "pred"), new BlankNode("id")), Statement));
+
+        $this->assertEquals($this->model->newBlankNode()->getId(), BNODE . "4");
     }
 
     public function testSize() {
 
         $this->assertTrue($this->model->size() == 0);
 
-        $statement = new Statement(new Resource(NS."test"), new Resource(NS."pred"), new LiteralNode("literal"));
+        $statement = new Statement(new Resource(NS . "test"), new Resource(NS . "pred"), new LiteralNode("literal"));
         $this->model->add($statement);
 
         $this->assertTrue($this->model->size() == 1);
@@ -295,7 +295,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($this->model->isEmpty());
 
-        $statement = new Statement(new Resource(NS."test"), new Resource(NS."pred"), new LiteralNode("literal"));
+        $statement = new Statement(new Resource(NS . "test"), new Resource(NS . "pred"), new LiteralNode("literal"));
         $this->model->add($statement);
 
         $this->assertFalse($this->model->isEmpty());
@@ -309,10 +309,9 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->model->remove(null);
     }
 
-    
     public function testRemoveError2() {
 
-        $this->assertFalse($this->model->remove(new Resource(NS."test")));
+        $this->assertFalse($this->model->remove(new Resource(NS . "test")));
     }
 
     /**
@@ -322,19 +321,19 @@ class ModelTest extends PHPUnit_Framework_TestCase {
 
         $this->model->remove(new LiteralNode("test"));
     }
-    
+
     public function testRemoveError4() {
-        
-        $res = $this->model->newResource("test")->addProperty(new Resource(NS."pred"), new LiteralNode("literal"));
+
+        $res = $this->model->newResource("test")->addProperty(new Resource(NS . "pred"), new LiteralNode("literal"));
         $this->model->add($res);
-        
-        $res1 = $this->model->newResource("test2")->addProperty(new Resource(NS."pred"), new LiteralNode("literal"));
+
+        $res1 = $this->model->newResource("test2")->addProperty(new Resource(NS . "pred"), new LiteralNode("literal"));
         $this->assertFalse($this->model->remove($res1));
     }
 
     public function testRemoveSuccess1() {
 
-        $statement = new Statement(new Resource(NS."test"), new Resource(NS."pred"), new LiteralNode("literal"));
+        $statement = new Statement(new Resource(NS . "test"), new Resource(NS . "pred"), new LiteralNode("literal"));
 
         $this->assertTrue($this->model->size() == 0);
         $this->assertFalse($this->model->contains($statement));
@@ -351,9 +350,9 @@ class ModelTest extends PHPUnit_Framework_TestCase {
 
     public function testRemoveSuccess2() {
 
-        $res = new Resource(NS."test");
+        $res = new Resource(NS . "test");
 
-        $res->addProperty(new Resource(NS."pred"), new LiteralNode("literal"));
+        $res->addProperty(new Resource(NS . "pred"), new LiteralNode("literal"));
 
         $this->assertTrue($this->model->size() == 0);
 
@@ -366,19 +365,19 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($this->model->size() == 0);
         $this->assertTrue($this->model->search($res) == null);
     }
-    
-     public function testRemoveSuccess3() {
+
+    public function testRemoveSuccess3() {
 
         $res = $this->model->newResource("test")
-                                ->addProperty($this->model->newResource("pred1"), new LiteralNode("literal1"))
-                                ->addProperty($this->model->newResource("pred2"), new LiteralNode("literal2"))
-                                ->addProperty($this->model->newResource("pred3"), $this->model->newResource("test2")
-                                                    ->addProperty($this->model->newResource("pred"), new LiteralNode("litera3"))
-                                                    ->addProperty($this->model->newResource("pred2"), new LiteralNode("litera4"))
-                                            );
-        
+                ->addProperty($this->model->newResource("pred1"), new LiteralNode("literal1"))
+                ->addProperty($this->model->newResource("pred2"), new LiteralNode("literal2"))
+                ->addProperty($this->model->newResource("pred3"), $this->model->newResource("test2")
+                ->addProperty($this->model->newResource("pred"), new LiteralNode("litera3"))
+                ->addProperty($this->model->newResource("pred2"), new LiteralNode("litera4"))
+        );
+
         $this->model->add($res);
-        
+
         $this->assertEquals($this->model->size(), 5);
         $this->assertTrue($this->model->search($res) != null);
 
@@ -387,19 +386,19 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($this->model->size(), 0);
         $this->assertTrue($this->model->search($res) == null);
     }
-    
+
     public function testToString() {
-        
-        $res = $this->model->newResource("test")->addProperty(new Resource(NS."pred"), new LiteralNode("literal"));
-        
+
+        $res = $this->model->newResource("test")->addProperty(new Resource(NS . "pred"), new LiteralNode("literal"));
+
         $this->model->add($res);
-        
+
         $this->assertTrue(Check::isString($this->model->toString()));
-         $this->assertTrue(Check::isString($this->model->toString("rdf")));
-          $this->assertTrue(Check::isString($this->model->toString("nt")));
-           $this->assertTrue(Check::isString($this->model->toString("turtle")));
+        $this->assertTrue(Check::isString($this->model->toString("rdf")));
+        $this->assertTrue(Check::isString($this->model->toString("nt")));
+        $this->assertTrue(Check::isString($this->model->toString("turtle")));
+        $this->assertTrue(Check::isString($this->model->toString("json")));
         $this->assertTrue(Check::isString($this->model->toHTML()));
-        
     }
 
     protected function tearDown() {

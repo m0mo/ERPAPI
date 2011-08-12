@@ -7,7 +7,7 @@
  *
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
  *
- * @name        RDFXMLSerializer.php
+ * @name        TurtleSerializer.php
  * @version     2011-08-12
  * @package     serializers
  * @access      public
@@ -48,6 +48,9 @@ class TurtleParser implements IParser {
 
         if (!file_exists($file))
             throw new APIException(API_ERROR . "The file to parse does not exist!");
+        
+        if (0 == filesize($file))
+            throw new APIException(API_ERROR . "File appears to be empty!");
 
 
         $this->transform($file, $model);
@@ -56,7 +59,7 @@ class TurtleParser implements IParser {
     }
 
     /**
-     * Transforms the model in to a string in nt notation
+     * Transforms the model in to a string in turtle notation
      *
      * @param Model $model
      * @return Model
@@ -66,10 +69,6 @@ class TurtleParser implements IParser {
 
         if (!Check::isModel($model))
             throw new APIException(API_ERROR_MODEL);
-
-        if (0 == filesize($file)) {
-            throw new APIException(API_ERROR . "File appears to be empty!");
-        }
 
         $this->model = &$model;
 

@@ -70,7 +70,7 @@ class TurtleSerializer {
     /**
      * Returns the model as a string in turtle notation
      * 
-     * @param type $model
+     * @param Model $model
      * @return string 
      * @throws APIException
      */

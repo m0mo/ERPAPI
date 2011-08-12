@@ -7,9 +7,9 @@
  *
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
  *
- * @name        RDFXMLSerializer.php
+ * @name        NTripleParser.php
  * @version     2011-08-12
- * @package     serializers
+ * @package     parsers
  * @access      public
  *
  * Description  Parser for N-Triple. Not whole gramma is possible. 
@@ -41,8 +41,10 @@ class NTripleParser implements IParser {
 
         if (!file_exists($file))
             throw new APIException(API_ERROR . "The file to parse does not exist!");
-
-
+        
+        if (0 == filesize($file))
+            throw new APIException(API_ERROR . "File appears to be empty!");
+        
         $this->transform($file, $model);
 
         return true;
@@ -59,10 +61,7 @@ class NTripleParser implements IParser {
 
         if (!Check::isModel($model))
             throw new APIException(API_ERROR_MODEL);
-
-        if (0 == filesize($file)) {
-            throw new APIException(API_ERROR . "File appears to be empty!");
-        }
+        
         $handle = fopen($file, "r");
 
         if ($handle) {

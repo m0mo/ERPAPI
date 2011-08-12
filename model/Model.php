@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
  *
  * @name        Model.php
- * @version     2011-08-11
+ * @version     2011-08-12
  * @package     model
  * @access      public
  *
@@ -497,10 +497,10 @@ class Model {
     }
 
     /**
-     * Saves the model to a file
+     * Saves the model to a file, Default is the RDF/XML format.
      *
      * @param string $filename
-     * @param string $type
+     * @param string $type defines the type of the output (rdf, nt, turtle, json)
      * @return bool 
      */
     public function save($filename, $type ='rdf') {
@@ -512,17 +512,22 @@ class Model {
             include_once(INCLUDE_DIR."serializers/RDFXMLSerializer.php");
             $ser = new RDFXMLSerializer();
             
-        } else if ($type == 'nt' || $type == "ntriple") {
+        } else if ($type == 'nt') {
             
             include_once(INCLUDE_DIR."serializers/NTripleSerializer.php");
             $ser = new NTripleSerializer();
             
-        } else if ($type == 'turtle' || $type == "ntriple") {
+        } else if ($type == 'turtle') {
             
             include_once(INCLUDE_DIR."serializers/TurtleSerializer.php");
             $ser = new TurtleSerializer();
             
-        }else {
+        } else if ($type == 'json') {
+            
+            include_once(INCLUDE_DIR."serializers/JsonSerializer.php");
+            $ser = new JsonSerializer();
+            
+        } else {
             throw new APIException(API_ERROR_FILETYPE);
         };
 
@@ -533,7 +538,7 @@ class Model {
      * Loads a model from a file and returns it.
      *
      * @param string $filename
-     * @param string $type
+     * @param string $type defines the type of the inputformat (rdf, nt, turtle, json)
      * @return bool 
      */
     public function load($filename, $type ='rdf') {
@@ -548,6 +553,9 @@ class Model {
         } else if ($type == 'turtle') {            
             include_once(INCLUDE_DIR."parsers/TurtleParser.php");
             $ser = new TurtleParser();
+        } else if ($type == 'json') {            
+            include_once(INCLUDE_DIR."parsers/JsonParser.php");
+            $ser = new JsonParser();
         } else {
             throw new APIException(API_ERROR_FILETYPE);
         };
@@ -624,7 +632,8 @@ class Model {
     /**
      * Returns a list of all statements in the model using following format:
      * subjectURI, predicateURI, objectUri or Literal
-     *
+     * 
+     * @param string $type defines the type of the output (rdf, nt, turtle, json)
      * @return string
      */
     public function toString($type = null) {
@@ -635,17 +644,22 @@ class Model {
             include_once(INCLUDE_DIR."serializers/RDFXMLSerializer.php");
             $ser = new RDFXMLSerializer();
             
-        } else if ($type == 'nt' || $type == "ntriple") {
+        } else if ($type == 'nt') {
             
             include_once(INCLUDE_DIR."serializers/NTripleSerializer.php");
             $ser = new NTripleSerializer();
             
-        } else if ($type == 'turtle' || $type == "ntriple") {
+        } else if ($type == 'turtle') {
             
             include_once(INCLUDE_DIR."serializers/TurtleSerializer.php");
             $ser = new TurtleSerializer();
             
-        }else {
+        }  else if ($type == 'json') {
+            
+            include_once(INCLUDE_DIR."serializers/JsonSerializer.php");
+            $ser = new JsonSerializer();
+            
+        } else {
             return $this->statemensToString($this->statements);
         };
 

@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        RdfXmlParser.php
- * @version     2011-08-11
+ * @version     2011-08-12
  * @package     parsers
  * @access      public
  * 
@@ -61,6 +61,9 @@ class RDFXMLParser implements IParser {
         if (!file_exists($file))
                 throw new APIException (API_ERROR."The file to parse does not exist!");
         
+        if (0 == filesize($file))
+            throw new APIException(API_ERROR . "File appears to be empty!");
+        
         $model = $this->transform($file, $model);
         
         return true;
@@ -69,7 +72,8 @@ class RDFXMLParser implements IParser {
     /**
      * Transforms a file to a ERP model
      *
-     * @return Model 
+     * @return Model
+     * @throws APIException
      */
     private function transform($file, &$model) {
         
@@ -98,6 +102,8 @@ class RDFXMLParser implements IParser {
 
     /**
      * Sets up the Dom Document 
+     * 
+     * @throws APIException
      */
     private function initDom() {
         
