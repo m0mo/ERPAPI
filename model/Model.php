@@ -645,29 +645,32 @@ class Model {
      * @return string
      */
     public function toString($type = null) {
+        
+        switch ($type) {
+            case "rdf":
+                $serializer = ERP::getRDFXMLSerializer();
+                break;
 
-        // get suffix and create a corresponding serializer
-        if ($type == 'rdf') {
+            case "nt":
+                $serializer = ERP::getNTripleSerializer();
+                break;
 
+            case "turtle":
+                $serializer = ERP::getTurtleSerializer();
+                break;
 
-            $ser = new RDFXMLSerializer();
-        } else if ($type == 'nt') {
+            case "json":
+                $serializer = ERP::getRDFJsonSerializer();
+                break;
+            
+            case null:
+                return $this->statemensToString($this->statements);
 
+            default :
+                throw new APIException(API_ERROR_FILETYPE);
+        }
 
-            $ser = new NTripleSerializer();
-        } else if ($type == 'turtle') {
-
-            include_once(INCLUDE_DIR . "serializers/TurtleSerializer.php");
-            $ser = new TurtleSerializer();
-        } else if ($type == 'json') {
-
-            include_once(INCLUDE_DIR . "serializers/JsonSerializer.php");
-            $ser = new JsonSerializer();
-        } else {
-            return $this->statemensToString($this->statements);
-        };
-
-        return $ser->serializeToString($this);
+        return $serializer->serializeToString($this);
     }
 
     /**
