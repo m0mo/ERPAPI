@@ -21,6 +21,20 @@
 require_once 'PHPUnit/Autoload.php';
 require_once '../API.php';
 
+// Parsers
+include_once INCLUDE_DIR."parsers/IParser.php";
+include_once INCLUDE_DIR."parsers/RDFXMLParser.php";
+include_once INCLUDE_DIR."parsers/NTripleParser.php";
+include_once INCLUDE_DIR."parsers/TurtleParser.php";
+include_once INCLUDE_DIR."parsers/JsonParser.php";
+
+// Serializers
+include_once INCLUDE_DIR."serializers/ISerializer.php";
+include_once INCLUDE_DIR."serializers/RDFXMLSerializer.php";
+include_once INCLUDE_DIR."serializers/NTripleSerializer.php";
+include_once INCLUDE_DIR."serializers/TurtleSerializer.php";
+include_once INCLUDE_DIR."serializers/JsonSerializer.php";
+
 define("NS", "http://example.org/");
 define("PREFIX", "ex");
 

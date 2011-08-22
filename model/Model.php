@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
  *
  * @name        Model.php
- * @version     2011-08-12
+ * @version     2011-08-22
  * @package     model
  * @access      public
  *
@@ -144,6 +144,15 @@ class Model {
      */
     public function getStatements() {
         return $this->statements;
+    }
+    
+    /**
+     * Returns an array of all stored statements
+     *
+     * @return array 
+     */
+    public function getTripples() {
+        return $this->getStatements();
     }
 
     /**
@@ -504,36 +513,31 @@ class Model {
      * @return bool 
      */
     public function save($filename, $type ='rdf') {
+        
+        switch ($type) {
+            case "rdf":
+                $serializer = ERP::getRDFXMLSerializer();
+                break;
 
+            case "nt":
+                $serializer = ERP::getNTripleSerializer();
+                break;
 
-        // get suffix and create a corresponding serializer
-        if ($type == 'rdf') {
-            
-            include_once(INCLUDE_DIR."serializers/RDFXMLSerializer.php");
-            $ser = new RDFXMLSerializer();
-            
-        } else if ($type == 'nt') {
-            
-            include_once(INCLUDE_DIR."serializers/NTripleSerializer.php");
-            $ser = new NTripleSerializer();
-            
-        } else if ($type == 'turtle') {
-            
-            include_once(INCLUDE_DIR."serializers/TurtleSerializer.php");
-            $ser = new TurtleSerializer();
-            
-        } else if ($type == 'json') {
-            
-            include_once(INCLUDE_DIR."serializers/JsonSerializer.php");
-            $ser = new JsonSerializer();
-            
-        } else {
-            throw new APIException(API_ERROR_FILETYPE);
-        };
+            case "turtle":
+                $serializer = ERP::getTurtleSerializer();
+                break;
 
-        return $ser->serialize($filename, $this);
+            case "json":
+                $serializer = ERP::getRDFJsonSerializer();
+                break;
+
+            default :
+                throw new APIException(API_ERROR_FILETYPE);
+        }
+
+        return $serializer->serialize($filename, $this);
     }
-    
+
     /**
      * Loads a model from a file and returns it.
      *
@@ -542,26 +546,30 @@ class Model {
      * @return bool 
      */
     public function load($filename, $type ='rdf') {
-        
-        // get suffix and create a corresponding serializer
-        if ($type == 'rdf') {
-            include_once(INCLUDE_DIR."parsers/RDFXMLParser.php");
-            $ser = new RDFXMLParser();
-        } else if ($type == 'nt') {         
-            include_once(INCLUDE_DIR."parsers/NTripleParser.php");
-            $ser = new NTripleParser();
-        } else if ($type == 'turtle') {            
-            include_once(INCLUDE_DIR."parsers/TurtleParser.php");
-            $ser = new TurtleParser();
-        } else if ($type == 'json') {            
-            include_once(INCLUDE_DIR."parsers/JsonParser.php");
-            $ser = new JsonParser();
-        } else {
-            throw new APIException(API_ERROR_FILETYPE);
-        };
-        
-        return $ser->parse($filename, $this);
-        
+
+        switch ($type) {
+            case "rdf":
+                $parser = ERP::getRDFXMLParser();
+                break;
+
+            case "nt":
+                $parser = ERP::getNTripleParser();
+                break;
+
+            case "turtle":
+                $parser = ERP::getTurtleParser();
+                break;
+
+            case "json":
+                $parser = ERP::getRDFJsonParser();
+                break;
+
+            default :
+                throw new APIException(API_ERROR_FILETYPE);
+        }
+
+
+        return $parser->parse($filename, $this);
     }
 
     // ------------------------------------------------------------------------
@@ -637,35 +645,29 @@ class Model {
      * @return string
      */
     public function toString($type = null) {
-        
+
         // get suffix and create a corresponding serializer
         if ($type == 'rdf') {
-            
-            include_once(INCLUDE_DIR."serializers/RDFXMLSerializer.php");
+
+
             $ser = new RDFXMLSerializer();
-            
         } else if ($type == 'nt') {
-            
-            include_once(INCLUDE_DIR."serializers/NTripleSerializer.php");
+
+
             $ser = new NTripleSerializer();
-            
         } else if ($type == 'turtle') {
-            
-            include_once(INCLUDE_DIR."serializers/TurtleSerializer.php");
+
+            include_once(INCLUDE_DIR . "serializers/TurtleSerializer.php");
             $ser = new TurtleSerializer();
-            
-        }  else if ($type == 'json') {
-            
-            include_once(INCLUDE_DIR."serializers/JsonSerializer.php");
+        } else if ($type == 'json') {
+
+            include_once(INCLUDE_DIR . "serializers/JsonSerializer.php");
             $ser = new JsonSerializer();
-            
         } else {
             return $this->statemensToString($this->statements);
         };
 
         return $ser->serializeToString($this);
-        
-        
     }
 
     /**

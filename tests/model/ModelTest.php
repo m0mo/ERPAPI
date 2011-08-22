@@ -10,7 +10,7 @@ require_once "settings.php";
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
  *
  * @name        ModelTest.php
- * @version     2011-08-10
+ * @version     2011-08-22
  * @package     tests
  * @access      public
  *
@@ -23,7 +23,7 @@ class ModelTest extends PHPUnit_Framework_TestCase {
     private $model;
 
     protected function setUp() {
-        $this->model = new Model();
+        $this->model = ERP::getModel();
         $this->model->addBaseNamespace(PREFIX, NS);
     }
 
@@ -399,6 +399,21 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(Check::isString($this->model->toString("turtle")));
         $this->assertTrue(Check::isString($this->model->toString("json")));
         $this->assertTrue(Check::isString($this->model->toHTML()));
+    }
+    
+    public function testStatements() {
+        $res = $this->model->newResource("test")
+                ->addProperty($this->model->newResource("pred1"), new LiteralNode("literal1"))
+                ->addProperty($this->model->newResource("pred2"), new LiteralNode("literal2"))
+                ->addProperty($this->model->newResource("pred3"), $this->model->newResource("test2")
+                ->addProperty($this->model->newResource("pred"), new LiteralNode("litera3"))
+                ->addProperty($this->model->newResource("pred2"), new LiteralNode("litera4"))
+        );
+        
+        $this->model->add($res);
+        
+        $this->assertEquals(count($this->model->getStatements()), 5);
+        $this->assertEquals(count($this->model->getStatements()), count($this->model->getTripples()));
     }
 
     protected function tearDown() {

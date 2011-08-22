@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        RdfXmlParser.php
- * @version     2011-08-12
+ * @version     2011-08-22
  * @package     parsers
  * @access      public
  * 
@@ -45,8 +45,15 @@ class RDFXMLParser implements IParser {
      * @var string
      */
     private $file;
-
+    
     /**
+     * Constructor
+     */
+    function __construct() {
+        
+    }
+
+        /**
      * Loads an RDFXML-file into the a model an returns it;
      *
      * @param string $file 
