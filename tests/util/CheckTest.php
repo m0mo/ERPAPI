@@ -25,25 +25,25 @@ class CheckTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testResourceSuccess() {
-       
+
         $this->assertTrue(Check::isResource(new Resource(NS . "test")));
         $this->assertTrue(Check::isResource(new BlankNode("id")));
     }
 
     public function testResourceError() {
-        
+
         $this->assertFalse(Check::isResource(null));
         $this->assertFalse(Check::isResource("string"));
         $this->assertFalse(Check::isResource(new LiteralNode("test")));
     }
 
     public function testBlankNodeSuccess() {
-        
+
         $this->assertTrue(Check::isBlankNode(new BlankNode("id")));
     }
 
     public function testBlankNodeError() {
-        
+
         $this->assertFalse(Check::isBlankNode(null));
         $this->assertFalse(Check::isBlankNode("string"));
         $this->assertFalse(Check::isBlankNode(new Resource(NS . "test")));
@@ -51,22 +51,22 @@ class CheckTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testLiteralNodeSuccess() {
-        
+
         $this->assertTrue(Check::isLiteralNode(new LiteralNode("test")));
     }
 
     public function testLiteralNodeError() {
-        
+
         $this->assertFalse(Check::isLiteralNode(null));
         $this->assertFalse(Check::isLiteralNode("string"));
         $this->assertFalse(Check::isLiteralNode(new Resource(NS . "test")));
         $this->assertFalse(Check::isLiteralNode(new BlankNode("id")));
     }
-    
+
     public function testIsStringSucess() {
         $this->assertTrue(Check::isString("string"));
     }
-    
+
     public function testIsStringError() {
         $this->assertFalse(Check::isString(null));
         $this->assertFalse(Check::isString(new Resource(NS . "test")));
@@ -121,11 +121,62 @@ class CheckTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse(Check::isPredicate(new LiteralNode("predicate can't be a literal")));
         $this->assertFalse(Check::isPredicate(new BlankNode("id")));
 
-        $res = new Resource("test");
+        $res = new Resource(NS . "test");
         $statement = $res->addProperty(new Resource(NS . "pred"), new LiteralNode("Test"));
 
         $this->assertFalse(Check::isPredicate($res));
         $this->assertFalse(Check::isPredicate($statement));
+    }
+
+    public function testIsUri() {
+
+        $this->assertFalse(Check::isUri("test"));
+        $this->assertFalse(Check::isUri(NS . "test/"));
+        $this->assertFalse(Check::isUri(NS . "test#"));
+
+        $this->assertTrue(Check::isUri(NS . "test"));
+        $this->assertTrue(Check::isUri(NS . "test/test2"));
+    }
+
+    public function testIsPrefix() {
+
+        $this->assertFalse(Check::isPrefix("+#"));
+        $this->assertFalse(Check::isPrefix(NS . "test/"));
+        $this->assertFalse(Check::isPrefix(NS . "test#"));
+
+        $this->assertTrue(Check::isPrefix("test"));
+        $this->assertTrue(Check::isPrefix("test2"));
+        $this->assertTrue(Check::isPrefix(PREFIX));
+    }
+
+    public function testIsName() {
+
+        $this->assertFalse(Check::isName("+#"));
+        $this->assertFalse(Check::isName(NS . "test/"));
+        $this->assertFalse(Check::isName(NS . "test#"));
+
+        $this->assertTrue(Check::isName("test"));
+        $this->assertTrue(Check::isName("test2"));
+    }
+    
+        public function testIsPrefixAndName() {
+
+        $this->assertFalse(Check::isPrefixAndName("+#"));
+        $this->assertFalse(Check::isPrefixAndName(NS . "test/"));
+        $this->assertFalse(Check::isPrefixAndName(NS . ":name"));
+        $this->assertFalse(Check::isPrefixAndName(PREFIX . "test"));
+
+        $this->assertTrue(Check::isPrefixAndName(PREFIX.":test"));
+    }
+    
+     public function testIsNamespace() {
+
+        $this->assertFalse(Check::isNamespace("+#"));
+        $this->assertFalse(Check::isNamespace(NS . "test"));
+        $this->assertFalse(Check::isNamespace(NS . ":name"));
+        $this->assertFalse(Check::isNamespace(PREFIX . "test"));
+
+        $this->assertTrue(Check::isNamespace(NS));
     }
 
     public function testObjectError() {

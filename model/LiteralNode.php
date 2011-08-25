@@ -52,9 +52,6 @@ class LiteralNode extends Node {
         if (!Check::isString($literal))
             throw new APIException(API_ERROR_STRING);
 
-        if (!Check::isString($datatype))
-            throw new APIException(API_ERROR_STRING);
-
         $this->datatype = $datatype;
         $this->literal = $literal;
         $this->language = $language;

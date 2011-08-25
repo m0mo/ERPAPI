@@ -131,7 +131,7 @@ class StatementTest extends PHPUnit_Framework_TestCase {
 
     public function testAcceptedObject2() {
 
-        $statement = new Statement($this->subj, $this->pred, new Resource("test"));
+        $statement = new Statement($this->subj, $this->pred, new Resource(NS."test"));
         $this->assertTrue(is_a($statement, Statement));
     }
 

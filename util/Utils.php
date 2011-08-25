@@ -44,10 +44,16 @@ class Utils {
      */
     public static function getName($uri) {
         
-        if (!Check::isUri($uri))
-            throw new APIException(API_ERROR_URI);
+        if(!Check::isString($uri))
+            throw new APIException(API_ERROR_STRING);
         
-        return substr($uri, self::getNamespaceEnd($uri));
+        if (Check::isUri($uri))
+            return substr($uri, self::getNamespaceEnd($uri));
+        
+        if (Check::isPrefixAndName($uri))
+            return substr (strpos ($uri, ":")+1, $uri);
+        
+        return $uri;
     }
 
     /**

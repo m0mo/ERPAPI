@@ -401,6 +401,19 @@ class ModelTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(Check::isString($this->model->toHTML()));
     }
     
+    /**
+     * @expectedException APIException
+     */
+    public function testToStringError() {
+
+        $res = $this->model->newResource("test")->addProperty(new Resource(NS . "pred"), new LiteralNode("literal"));
+
+        $this->model->add($res);
+
+        $this->assertTrue(Check::isString($this->model->toString("wathever")));
+
+    }
+    
     public function testStatements() {
         $res = $this->model->newResource("test")
                 ->addProperty($this->model->newResource("pred1"), new LiteralNode("literal1"))

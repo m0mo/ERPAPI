@@ -35,6 +35,9 @@ include_once INCLUDE_DIR."serializers/NTripleSerializer.php";
 include_once INCLUDE_DIR."serializers/TurtleSerializer.php";
 include_once INCLUDE_DIR."serializers/JsonSerializer.php";
 
+// sparql
+include_once INCLUDE_DIR."sparql/sparqlEngine/SparqlEngine.php";
+
 define("NS", "http://example.org/");
 define("PREFIX", "ex");
 

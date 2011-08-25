@@ -26,6 +26,11 @@ include_once "Check.php";
 include_once 'Utils.php';
 include_once 'ERP.php';
 
+// SPARQL
+include_once INCLUDE_DIR."sparql/ISparqlEngine.php";
+include_once INCLUDE_DIR."sparql/SparqlException.php";
+
+
 // Parsers
 //include_once INCLUDE_DIR."parsers/IParser.php";
 //include_once INCLUDE_DIR."parsers/RDFXMLParser.php";

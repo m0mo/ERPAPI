@@ -49,15 +49,15 @@ class Resource extends Node {
     function __construct($namespace_or_uri, $name = null) {
 
         // if $name is not a string $namespace_or_uri has to be an uri
-        if (!Check::isString($name) && !Check::isUri($namespace_or_uri))
+        if (!Check::isUri($namespace_or_uri) && !Check::isNamespace($namespace_or_uri))
             throw new APIException(API_ERROR_URI);
 
-        // if $name is a string $namespace_or_uri has to be an namespace
-        if (Check::isString($name) && !Check::isNamespace($namespace_or_uri))
-            throw new APIException(API_ERROR_NS);
+        // if $namespace_or_uri is a namespace $name has to be a valid name
+        if (Check::isNamespace($namespace_or_uri) && !Check::isName($name))
+            throw new APIException(API_ERROR_NAME);
 
-        $this->uri = (Check::isString($name)) ? $namespace_or_uri . $name : $namespace_or_uri;
-        $this->name = (Check::isString($name)) ? $name : Utils::getName($namespace_or_uri);
+        $this->uri = (Check::isNamespace($namespace_or_uri)) ? $namespace_or_uri . $name : $namespace_or_uri;
+        $this->name = (Check::isNamespace($namespace_or_uri)) ? $name : Utils::getName($namespace_or_uri);
     }
 
     /**

@@ -21,10 +21,10 @@ require_once "settings.php";
 class UtilsTest extends PHPUnit_Framework_TestCase {
     
     public function testGetterSuccess() {     
-        $this->assertTrue(Utils::getName(NS."test") == "test");
-        $this->assertTrue(Utils::getNamespace(NS."test") == NS);
-        $this->assertTrue(Utils::getNamespaceEnd(NS."test") == strlen(NS));
-        $this->assertTrue(Utils::getName("test") == "test");
+        $this->assertEquals(Utils::getName(NS."test"), "test");
+        $this->assertEquals(Utils::getNamespace(NS."test"), NS);
+        $this->assertEquals(Utils::getNamespaceEnd(NS."test"), strlen(NS));
+        $this->assertEquals(Utils::getName("test"), "test");
     }
     
     /**
@@ -34,10 +34,18 @@ class UtilsTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(Utils::getName(null) == "");
     }
     
-    
+    /**
+     * @expectedException APIException
+     */
     public function testGetNamespaceError2() {
-        $this->assertTrue(Utils::getNamespaceEnd("test") == 0);
-        $this->assertTrue(Utils::getNamespace("test") == "");
+        Utils::getNamespaceEnd("test");
+    }
+    
+        /**
+     * @expectedException APIException
+     */
+    public function testGetNamespaceError3() {
+        Utils::getNamespace("test");
     }
 
 }

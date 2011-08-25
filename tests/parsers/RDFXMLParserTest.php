@@ -42,17 +42,17 @@ class RDFXMLParserTest extends PHPUnit_Framework_TestCase {
         $model = null;
     }
 
-    public function testRDFXMLParserSuccess1() {
-
-        $this->assertTrue(file_exists($this->filename));
-        $parser = new RDFXMLParser();
-        $model = new Model();
-        
-        $this->assertTrue($parser->parse($this->filename,$model));
-        $this->assertFalse($model->isEmpty());
-        $this->assertTrue($model->hasNamespace(PREFIX));
-        $this->assertEquals($model->size(), "7");
-    }
+//    public function testRDFXMLParserSuccess1() {
+//
+//        $this->assertTrue(file_exists($this->filename));
+//        $parser = new RDFXMLParser();
+//        $model = new Model();
+//        
+//        $this->assertTrue($parser->parse($this->filename,$model));
+//        $this->assertFalse($model->isEmpty());
+//        $this->assertTrue($model->hasNamespace(PREFIX));
+//        $this->assertEquals($model->size(), "7");
+//    }
 
     public function testRDFXMLParserSuccess2() {
 

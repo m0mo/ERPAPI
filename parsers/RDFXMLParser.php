@@ -144,7 +144,7 @@ class RDFXMLParser implements IParser {
 
         foreach ($this->xpath->query('namespace::*') as $node) {
 
-            if ($node->prefix != RDF_PREFIX) {
+            if ($node->prefix != RDF_PREFIX && $node->prefix != XML_PREFIX && $node->prefix != XML_DECLARATION_PREFIX) {
                 $this->model->addNamespace($node->prefix, $node->nodeValue);
             }
         }

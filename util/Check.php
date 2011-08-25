@@ -127,9 +127,7 @@ class Check {
         if (!self::isString($namespace))
             return false;
 
-        // TODO: implement
-
-        return true;
+        return (preg_match('/^(http:\/\/)(.+)(#|\/)$/i', $namespace)) ? true : false;
     }
 
     /**
@@ -143,9 +141,24 @@ class Check {
         if (!self::isString($prefix))
             return false;
 
-        // TODO: implement
+        return (preg_match('/^([a-z0-9]+)$/i', $prefix)) ? true : false;
+    }
+    
+    
+    public static function isName($name) {
 
-        return true;
+        if (!self::isString($name))
+            return false;
+
+         return (preg_match('/^([a-z0-9]+)$/i', $name)) ? true : false;
+    }
+    
+    public static function isPrefixAndName($prefixAndName) {
+        
+         if (!self::isString($prefixAndName))
+            return false;
+
+         return (preg_match('/^([a-z0-9]+):([a-z0-9])+$/i', $prefixAndName)) ? true : false;
     }
     
     /**
@@ -159,9 +172,7 @@ class Check {
         if (!self::isString($uri))
             return false;
 
-        // TODO: implement
-
-        return true;
+        return (preg_match('/^(http:\/\/)(.+)(#|\/)([a-z0-9]+)$/i', $uri)) ? true : false;
     }
     
     /**

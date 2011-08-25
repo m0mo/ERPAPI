@@ -38,6 +38,7 @@ define("ERP_ERROR_OBJECT", API_ERROR . "Parameter is not an object (has to be a 
 define("API_ERROR_STATEMENT", API_ERROR . "Parameter is not a statement");
 define("API_ERROR_MODEL", API_ERROR . "Parameter is not a model");
 define("API_ERROR_URI", API_ERROR . "Parameter is not a valid URI");
+define("API_ERROR_NAME", API_ERROR . "Parameter is not a valid name");
 define("API_ERROR_NS", API_ERROR . "Parameter is not a valid namespace");
 define("API_ERROR_PREFIX", API_ERROR . "Parameter is not a valid namespace");
 define("API_ERROR_BASENS", API_ERROR . "Please provide a base namespace");
