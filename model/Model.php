@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
  *
  * @name        Model.php
- * @version     2011-08-22
+ * @version     2011-08-31
  * @package     model
  * @access      public
  *
@@ -60,6 +60,34 @@ class Model {
      * @var integer
      */
     private $bnodeCount = 0;
+
+    /**
+     * List for processed Resources for the recusive functions
+     *
+     * @var array
+     */
+    private $processedResources;
+
+    /**
+     * List of still processing resources for the recusive functions
+     *
+     * @var array
+     */
+    private $processingResources;
+
+    /**
+     * List of indexed statements
+     *
+     * @var array
+     */
+    private $indexedStatements;
+
+    /**
+     * List of returned Resources for the searchResources() function
+     *
+     * @var array
+     */
+    private $returnResources;
 
     /**
      * Constructor
@@ -140,16 +168,16 @@ class Model {
     /**
      * Returns an array of all stored statements
      *
-     * @return array 
+     * @return array
      */
     public function getStatements() {
         return $this->statements;
     }
-    
+
     /**
      * Returns an array of all stored statements
      *
-     * @return array 
+     * @return array
      */
     public function getTripples() {
         return $this->getStatements();
@@ -252,23 +280,29 @@ class Model {
         if (!Check::isSubject($resource))
             throw new APIException(ERP_ERROR_SUBJECT);
 
-        $properties = $resource->getProperties();
         $bool = false;
 
         // if there are no properties we can't add any statements
-        if (empty($properties)) {
-            return $bool;
-        }
+        if (!$resource->hasProperties())
+            return false;
+
+        $properties = $resource->getProperties();
+
+        $r = clone $resource;
+        $r->removeAllProperties();
 
         foreach ($properties as $prop) {
 
             $predicate = $prop["predicate"];
             $object = $prop["object"];
 
-            $bool = $this->addStatement(new Statement($resource, $predicate, $object), $double) || $bool;
-
-            if (Check::isSubject($object))
+            if (Check::isSubject($object) && $object->hasProperties()) {
                 $bool = $this->addResource($object, $double) || $bool;
+                $object = clone $object;
+                $object->removeAllProperties();
+            }
+
+            $bool = $this->addStatement(new Statement($r, $predicate, $object), $double) || $bool;
         }
 
         return $bool;
@@ -360,9 +394,9 @@ class Model {
     /**
      * Returns a list of statements which fit to the input
      *
-     * @param Resource $subject
+     * @param Resource|BlankNode $subject
      * @param Resource $predicate
-     * @param Node $object can be Resource or literal
+     * @param Resource|BlankNode|LiteralNode $object
      * @return array Array of Statements
      * @throws APIException
      */
@@ -379,6 +413,8 @@ class Model {
 
         if (!Check::isObject($object) && !empty($object))
             throw new APIException(ERP_ERROR_OBJECT);
+
+        $foundStatements = array();
 
         foreach ($this->statements as $statement) {
 
@@ -413,47 +449,259 @@ class Model {
     }
 
     /**
-     * Searchs for a resource and adds all found properties (recursive) to it.
-     * The resource that is returned will contain all properties and their
-     * properties creating a tree of related nodes.
+     * Searchs for a resource and adds all properties to it.
      *
-     * @param Resource $resource
-     * @return Resource
+     * @param Resource|BlankNode $subject
+     * @param Resource $predicate
+     * @param Resource|BlankNode|LiteralNode $object
+     * @return array|Resource
      * @throws APIException
      */
-    public function searchResource($resource) {
+    public function searchResources($subject = null, $predicate = null, $object = null) {
 
-        if (!Check::isSubject($resource))
-            throw new APIException(ERP_ERROR_SUBJECT);
+        // search cares about the input checks
+        $statements = $this->search($subject, $predicate, $object);
 
-        // prevent dead lock
-        if (isset($this->foundResources[$resource->getUri()])) {
+        $wholeList = $statements;
 
-            //return the element of the array rather than creating
-            //a new one
+        //preperations
+        $this->processedResources = null;
+        $this->processingResources = null;
 
-            return $this->foundResources[$resource->getUri()];
+        foreach ($statements as $statement) {
+
+            $this->processedResources[$statement->getSubject()->getUri()] = true;
+
+            $object = $statement->getObject();
+
+            $addList = array();
+
+            if (Check::isSubject($object))
+                $addList = $this->searchResourcesRecursive($object);
+
+
+            if (Check::isArray($addList))
+                $wholeList = array_merge($wholeList, $addList);
         }
 
-        $statements = $this->search($resource);
+//        print_r($wholeList);
+        // cleanup
+        $this->processedResources = null;
+        $this->processingResources = null;
+
+        $resources = $this->statementListToResourceList($wholeList);
+
+        if (empty($resources))
+            return null;
+
+        if (count($resources) == 1)
+            return end($resources);
+
+        return $resources;
+    }
+
+    /**
+     * Helper for searchResources(). Recusrively searches for more resources.
+     *
+     * @param Resource $subject
+     * @return array List of Statements
+     */
+    public function searchResourcesRecursive($subject) {
+
+        if (!Check::isSubject($subject))
+            return null;
+
+        $key = $subject->getUri();
+
+        // prevent dead lock
+        if (isset($this->processedResources[$key]))
+            return null;
+
+        // prevent dead lock
+        if (isset($this->processingResources[$key]))
+            return null;
+
+        $statements = $this->search($subject, null, null);
+        $returnList = $statements;
 
         if (!empty($statements)) {
 
+            // set the resource as processing
+            $this->processingResources[$key] = true;
+
             foreach ($statements as $statement) {
 
-                $this->foundResources[$resource->getUri()] = $resource;
                 $object = $statement->getObject();
 
-                if (Check::isSubject($object))
-                    $object = $this->searchResource($object);
+                $addList = array();
 
-                $resource->addProperty($statement->getPredicate(), $object);
+                // if object is a resource or blank node try to recursively call
+                // this function, but only if there are some statements in the
+                // list that can be used.
+                if (Check::isSubject($object))
+                    $addList = $this->searchResourcesRecursive($object);
+
+                if (Check::isArray($addList))
+                    $returnList = array_merge($returnList, $addList);
             }
+
+            unset($this->processingResources[$key]);
         }
 
-        unset($this->foundResources[$resource->getUri()]);
+        $this->processedResources[$key] = true;
+
+//        print_r($returnList);
+
+        return $returnList;
+    }
+
+    /**
+     * Transforms a lost of statements to a list of resources plus their properties.
+     * The returned list is indexed with the resource URI.
+     *
+     * @param array $statements
+     * @return array
+     * @throws APIException
+     */
+    public function statementListToResourceList($statements) {
+
+        // input checks
+        if (!Check::isArray($statements))
+            throw new APIException(API_ERROR . "Parameter is not an array.");
+
+        // preperation
+        $this->indexedStatements = array();
+        $this->processedResources = null;
+        $this->processingResources = null;
+
+        // indexing
+        foreach ($statements as $statement) {
+
+            if (!Check::isStatement($statement))
+                throw new APIException(API_ERROR . "Array does not contain an statement on position " . $key . ".");
+
+            // index array
+            $this->indexedStatements[$statement->getSubject()->getURI()][] = $statement;
+        }
+
+        $this->returnResources = array();
+
+        foreach ($this->indexedStatements as $key => $statementArray) {
+            if (!isset($this->processedResources[$key]))
+                $this->returnResources[$key] = $this->statementListToResourceListRecursive($key, $statementArray);
+        }
+
+//        print_r($this->returnResources);
+
+        $resources = $this->returnResources;
+
+        //cleanup
+        $this->indexedStatements = null;
+        $this->processedResources = null;
+        $this->processingResources = null;
+        $this->returnResources = null;
+
+        return $resources;
+    }
+
+    /**
+     * Helper for statementListToResourceList(). Used for recursive calls
+     *
+     * @param string $key
+     * @param array $statements
+     * @return array
+     */
+    public function statementListToResourceListRecursive($key, $statements) {
+
+        // input checks
+        if (!Check::isArray($statements))
+            return null;
+
+        // prevent dead lock
+        if (isset($this->processedResources[$key])) {
+
+            // if it was processed already it may be in the retrun array
+            // If it is called again it means that another resource requires it as
+            // a child. Therefore we remove it from the return array.
+            unset($this->returnResources[$key]);
+            return $this->processedResources[$key];
+        }
+
+        // prevent dead lock
+        if (isset($this->processingResources[$key])) {
+
+            // if the resource is still in process it means that there is a circle
+            // in the graph
+            return null;
+        }
+
+        // set the resource as processing
+        $this->processingResources[$key] = true;
+
+        // if there are no statements we cant do anything
+        if (!empty($statements)) {
+
+            // since all statements have the same subject we can just take one out
+            // that will be used as our return value
+            $resource = end($statements)->getSubject();
+            $resource->removeAllProperties();
+
+            foreach ($statements as $statement) {
+
+                if (!Check::isStatement($statement))
+                    throw new APIException(API_ERROR . "Statement expected.");
+
+                $object = $statement->getObject();
+
+                // if object is a resource or blank node try to recursively call
+                // this function, but only if there are some statements in the
+                // list that can be used.
+                if (Check::isSubject($object) && isset($this->indexedStatements[$object->getUri()]))
+                    $object = $this->statementListToResourceListRecursive($object->getUri(), $this->indexedStatements[$object->getUri()]);
+
+                $object = (empty($object)) ? $statement->getObject() : $object;
+
+                // add the properties
+                $resource->addProperty($statement->getPredicate(), $object);
+            }
+
+            $this->processedResources[$key] = $resource;
+        }
+
+        // resource is finnished processing
+        unset($this->processingResources[$key]);
+
 
         return $resource;
+    }
+
+    /**
+     * Transforms a list of resources with properties to a list of statements
+     *
+     * @param array $resources
+     * @return array
+     * @throws APIException
+     */
+    public function resourceListToStatementList($resources) {
+
+        if (!Check::isArray($resources))
+            throw new APIException(API_ERROR . "Parameter is not an array.");
+
+        $returnArray = array();
+
+        foreach ($resources as $key => $resource) {
+
+            if (!Check::isResource($resource))
+                throw new APIException(API_ERROR . "Array does not contain an resource on position " . $key . ".");
+
+            if (!$resource->hasProperties())
+                throw new APIException(API_ERROR . "Resource does not contain properties.");
+
+            foreach ($resource->getProperties() as $prop)
+                $returnArray[] = new Statement($resource, $prop["predicate"], $prop["object"]);
+        }
+
+        return $returnArray;
     }
 
     /**
@@ -510,10 +758,10 @@ class Model {
      *
      * @param string $filename
      * @param string $type defines the type of the output (rdf, nt, turtle, json)
-     * @return bool 
+     * @return bool
      */
     public function save($filename, $type ='rdf') {
-        
+
         switch ($type) {
             case "rdf":
                 $serializer = ERP::getRDFXMLSerializer();
@@ -543,7 +791,7 @@ class Model {
      *
      * @param string $filename
      * @param string $type defines the type of the inputformat (rdf, nt, turtle, json)
-     * @return bool 
+     * @return bool
      */
     public function load($filename, $type ='rdf') {
 
@@ -567,7 +815,6 @@ class Model {
             default :
                 throw new APIException(API_ERROR_FILETYPE);
         }
-
 
         return $parser->parse($filename, $this);
     }
@@ -640,12 +887,12 @@ class Model {
     /**
      * Returns a list of all statements in the model using following format:
      * subjectURI, predicateURI, objectUri or Literal
-     * 
+     *
      * @param string $type defines the type of the output (rdf, nt, turtle, json)
      * @return string
      */
     public function toString($type = null) {
-        
+
         switch ($type) {
             case "rdf":
                 $serializer = ERP::getRDFXMLSerializer();
@@ -662,7 +909,7 @@ class Model {
             case "json":
                 $serializer = ERP::getRDFJsonSerializer();
                 break;
-            
+
             case null:
                 return $this->statemensToString($this->statements);
 
@@ -693,12 +940,14 @@ class Model {
 
         foreach ($statements as $statement) {
 
+            $returnString = null;
+
             if (!Check::isStatement($statement))
                 throw new APIException(API_ERROR_STATEMENT);
 
             $returnString.= $statement->getSubject()->getUri() . " ";
             $returnString.= $statement->getPredicate()->getUri() . " ";
-            $returnString.= (is_a($statement->getObject(), LiteralNode)) ? $statement->getObject()->getLiteral() : $statement->getObject()->getUri();
+            $returnString.= (Check::isStatement($statement)) ? $statement->getObject()->getLiteral() : $statement->getObject()->getUri();
             $returnString.= " \n";
         }
 

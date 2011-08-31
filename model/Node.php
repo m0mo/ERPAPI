@@ -26,6 +26,8 @@ abstract class Node {
     public function toString() {
 
         $variables = get_object_vars($this);
+        
+        $vars = null;
 
         foreach ($variables as $key => $value)
             $vars .= $key . "='" . $value . "'; ";

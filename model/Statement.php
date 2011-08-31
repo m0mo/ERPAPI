@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Statement.php
- * @version     2011-08-10
+ * @version     2011-08-31
  * @package     model
  * @access      public
  * 
@@ -102,7 +102,7 @@ class Statement {
      */
     public function equals($that) {
         
-        if(!is_a($that, Statement))
+        if(!Check::isStatement($that))
                 return false;
 
         return $this->getSubject()->equals($that->getSubject()) && 

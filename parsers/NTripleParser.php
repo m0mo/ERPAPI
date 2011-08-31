@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
  *
  * @name        NTripleParser.php
- * @version     2011-08-12
+ * @version     2011-08-31
  * @package     parsers
  * @access      public
  *
@@ -135,13 +135,13 @@ class NTripleParser implements IParser {
 
                 $objPieces1 = explode("^^", $objectTXT);
 
-                $type = ($objPieces1[1]) ? substr($objPieces1[1], 1, -1) : "";
-                $literal = ($objPieces1[1]) ? $objPieces1[0] : $objectTXT;
+                $type = (Check::isArray($objPieces1)) ? substr($objPieces1[1], 1, -1) : "";
+                $literal = (Check::isArray($objPieces1)) ? $objPieces1[0] : $objectTXT;
 
                 $objPieces2 = explode("@", $literal);
 
-                $literal = ($objPieces2[1]) ? $objPieces2[0] : $literal;
-                $language = ($objPieces2[1]) ? $objPieces2[1] : "";
+                $literal = (Check::isArray($objPieces2)) ? $objPieces2[0] : $literal;
+                $language = (Check::isArray($objPieces2)) ? $objPieces2[1] : "";
 
                 $literal = substr($literal, 1, -1);
 

@@ -10,7 +10,7 @@ require_once "settings.php";
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        ResourceTest.php
- * @version     2011-08-10
+ * @version     2011-08-31
  * @package     tests
  * @access      public
  * 
@@ -29,7 +29,7 @@ class ResourceTest extends PHPUnit_Framework_TestCase {
     function testGenerateResource() {
 
         $res = new Resource(NS . "R2");
-        $this->assertTrue(is_a($res, Resource));
+        $this->assertTrue(Check::isResource($res));
     }
 
     public function testGetUri() {
@@ -44,6 +44,8 @@ class ResourceTest extends PHPUnit_Framework_TestCase {
         $statement1 = new Statement($this->resource, $predicate, $object);
 
         $this->resource->addProperty($predicate, $object);
+        $this->assertTrue($this->resource->hasProperties());
+        $this->assertTrue($this->resource->hasProperty($predicate));
 
         $this->assertTrue($statement1->getSubject()->equals($this->resource));
         $this->assertTrue($this->resource->getProperty($predicate) != null);
@@ -73,6 +75,17 @@ class ResourceTest extends PHPUnit_Framework_TestCase {
     public function testGetNamespace() {
 
         $this->assertTrue($this->resource->getNamespace() == NS);
+    }
+    
+    public function testHasProperty() {
+        
+        $predicate = new Resource(NS . "arc");
+        $object = new LiteralNode("test", BOOL);
+
+        $this->resource->addProperty($predicate, $object);
+        $this->assertTrue($this->resource->hasProperties());
+        $this->assertTrue($this->resource->hasProperty($predicate));
+        
     }
 
     protected function tearDown() {

@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        Resource.php
- * @version     2011-08-10
+ * @version     2011-08-31
  * @package     model
  * @access      public
  * 
@@ -97,6 +97,16 @@ class Resource extends Node {
 
         return isset($this->properties[$predicate->getURI()]);
     }
+    
+    /**
+     * Checks if the resource has any properties
+     *
+     * @return bool 
+     */
+    public function hasProperties() {
+
+        return !empty($this->properties);
+    }
 
     /**
      * Returns the object of the property
@@ -109,6 +119,9 @@ class Resource extends Node {
 
         if (!Check::isPredicate($predicate))
             throw new APIException(ERP_ERROR_PREDICATE);
+        
+        if(!$this->hasProperty($predicate))
+            return null;
 
         return $this->properties[$predicate->getURI()]["object"];
     }
@@ -139,6 +152,11 @@ class Resource extends Node {
         return $this->uri;
     }
 
+    /**
+     * Returns the namespace of the node
+     *
+     * @return string 
+     */
     public function getNamespace() {
         return Utils::getNamespace($this->uri);
     }
@@ -158,6 +176,10 @@ class Resource extends Node {
      */
     public function getProperties() {
         return $this->properties;
+    }
+    
+    public function removeAllProperties() {
+        $this->properties = null;       
     }
 
     /**

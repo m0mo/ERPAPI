@@ -22,7 +22,7 @@ class BlankNodeTest extends PHPUnit_Framework_TestCase {
 
     public function testGenerateBlankNode() {
         $blank = new BlankNode("bnode1");
-        $this->assertTrue(is_a($blank, BlankNode));
+        $this->assertTrue(Check::isBlankNode($blank));
         $this->assertEquals($blank->getId(), "bnode1");
         $this->assertEquals($blank->getName(), "bnode1");
         $this->assertEquals($blank->getUri(), "bnode1");

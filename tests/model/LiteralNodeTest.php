@@ -27,7 +27,7 @@ class LiteralNodeTest extends PHPUnit_Framework_TestCase {
     public function testGenerateLiteral() {
         
         $l = new LiteralNode("Test");
-        $this->assertTrue(is_a($l, LiteralNode));
+        $this->assertTrue(is_a($l, "LiteralNode"));
         
     }
     

@@ -204,7 +204,8 @@ class RDFXMLParser implements IParser {
             //object = literal node
             if (!empty($child->nodeValue)) {
                 
-                $type = STRING;
+                $type = null;
+                $lang = null;
                 
                 foreach ($child->attributes as $name => $attr) {
 

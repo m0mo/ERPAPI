@@ -38,8 +38,9 @@ class StatementTest extends PHPUnit_Framework_TestCase {
         $statement1 = new Statement($this->subj, $this->pred, $this->obj);
         $statement2 = new Statement($this->subj, $this->pred, new Resource(NS . "Res1"));
 
-        $this->assertTrue(is_a($statement1, Statement));
-        $this->assertTrue(is_a($statement2, Statement));
+        $this->assertTrue(Check::isStatement($statement1));
+        $this->assertTrue(Check::isStatement($statement2));
+        $this->assertFalse($statement1->equals($statement2));
     }
 
     public function testGetterMethods() {
@@ -108,31 +109,31 @@ class StatementTest extends PHPUnit_Framework_TestCase {
     public function testAcceptedSubject1() {
 
         $statement = new Statement(new Resource(NS . "Res2"), $this->pred, $this->obj);
-        $this->assertTrue(is_a($statement, Statement));
+        $this->assertTrue(Check::isStatement($statement));
     }
 
     public function testAcceptedSubject2() {
 
         $statement = new Statement(new BlankNode("id"), $this->pred, $this->obj);
-        $this->assertTrue(is_a($statement, Statement));
+        $this->assertTrue(Check::isStatement($statement));
     }
 
     public function testAcceptedPredicate() {
 
         $statement = new Statement($this->subj, new Resource(NS . "Pred2"), $this->obj);
-        $this->assertTrue(is_a($statement, Statement));
+        $this->assertTrue(Check::isStatement($statement));
     }
 
     public function testAcceptedObject1() {
 
         $statement = new Statement($this->subj, $this->pred, new LiteralNode("test"));
-        $this->assertTrue(is_a($statement, Statement));
+        $this->assertTrue(Check::isStatement($statement));
     }
 
     public function testAcceptedObject2() {
 
         $statement = new Statement($this->subj, $this->pred, new Resource(NS."test"));
-        $this->assertTrue(is_a($statement, Statement));
+        $this->assertTrue(Check::isStatement($statement));
     }
 
     public function testToString() {

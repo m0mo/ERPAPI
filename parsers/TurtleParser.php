@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
  *
  * @name        TurtleSerializer.php
- * @version     2011-08-12
+ * @version     2011-08-31
  * @package     serializers
  * @access      public
  *
@@ -97,9 +97,7 @@ class TurtleParser implements IParser {
      * @param string $line
      */
     private function handleLine($line) {
-
-
-
+        
         $pieces = explode(" ", $line);
 
         if (count($pieces) < 3)
@@ -190,13 +188,13 @@ class TurtleParser implements IParser {
 
                 $objPieces1 = explode("^^", $objectTXT);
 
-                $type = ($objPieces1[1]) ? substr($objPieces1[1], 1, -1) : "";
-                $literal = ($objPieces1[1]) ? $objPieces1[0] : $objectTXT;
+                $type = (Check::isArray($objPieces1)) ? substr($objPieces1[1], 1, -1) : "";
+                $literal = (Check::isArray($objPieces1)) ? $objPieces1[0] : $objectTXT;
 
                 $objPieces2 = explode("@", $literal);
 
-                $literal = ($objPieces2[1]) ? $objPieces2[0] : $literal;
-                $language = ($objPieces2[1]) ? $objPieces2[1] : "";
+                $literal = (Check::isArray($objPieces2)) ? $objPieces2[0] : $literal;
+                $language = (Check::isArray($objPieces2)) ? $objPieces2[1] : "";
 
                 $literal = substr($literal, 1, -1);
 

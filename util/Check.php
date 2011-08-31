@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        InstanceCheck.php
- * @version     2011-08-10
+ * @version     2011-08-31
  * @package     util
  * @access      public
  * 
@@ -54,7 +54,7 @@ class Check {
     /**
      * Checks if the parameter is a valid subject
      *
-     * @param Node $node
+     * @param Node $subject
      * @return bool
      */
     public static function isSubject($subject) {
@@ -79,6 +79,7 @@ class Check {
                 return true;
             }
         }
+        
         return false;
     }
 
@@ -107,7 +108,7 @@ class Check {
     /**
      * Checks if the parameter is a String
      *
-     * @param String $string
+     * @param string $string
      * @return bool 
      */
     public static function isString($string) {
@@ -117,7 +118,8 @@ class Check {
     }
 
     /**
-     * Checks if the parameter is a namespace.
+     * Checks if the parameter is a namespace. A namespace has to start with 
+     * <i>http://</i> and end with either # or /
      *
      * @param string $namespace 
      * @return bool
@@ -131,10 +133,11 @@ class Check {
     }
 
     /**
-     * Checks if the parameter is a prefix.
+     * Checks if the parameter is a valid prefix. A prefix can contain just
+     * characters or numbers
      *
-     * @param String $prefix 
-     * @return true if valid, otherwise false
+     * @param string $prefix 
+     * @return bool
      */
     public static function isPrefix($prefix) {
 
@@ -144,7 +147,13 @@ class Check {
         return (preg_match('/^([a-z0-9]+)$/i', $prefix)) ? true : false;
     }
     
-    
+    /**
+     * Checks if the parameter string is a valid name. Names can consist only of
+     * characters or numbers
+     *
+     * @param string $name
+     * @return bool 
+     */
     public static function isName($name) {
 
         if (!self::isString($name))
@@ -152,7 +161,14 @@ class Check {
 
          return (preg_match('/^([a-z0-9]+)$/i', $name)) ? true : false;
     }
-    
+
+        
+        /**
+     * Checks if the parameter string is of form <i>prefix:name</i>
+     *
+     * @param string $prefixAndName
+     * @return bool 
+     */
     public static function isPrefixAndName($prefixAndName) {
         
          if (!self::isString($prefixAndName))
@@ -162,10 +178,11 @@ class Check {
     }
     
     /**
-     * Checks if the parameter is an uri
+     * Checks if the parameter string is an URI. The URI has to start with 
+     * <i>http://</i> and end with either a number or character
      *
-     * @param type $uri
-     * @return type 
+     * @param string $uri
+     * @return bool 
      */
     public static function isUri($uri) {
         
@@ -176,12 +193,23 @@ class Check {
     }
     
     /**
-     * Checks if the parameter is a Model
+     * Checks if the parameter is instance of a Model
      *
      * @param Model $model 
+     * @return bool
      */
     public static function isModel($model) {
         return ($model instanceof Model);
+    }
+    
+    /**
+     * Check if the parameter is an array
+     *
+     * @param array $param
+     * @return bool 
+     */
+    public static function isArray($param) {
+        return is_array($param);
     }
 
 

@@ -123,6 +123,8 @@ class JsonParserTest extends PHPUnit_Framework_TestCase {
      */
     public function testRDFXMLParserError5() {
 
+        $content = null;
+        
         $ourFileHandle = fopen($this->filename, 'w');
         fwrite($ourFileHandle, $content);
         fclose($ourFileHandle);

@@ -7,8 +7,8 @@
  *
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
- * @name        Literal.php
- * @version     2011-08-11
+ * @name        LiteralNode.php
+ * @version     2011-08-31
  * @package     model
  * @access      public
  * 
@@ -113,7 +113,7 @@ class LiteralNode extends Node {
         if ($this == $that) {
             return true;
         }
-        if (($that == NULL) or !(is_a($that, LiteralNode))) {
+        if (($that == NULL) or !(is_a($that, "LiteralNode"))) {
             return false;
         }
 
