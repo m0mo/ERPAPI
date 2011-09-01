@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Model</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Model</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">--------------------------------------------------------------------  ERP API  --------------------------------------------------------------------</p>
+<p class="description"><p>This class represents the whole RDF model in form of a list of statements.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Alexander Aigner &lt;<a href="mailto:alex.aigner">(at) gmail.com alex.aigner (at) gmail.com</a>&gt;</li>
+				<li><span class="field">version:</span> 2011-09-01</li>
+				<li><span class="field">name:</span> Model.php</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_model---Model.php.html">/model/Model.php</a> (line <span class="field">18</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																																																																																																																				
+												<div class="method-definition">
+											<span class="method-result">Model</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#add" title="details" class="method-name">add</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$statement_or_resource</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$double</span> = <span class="var-default">ALLOW_DUPLICATES</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addBaseNamespace" title="details" class="method-name">addBaseNamespace</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$namespace</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$uri</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addNamespace" title="details" class="method-name">addNamespace</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$namespace</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$uri</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#contains" title="details" class="method-name">contains</a>
+											(<span class="var-type"><a href="../model/Statement.html">Statement</a></span>&nbsp;<span class="var-name">$statement</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#generateUniqueId" title="details" class="method-name">generateUniqueId</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getNamespace" title="details" class="method-name">getNamespace</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getNamespaces" title="details" class="method-name">getNamespaces</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getStatements" title="details" class="method-name">getStatements</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getTripples" title="details" class="method-name">getTripples</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#hasNamespace" title="details" class="method-name">hasNamespace</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#isEmpty" title="details" class="method-name">isEmpty</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#load" title="details" class="method-name">load</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">'rdf'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../model/BlankNode.html">BlankNode</a></span>
+										<a href="#newBlankNode" title="details" class="method-name">newBlankNode</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../model/LiteralNode.html">LiteralNode</a></span>
+										<a href="#newLiteralNode" title="details" class="method-name">newLiteralNode</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$literal</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$datatype</span> = <span class="var-default">STRING</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../model/Resource.html">Resource</a></span>
+										<a href="#newResource" title="details" class="method-name">newResource</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$name</span> = <span class="var-default">null</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$uri</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../model/Statement.html">Statement</a></span>
+										<a href="#newStatement" title="details" class="method-name">newStatement</a>
+											(<span class="var-type"><a href="../model/Resource.html">Resource</a></span>&nbsp;<span class="var-name">$subject</span>, <span class="var-type"><a href="../model/Resource.html">Resource</a></span>&nbsp;<span class="var-name">$predicate</span>, <span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$object</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#remove" title="details" class="method-name">remove</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$statement_or_resource</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#removeNamespace" title="details" class="method-name">removeNamespace</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#resourceListToStatementList" title="details" class="method-name">resourceListToStatementList</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$resources</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#save" title="details" class="method-name">save</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">'rdf'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#search" title="details" class="method-name">search</a>
+											([<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a></span>&nbsp;<span class="var-name">$subject</span> = <span class="var-default">null</span>], [<span class="var-type"><a href="../model/Resource.html">Resource</a></span>&nbsp;<span class="var-name">$predicate</span> = <span class="var-default">null</span>], [<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a>|<a href="../model/LiteralNode.html">LiteralNode</a></span>&nbsp;<span class="var-name">$object</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|<a href="../model/Resource.html">Resource</a></span>
+										<a href="#searchResources" title="details" class="method-name">searchResources</a>
+											([<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a></span>&nbsp;<span class="var-name">$subject</span> = <span class="var-default">null</span>], [<span class="var-type"><a href="../model/Resource.html">Resource</a></span>&nbsp;<span class="var-name">$predicate</span> = <span class="var-default">null</span>], [<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a>|<a href="../model/LiteralNode.html">LiteralNode</a></span>&nbsp;<span class="var-name">$object</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#searchResourcesRecursive" title="details" class="method-name">searchResourcesRecursive</a>
+											(<span class="var-type"><a href="../model/Resource.html">Resource</a></span>&nbsp;<span class="var-name">$subject</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#size" title="details" class="method-name">size</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#sparqlQuery" title="details" class="method-name">sparqlQuery</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$queryString</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$format</span> = <span class="var-default">&quot;array&quot;</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#statemensToString" title="details" class="method-name">statemensToString</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$statements</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#statementListToResourceList" title="details" class="method-name">statementListToResourceList</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$statements</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#statementListToResourceListRecursive" title="details" class="method-name">statementListToResourceListRecursive</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$statements</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">type</span>
+										<a href="#statementsToHTML" title="details" class="method-name">statementsToHTML</a>
+											(<span class="var-type">type</span>&nbsp;<span class="var-name">$statements</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">type</span>
+										<a href="#toHTML" title="details" class="method-name">toHTML</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#toString" title="details" class="method-name">toString</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">null</span>])
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">93</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+	
+	<div class="method-signature">
+		<span class="method-result">Model</span>
+		<span class="method-name">
+			__construct
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodadd" id="add"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">add</span> (line <span class="line-number">226</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a statement or a resource (with properties) to the model. If $double  is true (standart) there will be no check performed if the statement is  already part of the model and a copy will be saved. If $double is false  double entries are forbidden.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true if added, false if not</li>
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			add
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$statement_or_resource</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$double</span> = <span class="var-default">ALLOW_DUPLICATES</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$statement_or_resource</span><span class="var-description">: can be Statement or Resource</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$double</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddBaseNamespace" id="addBaseNamespace"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addBaseNamespace</span> (line <span class="line-number">108</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a base URI</p>
+<p class="description"><p>Adds a standart namespace to the model, which is used for node creation  by the model. So that nodes, that don't have a prefix or full Uri are  automatically added to the base namespace.</p></p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addBaseNamespace
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$namespace</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$uri</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefix</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$uri</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$namespace</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddNamespace" id="addNamespace"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addNamespace</span> (line <span class="line-number">129</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a namespace to the model</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addNamespace
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$namespace</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$uri</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefix</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$uri</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$namespace</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcontains" id="contains"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">contains</span> (line <span class="line-number">730</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the statement is already present in the model</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true if model contains the statement, otherwise false</li>
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			contains
+		</span>
+					(<span class="var-type"><a href="../model/Statement.html">Statement</a></span>&nbsp;<span class="var-name">$statement</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Statement.html">Statement</a></span>
+				<span class="var-name">$statement</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgenerateUniqueId" id="generateUniqueId"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateUniqueId</span> (line <span class="line-number">750</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generates a unique ID for a BlankNode</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> unique ID</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			generateUniqueId
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetNamespace" id="getNamespace"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getNamespace</span> (line <span class="line-number">147</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the URI of the namespace</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getNamespace
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefix</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetNamespaces" id="getNamespaces"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getNamespaces</span> (line <span class="line-number">161</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a list of namespaces inform of namespaces[$prefix] = $uri. May return null</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the uri fitting to the $prefix</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getNamespaces
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefix</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetStatements" id="getStatements"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getStatements</span> (line <span class="line-number">171</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns an array of all stored statements</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getStatements
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetTripples" id="getTripples"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getTripples</span> (line <span class="line-number">180</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns an array of all stored statements</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getTripples
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodhasNamespace" id="hasNamespace"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">hasNamespace</span> (line <span class="line-number">207</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the model contains a specific namespace</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true if yes, otherwise false</li>
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			hasNamespace
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefix</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisEmpty" id="isEmpty"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isEmpty</span> (line <span class="line-number">719</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the model is empty</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true if no statements are in the model, otherwise false</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isEmpty
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodload" id="load"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">load</span> (line <span class="line-number">808</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Loads a model from a file and returns it.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			load
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">'rdf'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$filename</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: defines the type of the inputformat (rdf, nt, turtle, json)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodnewBlankNode" id="newBlankNode"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">newBlankNode</span> (line <span class="line-number">878</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a new object of type BlankNode</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../model/BlankNode.html">BlankNode</a></span>
+		<span class="method-name">
+			newBlankNode
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodnewLiteralNode" id="newLiteralNode"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">newLiteralNode</span> (line <span class="line-number">865</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a new object of type LiteralNode</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../model/LiteralNode.html">LiteralNode</a></span>
+		<span class="method-name">
+			newLiteralNode
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$literal</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$datatype</span> = <span class="var-default">STRING</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$literal</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$datatype</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodnewResource" id="newResource"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">newResource</span> (line <span class="line-number">846</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a new object of type Resource if $uri is set, otherwise it will  return a BlankNode</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../model/Resource.html">Resource</a></span>
+		<span class="method-name">
+			newResource
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$name</span> = <span class="var-default">null</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$uri</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$uri</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodnewStatement" id="newStatement"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">newStatement</span> (line <span class="line-number">891</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a new object of type Statement</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../model/Statement.html">Statement</a></span>
+		<span class="method-name">
+			newStatement
+		</span>
+					(<span class="var-type"><a href="../model/Resource.html">Resource</a></span>&nbsp;<span class="var-name">$subject</span>, <span class="var-type"><a href="../model/Resource.html">Resource</a></span>&nbsp;<span class="var-name">$predicate</span>, <span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$object</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Resource.html">Resource</a></span>
+				<span class="var-name">$subject</span>			</li>
+					<li>
+				<span class="var-type"><a href="../model/Resource.html">Resource</a></span>
+				<span class="var-name">$predicate</span>			</li>
+					<li>
+				<span class="var-type"><a href="../model/Node.html">Node</a></span>
+				<span class="var-name">$object</span><span class="var-description">: Can be Resource or LiteralNode</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodremove" id="remove"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">remove</span> (line <span class="line-number">316</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Removes a statement or resource (and its properties) of the model</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true = removed, false = not removed</li>
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			remove
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$statement_or_resource</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$statement_or_resource</span><span class="var-description">: can be Statement or Resource</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodremoveNamespace" id="removeNamespace"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">removeNamespace</span> (line <span class="line-number">191</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Remove a namespace from the model</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true = removed, false = not removed</li>
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			removeNamespace
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefix</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodresourceListToStatementList" id="resourceListToStatementList"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">resourceListToStatementList</span> (line <span class="line-number">683</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Transforms a list of resources with properties to a list of statements</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			resourceListToStatementList
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$resources</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$resources</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsave" id="save"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">save</span> (line <span class="line-number">775</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Saves the model to a file, Default is the RDF/XML format.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			save
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">'rdf'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$filename</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: defines the type of the output (rdf, nt, turtle, json)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsearch" id="search"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">search</span> (line <span class="line-number">401</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a list of statements which fit to the input</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Array of Statements</li>
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			search
+		</span>
+					([<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a></span>&nbsp;<span class="var-name">$subject</span> = <span class="var-default">null</span>], [<span class="var-type"><a href="../model/Resource.html">Resource</a></span>&nbsp;<span class="var-name">$predicate</span> = <span class="var-default">null</span>], [<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a>|<a href="../model/LiteralNode.html">LiteralNode</a></span>&nbsp;<span class="var-name">$object</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a></span>
+				<span class="var-name">$subject</span>			</li>
+					<li>
+				<span class="var-type"><a href="../model/Resource.html">Resource</a></span>
+				<span class="var-name">$predicate</span>			</li>
+					<li>
+				<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a>|<a href="../model/LiteralNode.html">LiteralNode</a></span>
+				<span class="var-name">$object</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsearchResources" id="searchResources"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">searchResources</span> (line <span class="line-number">458</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Searchs for a resource and adds all properties to it.</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|<a href="../model/Resource.html">Resource</a></span>
+		<span class="method-name">
+			searchResources
+		</span>
+					([<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a></span>&nbsp;<span class="var-name">$subject</span> = <span class="var-default">null</span>], [<span class="var-type"><a href="../model/Resource.html">Resource</a></span>&nbsp;<span class="var-name">$predicate</span> = <span class="var-default">null</span>], [<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a>|<a href="../model/LiteralNode.html">LiteralNode</a></span>&nbsp;<span class="var-name">$object</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a></span>
+				<span class="var-name">$subject</span>			</li>
+					<li>
+				<span class="var-type"><a href="../model/Resource.html">Resource</a></span>
+				<span class="var-name">$predicate</span>			</li>
+					<li>
+				<span class="var-type"><a href="../model/Resource.html">Resource</a>|<a href="../model/BlankNode.html">BlankNode</a>|<a href="../model/LiteralNode.html">LiteralNode</a></span>
+				<span class="var-name">$object</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsearchResourcesRecursive" id="searchResourcesRecursive"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">searchResourcesRecursive</span> (line <span class="line-number">507</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Helper for searchResources(). Recusrively searches for more resources.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> List of Statements</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			searchResourcesRecursive
+		</span>
+					(<span class="var-type"><a href="../model/Resource.html">Resource</a></span>&nbsp;<span class="var-name">$subject</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Resource.html">Resource</a></span>
+				<span class="var-name">$subject</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsize" id="size"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">size</span> (line <span class="line-number">710</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the number of statements stored in the model</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			size
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsparqlQuery" id="sparqlQuery"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">sparqlQuery</span> (line <span class="line-number">762</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Performs a SPARQL Query against the model. NOTE: not all SPARQL constructs  are supported</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			sparqlQuery
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$queryString</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$format</span> = <span class="var-default">&quot;array&quot;</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$query</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$format</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$queryString</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodstatemensToString" id="statemensToString"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">statemensToString</span> (line <span class="line-number">943</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a list of provided statements using following format:  subjectURI, predicateURI, objectUri or Literal</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			statemensToString
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$statements</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$statements</span><span class="var-description">: Array of Statements</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodstatementListToResourceList" id="statementListToResourceList"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">statementListToResourceList</span> (line <span class="line-number">564</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Transforms a lost of statements to a list of resources plus their properties.</p>
+<p class="description"><p>The returned list is indexed with the resource URI.</p></p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			statementListToResourceList
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$statements</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$statements</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodstatementListToResourceListRecursive" id="statementListToResourceListRecursive"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">statementListToResourceListRecursive</span> (line <span class="line-number">612</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Helper for statementListToResourceList(). Used for recursive calls</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			statementListToResourceListRecursive
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$statements</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$key</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$statements</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodstatementsToHTML" id="statementsToHTML"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">statementsToHTML</span> (line <span class="line-number">984</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a HTML table of the statement array</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">type</span>
+		<span class="method-name">
+			statementsToHTML
+		</span>
+					(<span class="var-type">type</span>&nbsp;<span class="var-name">$statements</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">type</span>
+				<span class="var-name">$statements</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtoHTML" id="toHTML"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">toHTML</span> (line <span class="line-number">974</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a HTML table of the model's statements</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">type</span>
+		<span class="method-name">
+			toHTML
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtoString" id="toString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">toString</span> (line <span class="line-number">906</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a list of all statements in the model using following format:  subjectURI, predicateURI, objectUri or Literal</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			toString
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: defines the type of the output (rdf, nt, turtle, json)</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 01 Sep 2011 09:53:29 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

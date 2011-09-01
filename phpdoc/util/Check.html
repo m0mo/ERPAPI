@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Check</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Check</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">-----------------------------------------------------------------------------  ERP API  -----------------------------------------------------------------------------</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Alexander Aigner &lt;<a href="mailto:alex.aigner">(at) gmail.com alex.aigner (at) gmail.com</a>&gt;</li>
+				<li><span class="field">version:</span> 2011-08-31</li>
+				<li><span class="field">name:</span> InstanceCheck.php</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_util---Check.php.html">/util/Check.php</a> (line <span class="field">20</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+												<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isArray" title="details" class="method-name">isArray</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$param</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isBlankNode" title="details" class="method-name">isBlankNode</a>
+											(<span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$blankNode</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isLiteralNode" title="details" class="method-name">isLiteralNode</a>
+											(<span class="var-type"><a href="../model/LiteralNode.html">LiteralNode</a></span>&nbsp;<span class="var-name">$literalNode</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isModel" title="details" class="method-name">isModel</a>
+											(<span class="var-type"><a href="../model/Model.html">Model</a></span>&nbsp;<span class="var-name">$model</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isName" title="details" class="method-name">isName</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isNamespace" title="details" class="method-name">isNamespace</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$namespace</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isObject" title="details" class="method-name">isObject</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$object</span>, <span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$node</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isPredicate" title="details" class="method-name">isPredicate</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$predicate</span>, <span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$node</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isPrefix" title="details" class="method-name">isPrefix</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isPrefixAndName" title="details" class="method-name">isPrefixAndName</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefixAndName</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isResource" title="details" class="method-name">isResource</a>
+											(<span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$resource</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isStatement" title="details" class="method-name">isStatement</a>
+											(<span class="var-type"><a href="../model/Statement.html">Statement</a></span>&nbsp;<span class="var-name">$statement</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isString" title="details" class="method-name">isString</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isSubject" title="details" class="method-name">isSubject</a>
+											(<span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$subject</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#isUri" title="details" class="method-name">isUri</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$uri</span>)
+									</div>
+								
+																																																																																																																												</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodisArray" id="isArray"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isArray</span> (line <span class="line-number">211</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check if the parameter is an array</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isArray
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$param</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$param</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisBlankNode" id="isBlankNode"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isBlankNode</span> (line <span class="line-number">39</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if parameter is a blank node</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isBlankNode
+		</span>
+					(<span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$blankNode</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Node.html">Node</a></span>
+				<span class="var-name">$blankNode</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisLiteralNode" id="isLiteralNode"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isLiteralNode</span> (line <span class="line-number">50</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter is a literal node</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isLiteralNode
+		</span>
+					(<span class="var-type"><a href="../model/LiteralNode.html">LiteralNode</a></span>&nbsp;<span class="var-name">$literalNode</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/LiteralNode.html">LiteralNode</a></span>
+				<span class="var-name">$literalNode</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisModel" id="isModel"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isModel</span> (line <span class="line-number">201</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter is instance of a Model</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isModel
+		</span>
+					(<span class="var-type"><a href="../model/Model.html">Model</a></span>&nbsp;<span class="var-name">$model</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Model.html">Model</a></span>
+				<span class="var-name">$model</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisName" id="isName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isName</span> (line <span class="line-number">157</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter string is a valid name. Names can consist only of  characters or numbers</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isName
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisNamespace" id="isNamespace"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isNamespace</span> (line <span class="line-number">127</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter is a namespace. A namespace has to start with  <em>http://</em> and end with either # or /</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isNamespace
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$namespace</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$namespace</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisObject" id="isObject"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isObject</span> (line <span class="line-number">92</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter is a valid object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isObject
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$object</span>, <span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$node</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Node.html">Node</a></span>
+				<span class="var-name">$node</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$object</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisPredicate" id="isPredicate"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isPredicate</span> (line <span class="line-number">71</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter is a valid predicate</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isPredicate
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$predicate</span>, <span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$node</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Node.html">Node</a></span>
+				<span class="var-name">$node</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$predicate</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisPrefix" id="isPrefix"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isPrefix</span> (line <span class="line-number">142</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter is a valid prefix. A prefix can contain just  characters or numbers</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isPrefix
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefix</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisPrefixAndName" id="isPrefixAndName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isPrefixAndName</span> (line <span class="line-number">172</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter string is of form <em>prefix:name</em></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isPrefixAndName
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$prefixAndName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefixAndName</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisResource" id="isResource"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isResource</span> (line <span class="line-number">28</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter is a resource</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isResource
+		</span>
+					(<span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$resource</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Node.html">Node</a></span>
+				<span class="var-name">$resource</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisStatement" id="isStatement"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isStatement</span> (line <span class="line-number">103</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if $statement is a valid Statement.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isStatement
+		</span>
+					(<span class="var-type"><a href="../model/Statement.html">Statement</a></span>&nbsp;<span class="var-name">$statement</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Statement.html">Statement</a></span>
+				<span class="var-name">$statement</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisString" id="isString"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isString</span> (line <span class="line-number">114</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter is a String</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isString
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$string</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisSubject" id="isSubject"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isSubject</span> (line <span class="line-number">60</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter is a valid subject</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isSubject
+		</span>
+					(<span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$subject</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Node.html">Node</a></span>
+				<span class="var-name">$subject</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisUri" id="isUri"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method isUri</span> (line <span class="line-number">187</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if the parameter string is an URI. The URI has to start with  <em>http://</em> and end with either a number or character</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isUri
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$uri</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$uri</span>			</li>
+				</ul>
+		
+			
+	</div>
+
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 01 Sep 2011 09:53:24 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

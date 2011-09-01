@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Node</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Node</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">--------------------------------------------------------------------  ERP API  --------------------------------------------------------------------</p>
+<p class="description"><p>This abstract class represents an RDF Node</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Alexander Aigner &lt;<a href="mailto:alex.aigner">(at) gmail.com alex.aigner (at) gmail.com</a>&gt;</li>
+				<li><span class="field">version:</span> 2011-08-10</li>
+				<li><span class="field">abstract:</span> </li>
+				<li><span class="field">name:</span> Node.php</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_model---Node.php.html">/model/Node.php</a> (line <span class="field">18</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../model/LiteralNode.html">LiteralNode</a></td>
+					<td>
+											--------------------------------------------------------------------  ERP API  --------------------------------------------------------------------
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../model/Resource.html">Resource</a></td>
+					<td>
+											--------------------------------------------------------------------  ERP API  --------------------------------------------------------------------
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																				
+												<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#equals" title="details" class="method-name">equals</a>
+											(<span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$that</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#toString" title="details" class="method-name">toString</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodequals" id="equals"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">equals</span> (line <span class="line-number">43</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks if two Nodes are the same</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true if equal, else false</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			equals
+		</span>
+					(<span class="var-type"><a href="../model/Node.html">Node</a></span>&nbsp;<span class="var-name">$that</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Node.html">Node</a></span>
+				<span class="var-name">$that</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../model/LiteralNode.html#methodequals">LiteralNode::equals()</a>
+								: Checks if two literal nodes are equal
+							</li>
+					<li>
+				<a href="../model/Resource.html#methodequals">Resource::equals()</a>
+								: Checks if two Resources are the same
+							</li>
+				</ul>
+	</div>
+<a name="methodtoString" id="toString"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">toString</span> (line <span class="line-number">25</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">prints the propertis of the node</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			toString
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 01 Sep 2011 09:53:30 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class NTripleSerializer</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class NTripleSerializer</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../serializers/ISerializer.html">ISerializer</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">--------------------------------------------------------------------  ERP API  --------------------------------------------------------------------</p>
+<p class="description"><p>Serializer for N-Triple. Not whole gramma of N-Triple notation is possible.  For a description visit http://www.w3.org/2001/sw/RDFCore/ntriples/</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Alexander Aigner &lt;<a href="mailto:alex.aigner">(at) gmail.com alex.aigner (at) gmail.com</a>&gt;</li>
+				<li><span class="field">version:</span> 2011-08-11</li>
+				<li><span class="field">name:</span> RDFXMLSerializer.php</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_serializers---NTripleSerializer.php.html">/serializers/NTripleSerializer.php</a> (line <span class="field">19</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																				
+												<div class="method-definition">
+											<span class="method-result">NTripleSerializer</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#serialize" title="details" class="method-name">serialize</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>, <span class="var-type"><a href="../model/Model.html">Model</a></span>&nbsp;<span class="var-name">$model</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">type</span>
+										<a href="#serializeToString" title="details" class="method-name">serializeToString</a>
+											(<span class="var-type">type</span>&nbsp;<span class="var-name">$model</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#transform" title="details" class="method-name">transform</a>
+											(<span class="var-type"><a href="../model/Model.html">Model</a></span>&nbsp;<span class="var-name">$model</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">31</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+	
+	<div class="method-signature">
+		<span class="method-result">NTripleSerializer</span>
+		<span class="method-name">
+			__construct
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodserialize" id="serialize"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">serialize</span> (line <span class="line-number">43</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Saves the model in nt notation in to a file</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			serialize
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>, <span class="var-type"><a href="../model/Model.html">Model</a></span>&nbsp;<span class="var-name">$model</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$file</span>			</li>
+					<li>
+				<span class="var-type"><a href="../model/Model.html">Model</a></span>
+				<span class="var-name">$model</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../serializers/ISerializer.html#methodserialize">ISerializer::serialize()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodserializeToString" id="serializeToString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">serializeToString</span> (line <span class="line-number">67</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the model as a string in nt notation</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">type</span>
+		<span class="method-name">
+			serializeToString
+		</span>
+					(<span class="var-type">type</span>&nbsp;<span class="var-name">$model</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">type</span>
+				<span class="var-name">$model</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../serializers/ISerializer.html#methodserializeToString">ISerializer::serializeToString()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodtransform" id="transform"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">transform</span> (line <span class="line-number">82</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Transforms the model in to a string in nt notation</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			transform
+		</span>
+					(<span class="var-type"><a href="../model/Model.html">Model</a></span>&nbsp;<span class="var-name">$model</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../model/Model.html">Model</a></span>
+				<span class="var-name">$model</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 01 Sep 2011 09:53:31 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

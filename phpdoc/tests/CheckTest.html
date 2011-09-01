@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class CheckTest</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class CheckTest</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">--------------------------------------------------------------------  ERP API Test  --------------------------------------------------------------------</p>
+<p class="description"><p>Testing the Check class</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Alexander Aigner &lt;<a href="mailto:alex.aigner">(at) gmail.com alex.aigner (at) gmail.com</a>&gt;</li>
+				<li><span class="field">version:</span> 2011-08-10</li>
+				<li><span class="field">name:</span> CheckTest.php</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_tests---util---CheckTest.php.html">/tests/util/CheckTest.php</a> (line <span class="field">20</span>)
+		</p>
+		
+				
+		<pre>PHPUnit_Framework_TestCase
+   |
+   --CheckTest</pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																												
+												<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setUp" title="details" class="method-name">setUp</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#tearDown" title="details" class="method-name">tearDown</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testBlankNodeError" title="details" class="method-name">testBlankNodeError</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testBlankNodeSuccess" title="details" class="method-name">testBlankNodeSuccess</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsName" title="details" class="method-name">testIsName</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsNamespace" title="details" class="method-name">testIsNamespace</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsPrefix" title="details" class="method-name">testIsPrefix</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsPrefixAndName" title="details" class="method-name">testIsPrefixAndName</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsStringError" title="details" class="method-name">testIsStringError</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsStringSucess" title="details" class="method-name">testIsStringSucess</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsUri" title="details" class="method-name">testIsUri</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testLiteralNodeError" title="details" class="method-name">testLiteralNodeError</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testLiteralNodeSuccess" title="details" class="method-name">testLiteralNodeSuccess</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testObjectError" title="details" class="method-name">testObjectError</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testObjectSuccess" title="details" class="method-name">testObjectSuccess</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testPredicateError" title="details" class="method-name">testPredicateError</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testPredicateSuccess" title="details" class="method-name">testPredicateSuccess</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testResourceError" title="details" class="method-name">testResourceError</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testResourceSuccess" title="details" class="method-name">testResourceSuccess</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testSubjectError" title="details" class="method-name">testSubjectError</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testSubjectSuccess" title="details" class="method-name">testSubjectSuccess</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodsetUp" id="setUp"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setUp</span> (line <span class="line-number">22</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setUp
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtearDown" id="tearDown"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">tearDown</span> (line <span class="line-number">186</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			tearDown
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestBlankNodeError" id="testBlankNodeError"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testBlankNodeError</span> (line <span class="line-number">44</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testBlankNodeError
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestBlankNodeSuccess" id="testBlankNodeSuccess"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testBlankNodeSuccess</span> (line <span class="line-number">39</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testBlankNodeSuccess
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsName" id="testIsName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsName</span> (line <span class="line-number">151</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsName
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsNamespace" id="testIsNamespace"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsNamespace</span> (line <span class="line-number">171</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsNamespace
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsPrefix" id="testIsPrefix"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsPrefix</span> (line <span class="line-number">140</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsPrefix
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsPrefixAndName" id="testIsPrefixAndName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsPrefixAndName</span> (line <span class="line-number">161</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsPrefixAndName
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsStringError" id="testIsStringError"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsStringError</span> (line <span class="line-number">69</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsStringError
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsStringSucess" id="testIsStringSucess"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsStringSucess</span> (line <span class="line-number">65</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsStringSucess
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsUri" id="testIsUri"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsUri</span> (line <span class="line-number">130</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsUri
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestLiteralNodeError" id="testLiteralNodeError"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testLiteralNodeError</span> (line <span class="line-number">57</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testLiteralNodeError
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestLiteralNodeSuccess" id="testLiteralNodeSuccess"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testLiteralNodeSuccess</span> (line <span class="line-number">52</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testLiteralNodeSuccess
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestObjectError" id="testObjectError"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testObjectError</span> (line <span class="line-number">181</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testObjectError
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestObjectSuccess" id="testObjectSuccess"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testObjectSuccess</span> (line <span class="line-number">93</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testObjectSuccess
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestPredicateError" id="testPredicateError"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testPredicateError</span> (line <span class="line-number">117</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testPredicateError
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestPredicateSuccess" id="testPredicateSuccess"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testPredicateSuccess</span> (line <span class="line-number">88</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testPredicateSuccess
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestResourceError" id="testResourceError"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testResourceError</span> (line <span class="line-number">32</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testResourceError
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestResourceSuccess" id="testResourceSuccess"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testResourceSuccess</span> (line <span class="line-number">26</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testResourceSuccess
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestSubjectError" id="testSubjectError"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testSubjectError</span> (line <span class="line-number">106</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testSubjectError
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestSubjectSuccess" id="testSubjectSuccess"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testSubjectSuccess</span> (line <span class="line-number">76</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testSubjectSuccess
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 01 Sep 2011 09:53:21 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
