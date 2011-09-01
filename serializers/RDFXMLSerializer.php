@@ -1,20 +1,19 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * Serializer for RDF/XML
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        RDFXMLSerializer.php
  * @version     2011-08-12
  * @package     serializers
  * @access      public
  * 
- * Description  Serializer for RDF/XML
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class RDFXMLSerializer implements ISerializer {
 

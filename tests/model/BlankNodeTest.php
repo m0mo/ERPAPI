@@ -3,20 +3,19 @@
 require_once "settings.php";
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API Test
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * Testing the BlankNode class
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        BlankNodeTest.php
  * @version     2011-08-09
- * @package     tests
+ * @package     tests/model
  * @access      public
  * 
- * Description  Testing the class BlankNode
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class BlankNodeTest extends PHPUnit_Framework_TestCase {
 

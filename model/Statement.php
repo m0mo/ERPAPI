@@ -1,21 +1,20 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * This class represents an RDF statement containing a triple of subject, 
+ * predicate, object
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        Statement.php
  * @version     2011-08-31
  * @package     model
  * @access      public
- * 
- * Description  This class represents an RDF statement containing a triple of
- *              subject, predicate, object
- * 
- * -----------------------------------------------------------------------------
+ *
+ * --------------------------------------------------------------------
  */
 class Statement {
 

@@ -1,21 +1,20 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
+ * Parser for N-Triple. Not whole gramma is possible.  For more info see: 
+ * http://www.w3.org/2001/sw/RDFCore/ntriples/
+ * 
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
- *
  * @name        NTripleParser.php
  * @version     2011-08-31
  * @package     parsers
  * @access      public
  *
- * Description  Parser for N-Triple. Not whole gramma is possible. 
- *              For more info see: http://www.w3.org/2001/sw/RDFCore/ntriples/
- *
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class NTripleParser implements IParser {
 

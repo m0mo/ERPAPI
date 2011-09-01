@@ -3,20 +3,19 @@
 require_once "settings.php";
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API Test
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
+ * 
+ * Testing the Check class
  *
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
- * 
  * @name        CheckTest.php
  * @version     2011-08-10
  * @package     tests
  * @access      public
  * 
- * Description  This class test the static functions of the Check class
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class CheckTest extends PHPUnit_Framework_TestCase {
 

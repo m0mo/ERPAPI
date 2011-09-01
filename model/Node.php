@@ -1,20 +1,19 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * This abstract class represents an RDF Node
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        Node.php
  * @version     2011-08-10
  * @package     model
  * @access      public
  * 
- * Description  This abstract class represents an RDF Node
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 abstract class Node {
 

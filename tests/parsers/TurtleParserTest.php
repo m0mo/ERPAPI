@@ -3,20 +3,19 @@
 require_once 'settings.php';
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API Test
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * Testing the TurtleParser class
  * 
- * @name        RDFXMLParserTest.php
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * @name        TurtleParser.php
  * @version     2011-08-12  
- * @package     tests
+ * @package     tests/parsers
  * @access      public
  * 
- * Description  Tests the Turtle parser
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class TurtleParserTest extends PHPUnit_Framework_TestCase {
 

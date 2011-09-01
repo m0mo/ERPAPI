@@ -3,20 +3,19 @@
 require_once 'settings.php';
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API Test
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * Testing the SparqlParser class
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        SparqlParserTest.php
  * @version     2011-09-01
- * @package     tests
+ * @package     tests/sparql/sparqlEngine
  * @access      public
  * 
- * Description  testing the Sparql Parser
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class SparqlParserTest extends PHPUnit_Framework_TestCase {
     

@@ -3,20 +3,19 @@
 require_once 'settings.php';
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API Test
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * Testing the RDFXMLParser class
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        RDFXMLParserTest.php
  * @version     2011-08-11  
- * @package     tests
+ * @package     tests/parsers
  * @access      public
  * 
- * Description  Tests the RDF/XML parser
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class RDFXMLParserTest extends PHPUnit_Framework_TestCase {
 

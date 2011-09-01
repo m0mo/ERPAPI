@@ -1,21 +1,19 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
+ * This class represents the whole RDF model in form of a list of statements.
+ * 
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
- *
  * @name        Model.php
  * @version     2011-09-01
  * @package     model
  * @access      public
  *
- * Description  This class represents the whole RDF model in form of a list
- *              of statements.
- *
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class Model {
 

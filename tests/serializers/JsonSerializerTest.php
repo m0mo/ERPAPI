@@ -3,20 +3,19 @@
 require_once 'settings.php';
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API Test
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * Testin the JsonSerializer class
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        JsonSerializerTest.php
  * @version     2011-08-11
- * @package     tests
+ * @package     tests/serializers
  * @access      public
  * 
- * Description  Tests the Turtle serializer
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class JsonSerializerTest extends PHPUnit_Framework_TestCase {
 

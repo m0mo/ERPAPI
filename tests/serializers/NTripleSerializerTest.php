@@ -3,20 +3,19 @@
 require_once 'settings.php';
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API Test
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * Testing the NTripleSerializer class
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        NTripleSerializerTest.php
  * @version     2011-08-11
- * @package     tests
+ * @package     tests/serializers
  * @access      public
  * 
- * Description  tests the nt serializer
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class NTripleSerializerTest extends PHPUnit_Framework_TestCase {
 

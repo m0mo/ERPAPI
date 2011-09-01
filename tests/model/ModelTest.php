@@ -3,20 +3,19 @@
 require_once "settings.php";
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API Test
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
+ * Testing the Model class
+ * 
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
- *
  * @name        ModelTest.php
  * @version     2011-08-31
- * @package     tests
+ * @package     tests/model
  * @access      public
  *
- * Description  Testing the class Model
- *
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class ModelTest extends PHPUnit_Framework_TestCase {
 

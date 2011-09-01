@@ -5,20 +5,19 @@ require_once 'SparqlParser.php';
 require_once 'SparqlQuery.php';
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
+ * The ERP Sparql Engine
+ * 
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
- *
  * @name        XPathSparqlEngine.php
  * @version     2011-09-01
  * @package     sparql/sparqlEngine
  * @access      public
  *
- * Description  The Sparql XPath Engine
- *
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class SparqlEngine implements ISparqlEngine {
 

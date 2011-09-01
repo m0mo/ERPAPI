@@ -1,20 +1,19 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * This class represents a literal node of RDF
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        LiteralNode.php
  * @version     2011-08-31
  * @package     model
  * @access      public
  * 
- * Description  This class represents a literal node of RDF
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class LiteralNode extends Node {
 

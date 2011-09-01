@@ -1,20 +1,19 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * This class represents a resource node of RDF
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        Resource.php
  * @version     2011-08-31
  * @package     model
  * @access      public
  * 
- * Description  This class represents a resource node of RDF
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class Resource extends Node {
 

@@ -1,20 +1,19 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * Constants for the ERP Sparql engine
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        Constants.php
  * @version     2011-09-01
  * @package     sparql/sparqlEngine
  * @access      public
  * 
- * Description  Constants for the XPATH engine
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 
 define("SPARQL_ERROR", "Sparql Exception: ");

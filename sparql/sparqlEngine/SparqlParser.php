@@ -1,20 +1,19 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * Class for parsing the Sparql Query
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        SparqlParser.php
  * @version     2011-09-01
  * @package     sparql/sparqlEngine
  * @access      public
  * 
- * Description  Class for parsing the Sparql Query
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class SparqlParser {
 

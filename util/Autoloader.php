@@ -1,21 +1,19 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * Handels all necessary includes so the user does not have to care.
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        Autoloader.php
  * @version     2011-08-12
  * @package     util
  * @access      public
  * 
- * Description  Handels all necessary includes so the user does not have to 
- *              care.
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 
 // Utilities

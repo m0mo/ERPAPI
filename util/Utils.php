@@ -1,20 +1,19 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * This class offers static functions for all kinds of stuff
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        Utils.php
  * @version     2011-08-10
  * @package     util
  * @access      public
  * 
- * Description  This class offers static functions for all kinds of stuff
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class Utils {
 

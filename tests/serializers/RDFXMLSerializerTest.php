@@ -3,20 +3,19 @@
 require_once 'settings.php';
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API Test
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
- * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
+ * Testin the RDFXMLSerializer class
  * 
+ * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * @name        RDFXMLSerializerTest.php
- * @version     Aug 10, 2011
- * @package     tests
+ * @version     2011-08-10
+ * @package     tests/serializers
  * @access      public
  * 
- * Description  Testing the RDF/XML serializer
- * 
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class RDFXMLSerializerTest extends PHPUnit_Framework_TestCase {
 

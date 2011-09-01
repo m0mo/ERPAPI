@@ -1,21 +1,20 @@
 <?php
 
 /**
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  * ERP API
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  *
+ * Parser for Turtle. Not whole grammar is possible. For more info see: 
+ * http://www.w3.org/TeamSubmission/turtle/
+ * 
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
- *
  * @name        TurtleSerializer.php
  * @version     2011-08-31
  * @package     serializers
  * @access      public
  *
- * Description  Parser for Turtle. Not whole grammar is possible.
- *              for more info see: http://www.w3.org/TeamSubmission/turtle/
- *
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------
  */
 class TurtleParser implements IParser {
 
