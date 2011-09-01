@@ -9,7 +9,7 @@
  * 
  * @name        SparqlQuery.php
  * @version     2011-08-31
- * @package     sparql
+ * @package     sparql/sparqlEngine
  * @access      public
  * 
  * Description  Sparql Query Object

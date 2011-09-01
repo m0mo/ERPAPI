@@ -13,7 +13,7 @@ require_once 'SparqlQuery.php';
  *
  * @name        XPathSparqlEngine.php
  * @version     2011-09-01
- * @package     XPathEngine
+ * @package     sparql/sparqlEngine
  * @access      public
  *
  * Description  The Sparql XPath Engine

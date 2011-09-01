@@ -9,7 +9,7 @@
  * 
  * @name        SparqlParser.php
  * @version     2011-09-01
- * @package     sparql
+ * @package     sparql/sparqlEngine
  * @access      public
  * 
  * Description  Class for parsing the Sparql Query

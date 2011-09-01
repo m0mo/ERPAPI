@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        ISparqlEngine.php
- * @version     2011-08-23)
+ * @version     2011-08-23
  * @package     sparql
  * @access      public
  * 
