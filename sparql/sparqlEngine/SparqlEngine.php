@@ -168,6 +168,14 @@ class SparqlEngine implements ISparqlEngine {
         return $result;
     }
 
+    /**
+     * Formats the return value
+     *
+     * @param array $res
+     * @param string $format
+     * @return mixed 
+     * @throws SparqlException
+     */
     private function format($res, $format) {
 
         if (!Check::isArray($res))
@@ -186,6 +194,13 @@ class SparqlEngine implements ISparqlEngine {
         }
     }
 
+    /**
+     * Formats result to an array
+     *
+     * @param array $res
+     * @param bool $stringify
+     * @return array 
+     */
     private function formatArray($res, $stringify=true) {
 
         $array = array();
