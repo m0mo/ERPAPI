@@ -10,7 +10,7 @@ require_once 'settings.php';
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        testSparqlQuery.php
- * @version     2011-08-31
+ * @version     2011-09-01
  * @package     tests
  * @access      public
  * 
@@ -108,6 +108,16 @@ class SparqlQueryTest extends PHPUnit_Framework_TestCase {
 
         $query = new SparqlQuery();
         $query->addWhereTriple("?x", "y", "?z");
+    }
+    
+        
+        /**
+     * @expectedException SparqlException
+     */
+    public function testError8() {
+
+        $query = new SparqlQuery();
+        $query->setResultForm("?z");
     }
 
     protected function tearDown() {

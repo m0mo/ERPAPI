@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        SparqlParser.php
- * @version     2011-08-31 
+ * @version     2011-09-01
  * @package     sparql
  * @access      public
  * 
@@ -71,9 +71,6 @@ class SparqlParser {
 
             case CONSTRUCT:
                 throw new SparqlException(SPQRQL_QUERY_RESULT_SUPPORT);
-
-            default:
-                throw new SparqlException(SPQRQL_QUERY_RESULT_FORMAT);
         }
 
         // if PREFIX is in the query there is a namespace definition

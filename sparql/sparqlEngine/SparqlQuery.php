@@ -183,24 +183,24 @@ class SparqlQuery {
      * @param string $form 
      */
     public function setResultForm($form) {
-        
-        switch(strtoupper($form)) {
+
+        switch (strtoupper($form)) {
             case SELECT:
                 $this->form = SELECT;
                 break;
-            
+
             case CONSTRUCT:
                 $this->form = CONSTRUCT;
                 break;
-            
+
             case ASK:
                 $this->form = ASK;
                 break;
-            
+
             case DESCRIBE:
                 $this->form = DESCRIBE;
                 break;
-            
+
             default:
                 throw new SparqlException(SPQRQL_QUERY_RESULT_FORMAT);
         }

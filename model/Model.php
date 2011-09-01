@@ -8,7 +8,7 @@
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
  *
  * @name        Model.php
- * @version     2011-08-31
+ * @version     2011-09-01
  * @package     model
  * @access      public
  *
@@ -751,6 +751,20 @@ class Model {
      */
     public function generateUniqueId() {
         return BNODE . ++$this->bnodeCount;
+    }
+    
+    /**
+     * Performs a SPARQL Query against the model. NOTE: not all SPARQL constructs 
+     * are supported
+     *
+     * @param string $query
+     * @param string $format 
+     * @return mixed 
+     */
+    public function sparqlQuery($queryString, $format = "array") {
+        
+        require_once INCLUDE_DIR.'sparql/sparqlEngine/SparqlEngine.php';
+        return SparqlEngine::doQuery($queryString, $this, $format);
     }
 
     /**

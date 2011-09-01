@@ -10,7 +10,7 @@ require_once 'settings.php';
  * @author      Alexander Aigner <alex.aigner (at) gmail.com> 
  * 
  * @name        SparqlParserTest.php
- * @version     2011-08-31
+ * @version     2011-09-01
  * @package     tests
  * @access      public
  * 
@@ -69,6 +69,49 @@ class SparqlParserTest extends PHPUnit_Framework_TestCase {
     public function testParseError2() {
         $query = "PREFIX foaf: <http://xmlns.com/foaf/0.1/> ";
         $query.= "BLA ?x ?y WHERE ";
+        $query.= "{ ";
+        $query.= "?x foaf:knows ?y . ";
+        $query.= "}";
+        
+        $parser = new SparqlParser();
+        $object = $parser->parse($query);
+    }
+    
+    /**
+     * @expectedException SparqlException
+     */
+        public function testParseError3() {
+        $query = "PREFIX foaf: <http://xmlns.com/foaf/0.1/> ";
+        $query.= "CONSTRUCT ?x ?y WHERE ";
+        $query.= "{ ";
+        $query.= "?x foaf:knows ?y . ";
+        $query.= "}";
+        
+        $parser = new SparqlParser();
+        $object = $parser->parse($query);
+    }
+    
+    /**
+     * @expectedException SparqlException
+     */
+            public function testParseError4() {
+        $query = "PREFIX foaf: <http://xmlns.com/foaf/0.1/ ";
+        $query.= "SELECT ?x ?y WHERE ";
+        $query.= "{ ";
+        $query.= "?x foaf:knows ?y . ";
+        $query.= "}";
+        
+        $parser = new SparqlParser();
+        $object = $parser->parse($query);
+    }
+
+    
+    /**
+     * @expectedException SparqlException
+     */
+            public function testParseError5() {
+        $query = "PREFIX foaf: <http://xmlns.com/foaf/0.1/ ";
+        $query.= "SELECT ? WHERE ";
         $query.= "{ ";
         $query.= "?x foaf:knows ?y . ";
         $query.= "}";

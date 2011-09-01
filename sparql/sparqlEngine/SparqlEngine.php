@@ -12,7 +12,7 @@ require_once 'SparqlQuery.php';
  * @author      Alexander Aigner <alex.aigner (at) gmail.com>
  *
  * @name        XPathSparqlEngine.php
- * @version     2011-08-31
+ * @version     2011-09-01
  * @package     XPathEngine
  * @access      public
  *
@@ -87,7 +87,22 @@ class SparqlEngine implements ISparqlEngine {
      * @param Model $model
      * @return mixed 
      */
-    public function query($queryString, $model) {
+    public static function doQuery($queryString, $model, $format = "array") {
+
+        $parser = new SparqlEngine();
+        return $parser->query($queryString, $model, $format);
+    }
+
+    /**
+     * Performs a query against a model
+     *
+     * @param string $queryString
+     * @param Model $model
+     * @return mixed 
+     */
+    public function query($queryString, $model, $format = "array") {
+
+        $start = $this->getTime();
 
         if (!Check::isModel($model))
             throw new SparqlException(SPARQL_ERROR . "Parameter is not a Model.");
@@ -109,21 +124,29 @@ class SparqlEngine implements ISparqlEngine {
         switch ($this->query->getResultForm()) {
 
             case SELECT:
-                return $this->querySelect($queryString, $model);
+                $res = $this->querySelect($queryString, $model);
                 break;
-
-            case ASK:
-                throw new SparqlException(SPQRQL_QUERY_RESULT_SUPPORT);
-
-            case DESCRIBE:
-                throw new SparqlException(SPQRQL_QUERY_RESULT_SUPPORT);
-                
-            case CONSTRUCT:
-                throw new SparqlException(SPQRQL_QUERY_RESULT_SUPPORT);
-
-            default:
-                throw new SparqlException(SPQRQL_ERROR_QUERY_RESULT_FORMAT);
+//
+//            case ASK:
+//                throw new SparqlException(SPQRQL_QUERY_RESULT_SUPPORT);
+//
+//            case DESCRIBE:
+//                throw new SparqlException(SPQRQL_QUERY_RESULT_SUPPORT);
+//
+//            case CONSTRUCT:
+//                throw new SparqlException(SPQRQL_QUERY_RESULT_SUPPORT);
         }
+
+        $res = $this->format($res, $format);
+
+        $end = $this->getTime();
+
+        if (Check::isArray($res)) {
+            $res["query"] = $this->queryString;
+            $res["time"] = number_format(($end - $start), 5);
+        }
+
+        return $res;
     }
 
     /**
@@ -143,6 +166,52 @@ class SparqlEngine implements ISparqlEngine {
         $result = $this->filterBySelect($result);
 
         return $result;
+    }
+
+    private function format($res, $format) {
+
+        if (!Check::isArray($res))
+            throw new SparqlException(SPARQL_ERROR . "Array expected");
+
+        if (!Check::isString($format))
+            throw new SparqlException(SPARQL_ERROR . "String expected");
+
+        switch ($format) {
+            case "array":
+                return $this->formatArray($res);
+            case "objectarray":
+                return $this->formatArray($res, false);
+            default:
+                return $this->formatArray($res);
+        }
+    }
+
+    private function formatArray($res, $stringify=true) {
+
+        $array = array();
+
+        foreach ($res as $key => $vars) {
+
+            $array["variables"][] = $key;
+
+            if ($stringify) {
+
+                foreach ($vars as $o) {
+                    if (Check::isBlankNode($o))
+                        $array["table"][$key][] = "_:" . $o->getID();
+
+                    if (Check::isLiteralNode($o))
+                        $array["table"][$key][] = $o->getLiteral();
+
+                    if (Check::isResource($o) && !Check::isBlankNode($o))
+                        $array["table"][$key][] = $o->getUri();
+                }
+            } else {
+                $array["table"][$key] = $vars;
+            }
+        }
+
+        return $array;
     }
 
     /**
@@ -422,12 +491,19 @@ class SparqlEngine implements ISparqlEngine {
                 if ($this->isSetVar($subjectVar)) {
 
                     foreach ($this->resultTable[$subjectVar] as $row => $s) {
-
+                        
                         if ($this->isSetVar($predicateVar)) {
 
                             $p = $this->resultTable[$predicateVar][$row];
 
                             if ($this->isSetVar($objectVar)) {
+
+                                if (!isset($this->resultTable[$objectVar][$row])) {
+                                    $res = $this->model->search($s, $p, $object);
+
+                                    if (!$this->processRow($row, $res, $subjectVar, $predicateVar, $objectVar))
+                                        $deleteRows[] = $row;
+                                }
 
                                 // possibility(4)
                                 // all variables already in the array so
@@ -585,6 +661,8 @@ class SparqlEngine implements ISparqlEngine {
      */
     private function processRow($row, $res, $sV, $pV, $oV) {
 
+//        echo $row . $sV . $pV . $oV;
+
         if (!Check::isArray($res))
             return false;
 
@@ -592,15 +670,10 @@ class SparqlEngine implements ISparqlEngine {
             return false;
 
         // check wich variables are already set
-        $isSetS = $this->isSetVar($sV);
-        $isSetP = $this->isSetVar($pV);
-        $isSetO = $this->isSetVar($oV);
+        $toSetS = $this->isSetVar($sV) || $this->isVariable($sV);
+        $toSetP = $this->isSetVar($pV) || $this->isVariable($pV);
+        $toSetO = $this->isSetVar($oV) || $this->isVariable($oV);
 
-
-        // check wich variables need to be set
-        $toSetS = !$isSetS && $this->isVariable($sV);
-        $toSetP = !$isSetP && $this->isVariable($pV);
-        $toSetO = !$isSetO && $this->isVariable($oV);
 
         if (count($res) == 1) {
 
@@ -615,11 +688,48 @@ class SparqlEngine implements ISparqlEngine {
         }
 
         if (count($res) > 1) {
+            // if there is more than one result we might have to dublicate the row
 
-            //TODO: Implement count($res) > 1
+            if ($toSetS || $toSetP || $toSetO) {
+
+                // collect row data
+
+                $rowVars = array();
+
+                foreach ($this->resultTable as $key => $vars)
+                    $rowVars[$key] = $vars[$row];
+
+                $this->removeRow($row);
+
+                foreach ($res as $statement) {
+
+                    if ($toSetS)
+                        $rowVars[$sV] = $statement->getSubject();
+
+                    if ($toSetP)
+                        $rowVars[$pV] = $statement->getPredicate();
+
+                    if ($toSetO)
+                        $rowVars[$oV] = $statement->getObject();
+
+                    foreach ($rowVars as $key => $o) {
+                        $this->resultTable[$key][] = $o;
+                    }
+                }
+            }
         }
 
         return true;
+    }
+
+    /**
+     * Used for measuring query time
+     *
+     * @return double 
+     */
+    private function getTime() {
+        $a = explode(' ', microtime());
+        return(double) $a[0] + $a[1];
     }
 
 }
