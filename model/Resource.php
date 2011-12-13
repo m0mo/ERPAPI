@@ -37,6 +37,12 @@ class Resource extends Node {
      * @var array containing array("predicate" => $predicate, "object" => $object); 
      */
     protected $properties;
+    
+    /**
+     *
+     * @var String the type of the node, for example, rdfs:Class, rdfs:Property, ...
+     */
+    private $type;
 
     /**
      * Creates a new Resource from an URI and a name.
@@ -54,6 +60,8 @@ class Resource extends Node {
         // if $namespace_or_uri is a namespace $name has to be a valid name
         if (Check::isNamespace($namespace_or_uri) && !Check::isName($name))
             throw new APIException(API_ERROR_NAME);
+        
+        $this->type = RDF_NS.RDF_DESCRIPTION;
 
         $this->uri = (Check::isNamespace($namespace_or_uri)) ? $namespace_or_uri . $name : $namespace_or_uri;
         $this->name = (Check::isNamespace($namespace_or_uri)) ? $name : Utils::getName($namespace_or_uri);
@@ -180,7 +188,16 @@ class Resource extends Node {
     public function removeAllProperties() {
         $this->properties = null;       
     }
+    
+    public function getType() {
+        return $this->type;
+    }
 
+    public function setType($type) {
+        $this->type = $type;
+    }
+
+    
     /**
      * Checks if two Resources are the same
      *

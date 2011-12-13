@@ -76,6 +76,7 @@ define("RDF_ID","ID");
 define("RDF_ABOUT","about");
 define("RDF_RESOURCE","resource");
 define("RDF_DATATYPE","datatype");
+define("RDF_TYPE", "rdf:type");
 
 // -----------------------------------------------------------------------------
 // RDF Schema
@@ -99,7 +100,7 @@ define("RDFS_COMMENT","comment");
 // OWL
 // -----------------------------------------------------------------------------
 
-define("OWL_URI","http://www.w3.org/2002/07/owl#" );
+define("OWL_NS","http://www.w3.org/2002/07/owl#" );
 define("OWL_PREFIX", "owl");
 define("OWL_SAME_AS","sameAs");
 define("OWL_INVERSE_OF","inverseOf");

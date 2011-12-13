@@ -388,9 +388,69 @@ class Model {
 
         return $bool;
     }
+    
+    /**
+     * Removes a statement or resource (and its properties) of the model
+     *
+     * @param mixed $statement_or_resource can be Statement or Resource
+     * @return bool true = removed, false = not removed
+     * @throws APIException
+     */
+    public function edit($old_statement_or_resource, $new_statement_or_resource) {
+
+        if (empty($old_statement_or_resource))
+            throw new APIException(API_ERROR . "Parameter is null");
+        
+        if (empty($new_statement_or_resource))
+            throw new APIException(API_ERROR . "Parameter is null");
+
+        if (Check::isStatement($old_statement_or_resource) && Check::isStatement($new_statement_or_resource)) {
+            return $this->editStatement($old_statement_or_resource, $new_statement_or_resource);
+        } else if (Check::isResource($old_statement_or_resource) && Check::isResource($new_statement_or_resource)) {
+            return $this->editResource($old_statement_or_resource, $new_statement_or_resource);
+        } else {
+            // if nothing above fits, throw new exception
+            throw new APIException(API_ERROR . "tryed to add non-statement or non-resource to the model.");
+        }
+
+        return false;
+    }
 
     /**
-     * Returns a list of statements which fit to the input
+     * Edits a statement to the list of statements
+     *
+     * @param Statement $statement
+     * @return bool true = removed, false = not removed
+     * @throws APIException
+     */
+    private function editStatement($oldstatement, $newstatement) {
+
+        if (!Check::isStatement($oldstatement) || !Check::isStatement($newstatement))
+            throw new APIException(API_ERROR_STATEMENT);
+
+        $this->removeStatement($oldstatement);
+        $this->addStatement($newstatement);
+        
+    }
+
+    /**
+     * This function removes a resource (with all properties recursively) from the model
+     *
+     * @param Resource $resource
+     * @return bool true = removed, false = not removed
+     * @throws APIException
+     */
+    private function editResource($oldresource, $newresource) {
+
+        if (!Check::isResource($oldresource) || !Check::isResource($newresource))
+            throw new APIException(ERP_ERROR_SUBJECT);
+
+        $this->removeResource($oldresource);
+        $this->addResource($newresource);
+    }
+
+    /**
+     * Returns a list of statements that contain the parameters
      *
      * @param Resource|BlankNode $subject
      * @param Resource $predicate
@@ -504,7 +564,7 @@ class Model {
      * @param Resource $subject
      * @return array List of Statements
      */
-    public function searchResourcesRecursive($subject) {
+    private function searchResourcesRecursive($subject) {
 
         if (!Check::isSubject($subject))
             return null;
@@ -609,7 +669,7 @@ class Model {
      * @param array $statements
      * @return array
      */
-    public function statementListToResourceListRecursive($key, $statements) {
+    private function statementListToResourceListRecursive($key, $statements) {
 
         // input checks
         if (!Check::isArray($statements))
